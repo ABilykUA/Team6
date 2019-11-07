@@ -1,0 +1,72 @@
+
+
+img{
+
+    width:20%;
+    height:20% ;
+}
+
+body{
+
+    margin: 0;
+    padding: 0;
+    background-color: salmon;
+    font-family: monospace;
+
+
+}
+
+header{
+    overflow: hidden;
+    background-color: white;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    border-bottom: black 1px solid;
+    margin-bottom: 30px;
+    text-align: center;
+    font-family: "Palatino", monospace;
+}
+
+
+.content{
+
+    margin: 0 20px 0 20px;
+
+
+}
+
+
+h1{
+    font-size:10vw;
+
+
+}
+
+main{
+    margin-top: 30%;
+    text-align: center;
+
+
+}
+
+#button{
+    font-size: 10vw;
+
+}
+
+footer{
+
+    background: #ffffff;
+    border-top: 1px solid #000000;
+    bottom: 0;
+    position: absolute;
+    width: 100%;
+    font-family: monospace;
+
+
+}
+.bottom{
+
+    padding: 3px;
+}
