@@ -1,9 +1,23 @@
 // JS is done here ↓
 
+// This is just an example we have to change this ↓ //
+    function Output() {
+
+        let output = document.getElementById("test");
+        let TeamNameElement = document.getElementById("TeamName");
+        let NameElement = document.getElementById("Name");
+
+        let TeamNamevalue = TeamNameElement.value;
+        let NameElementvalue = NameElement.value;
+
+        output.innerHTML = TeamNamevalue + " " + NameElementvalue;
 
 
-    let Title = document.getElementById("Title");
-    let TeamNameElement = document.getElementById("TeamName");
+    }
+
+// This is just an example we have to change this ↑ //
+
+
 
     fetch   ("https://codecyprus.org/th/api/list")
         .then(response => response.json()) //Parse JSON text to JavaScript object
@@ -12,13 +26,17 @@
 
             let TreasureHunts = jsonObject.treasureHunts;
 
-           let TreasureHuntslist = document.getElementById("HuntOption");
+            let TreasureHuntslist = document.getElementById("HuntOption");
+
 
            for (let i = 0 ; i<TreasureHunts.length; i++){
 
-               var newBrandOption = document.createElement("option");
-               TreasureHuntslist.appendChild(newBrandOption);
-               newBrandOption.text = TreasureHunts[i].name;
+
+
+               let newHuntOption = document.createElement("option");
+               TreasureHuntslist.appendChild(newHuntOption);
+               newHuntOption.text = TreasureHunts[i].name;
+
 
 
 
