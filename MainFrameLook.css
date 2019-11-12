@@ -11,7 +11,8 @@ header{
 
 
 h1{
-    font-size:10vw;
+    font-size:5vmax;
+
 
 }
 
@@ -60,5 +61,7 @@ footer{
 img{
 
     width:20%;
-    height:20% ;
+    height:20%;
+    max-width: 155px;
+    max-height: 350px;
 }
