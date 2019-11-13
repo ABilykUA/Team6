@@ -58,6 +58,22 @@ function NameAndTeamInput() {
 
 
 
+function Questions() {
+    fetch("https://codecyprus.org/th/api/start?player=Andrii&app=AndriiTeam&treasure-hunt-id=ag9nfmNvZGVjeXBydXNvcmdyGQsSDFRyZWFzdXJlSHVudBiAgICAvKGCCgw")
+        .then(response => response.json()) //Parse JSON text to JavaScript object
+        .then(jsonObject => {
+
+            console.log(jsonObject);
+
+        });
+
+
+
+
+
+}
+
+
 
 
 
