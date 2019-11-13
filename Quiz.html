@@ -28,21 +28,26 @@
 
 <main id="maindiv">
 
-    <p> Select your treasure hunt:<select name="huntlist" id="HuntOption" class="list"> </select></p>
 
     <!-- This is just an example we have to change this ↓ -->
 
 
+    <form>
+
+        <p> Enter your team name:   </p>
+        <input type="text" id="TeamName" size="15" />
+
+        <p> Enter your  name:   </p>
+        <input type="text" id="Name" size="15" />
 
 
-    <p> Enter your  name:  <input type="text" id="Name" size="15" /> </p>
-    <p> Enter your team name:  <input type="text" id="TeamName" size="15" /> </p>
+    </form>
 
 
+    <p> Select your treasure hunt:</p>
+    <ul id="HuntOptions"> </ul>
 
 
-    <p><input type="submit" id="start" value="Start" onclick="Output()" /></p>
-    <p id="test">  </p>
 
     <!-- This is just an example we have to change this ↑ -->
 

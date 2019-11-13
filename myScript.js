@@ -1,46 +1,40 @@
 // JS is done here ↓
-//"https://codecyprus.org/th/api/start?player=" + NameElementvalue +  "&app="+ TeamNamevalue +"&treasure-hunt-id=uuid";
-// This is just an example we have to change this ↓ //
-    function Output() {
-
-
-        let TeamNameElement = document.getElementById("TeamName");
-        let NameElement = document.getElementById("Name");
-
-        let TeamNamevalue = TeamNameElement.value;
-        let NameElementvalue = NameElement.value;
-
-
-        let startlink = document.createElement("A");
-        document.getElementById("maindiv").appendChild(startlink);
-        startlink.innerHTML =  "Press here ";
-        startlink.setAttribute("href","https://codecyprus.org/th/api/start?player="+  NameElementvalue   + "&app=" + TeamNamevalue +   "&treasure-hunt-id=uuid");
-
-    }
-
-// This is just an example we have to change this ↑ //
 
 
 
 function getinformation(){
+    const LIST_API = "https://codecyprus.org/th/api/list";
 
-    fetch   ("https://codecyprus.org/th/api/list")
+    let TeamNameElement = document.getElementById("TeamName");
+    let NameElement = document.getElementById("Name");
+
+    let TeamNamevalue = TeamNameElement.value;
+    let NameElementvalue = NameElement.value;
+
+
+
+    fetch(LIST_API)
         .then(response => response.json()) //Parse JSON text to JavaScript object
         .then(jsonObject => {
-        console.log(jsonObject);
-
-            let TreasureHunts = jsonObject.treasureHunts;
-
-            let TreasureHuntslist = document.getElementById("HuntOption");
 
 
-           for (let i = 0 ; i<TreasureHunts.length; i++){
+            let TreasureHuntsOBJECT = jsonObject.treasureHunts;
+
+            let TreasureHuntslist = document.getElementById("HuntOptions");
 
 
+           for (let i = 0 ; i<TreasureHuntsOBJECT.length; i++){
 
-               let newHuntOption = document.createElement("option");
-               TreasureHuntslist.appendChild(newHuntOption);
-               newHuntOption.text = TreasureHunts[i].name;
+               UUID = TreasureHuntsOBJECT[i].uuid;
+
+               NameOfHunts = TreasureHuntsOBJECT[i].name;
+
+               let HuntOptions = document.createElement("li");
+
+               HuntOptions.innerHTML = "<a href='https://codecyprus.org/th/api/start?player=" +   NameElementvalue   + "&app=" +  TeamNamevalue +   "&treasure-hunt-id=" + UUID + "  '>" + NameOfHunts  + "</a>";
+
+               TreasureHuntslist.appendChild(HuntOptions);
+
 
 
 
