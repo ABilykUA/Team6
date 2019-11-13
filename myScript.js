@@ -5,42 +5,55 @@
 function NameAndTeamInput() {
     const LIST_API = "https://codecyprus.org/th/api/list";
 
-    let TeamNameElement = document.getElementById("TeamName");
-    let NameElement = document.getElementById("Name");
-    let Selectlink = document.getElementById("textlist");
-    Selectlink.innerText = "Select your treasure hunt:" ;
-
-    let TeamNamevalue = TeamNameElement.value;
-    let NameElementvalue = NameElement.value;
+    let TeamName = document.getElementById("TeamName").value;
+    let Name = document.getElementById("Name").value;
+    let TextOutPut = document.getElementById("textlist");
+    let elem = document.getElementById("button");
 
 
-    fetch(LIST_API)
-        .then(response => response.json()) //Parse JSON text to JavaScript object
-        .then(jsonObject => {
+
+    if (Name && TeamName !== '') {
 
 
-            let TreasureHuntsOBJECT = jsonObject.treasureHunts;
-
-            let TreasureHuntslist = document.getElementById("HuntOptions");
-
-
-            for (let i = 0; i < TreasureHuntsOBJECT.length; i++) {
-
-                UUID = TreasureHuntsOBJECT[i].uuid;
-
-                NameOfHunts = TreasureHuntsOBJECT[i].name;
-
-                let HuntOptions = document.createElement("li");
-
-                HuntOptions.innerHTML = "<a href='https://codecyprus.org/th/api/start?player=" + NameElementvalue + "&app=" + TeamNamevalue + "&treasure-hunt-id=" + UUID + "  '>" + NameOfHunts + "</a>";
-
-                TreasureHuntslist.appendChild(HuntOptions);
+        fetch(LIST_API)
+            .then(response => response.json()) //Parse JSON text to JavaScript object
+            .then(jsonObject => {
 
 
-            }
+                let TreasureHuntsOBJECT = jsonObject.treasureHunts;
+
+                let TreasureHuntslist = document.getElementById("HuntOptions");
+
+                TextOutPut.innerText = "Lists";
+
+                for (let i = 0; i < TreasureHuntsOBJECT.length; i++) {
+
+                    UUID = TreasureHuntsOBJECT[i].uuid;
+
+                    NameOfHunts = TreasureHuntsOBJECT[i].name;
+
+                    let HuntOptions = document.createElement("li");
+
+                    HuntOptions.innerHTML = "<a href='https://codecyprus.org/th/api/start?player=" + Name + "&app=" + TeamName + "&treasure-hunt-id=" + UUID + "  '>" + NameOfHunts + "</a>";
+
+                    TreasureHuntslist.appendChild(HuntOptions);
 
 
-        });
+                }
+
+
+            });
+
+    }else {
+
+            TextOutPut.innerText = "Error! Refresh the page fill in the fields!";
+            elem.parentNode.removeChild(elem);
+
+
+
+    }
+
+
 }
 
 
