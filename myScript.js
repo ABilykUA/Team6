@@ -2,15 +2,16 @@
 
 
 
-function getinformation(){
+function NameAndTeamInput() {
     const LIST_API = "https://codecyprus.org/th/api/list";
 
     let TeamNameElement = document.getElementById("TeamName");
     let NameElement = document.getElementById("Name");
+    let Selectlink = document.getElementById("textlist");
+    Selectlink.innerText = "Select your treasure hunt:" ;
 
     let TeamNamevalue = TeamNameElement.value;
     let NameElementvalue = NameElement.value;
-
 
 
     fetch(LIST_API)
@@ -23,39 +24,27 @@ function getinformation(){
             let TreasureHuntslist = document.getElementById("HuntOptions");
 
 
-           for (let i = 0 ; i<TreasureHuntsOBJECT.length; i++){
+            for (let i = 0; i < TreasureHuntsOBJECT.length; i++) {
 
-               UUID = TreasureHuntsOBJECT[i].uuid;
+                UUID = TreasureHuntsOBJECT[i].uuid;
 
-               NameOfHunts = TreasureHuntsOBJECT[i].name;
+                NameOfHunts = TreasureHuntsOBJECT[i].name;
 
-               let HuntOptions = document.createElement("li");
+                let HuntOptions = document.createElement("li");
 
-               HuntOptions.innerHTML = "<a href='https://codecyprus.org/th/api/start?player=" +   NameElementvalue   + "&app=" +  TeamNamevalue +   "&treasure-hunt-id=" + UUID + "  '>" + NameOfHunts  + "</a>";
+                HuntOptions.innerHTML = "<a href='https://codecyprus.org/th/api/start?player=" + NameElementvalue + "&app=" + TeamNamevalue + "&treasure-hunt-id=" + UUID + "  '>" + NameOfHunts + "</a>";
 
-               TreasureHuntslist.appendChild(HuntOptions);
-
-
+                TreasureHuntslist.appendChild(HuntOptions);
 
 
-
-           }
-
+            }
 
 
-
-
-
-
-
-
-
-
-    });
-
+        });
 }
 
-getinformation();
+
+
 
 
 

@@ -45,6 +45,7 @@ ul{
 }
 .button{
 
+    margin-top:1vmax ;
     border: 1px solid black;
     background-image: linear-gradient(salmon, white);
 }
