@@ -34,9 +34,15 @@ function NameAndTeamInput() {
 
                     let HuntOptions = document.createElement("li");
 
-                    HuntOptions.innerHTML = "<a href='https://codecyprus.org/th/api/start?player=" + Name + "&app=" + TeamName + "&treasure-hunt-id=" + UUID + "  '>" + NameOfHunts + "</a>";
+                    HuntOptions.innerHTML = "<a onclick='onStartClick(Name.value, TeamName.value, UUID)' >" + NameOfHunts + "</a>";
+
+
+                    //'
+
 
                     TreasureHuntslist.appendChild(HuntOptions);
+
+                    // document.location.href = "Question.html?";
 
 
                 }
@@ -56,25 +62,32 @@ function NameAndTeamInput() {
 
 }
 
+function onStartClick(name, teamName, uuid) {
 
 
-function Questions() {
-    fetch("https://codecyprus.org/th/api/start?player=Andrii&app=AndriiTeam&treasure-hunt-id=ag9nfmNvZGVjeXBydXNvcmdyGQsSDFRyZWFzdXJlSHVudBiAgICAvKGCCgw")
+    fetch("https://codecyprus.org/th/api/start?player=" + name + "&app=" + teamName + "&treasure-hunt-id=" + uuid )
         .then(response => response.json()) //Parse JSON text to JavaScript object
         .then(jsonObject => {
 
+
+
             console.log(jsonObject);
+
+
+
+
+
 
         });
 
 
+    console.log(name);
+    console.log(teamName);
+    console.log(uuid);
+}
 
-
+function dfg() {
 
 }
 
-
-
-
-
-
+dfg();
