@@ -48,6 +48,7 @@ ul{
     margin-top:1vmax ;
     border: 1px solid black;
     background-image: linear-gradient(salmon, white);
+    text-align: center;
 }
 
 

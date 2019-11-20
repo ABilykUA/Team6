@@ -23,6 +23,7 @@ function NameAndTeamInput() {
                 let TreasureHuntsOBJECT = jsonObject.treasureHunts;
 
                 let TreasureHuntslist = document.getElementById("HuntOptions");
+                console.log(TreasureHuntsOBJECT);
 
                 TextOutPut.innerText = "Lists";
 
@@ -34,15 +35,14 @@ function NameAndTeamInput() {
 
                     let HuntOptions = document.createElement("li");
 
-                    HuntOptions.innerHTML = "<a onclick='onStartClick(Name.value, TeamName.value, UUID)' >" + NameOfHunts + "</a>";
-
-
-                    //'
-
+                    HuntOptions.innerHTML = "<a onclick='onStartClick(Name.value, TeamName.value, UUID )' href='Question.html'>" + NameOfHunts + "</a>";
 
                     TreasureHuntslist.appendChild(HuntOptions);
 
                     // document.location.href = "Question.html?";
+
+
+                    // i have to make it, save the name , uuid , teamname, to qustions page!  !!
 
 
                 }
@@ -62,32 +62,94 @@ function NameAndTeamInput() {
 
 }
 
-function onStartClick(name, teamName, uuid) {
+function onStartClick() {
+
+    // name, teamName, uuid
+    //input should look like this = https://codecyprus.org/th/api/start?player=" + name + "&app=" + teamName + "&treasure-hunt-id=" + uuid
+
+    const Settion_API = "https://codecyprus.org/th/api/start?player=Andrii&app=teamAndrii&treasure-hunt-id=ag9nfmNvZGVjeXBydXNvcmdyGQsSDFRyZWFzdXJlSHVudBiAgICAvKGCCgw";
+
+    let FormElement = document.getElementById("FormQuestions");
+    let ButtonErase = document.getElementById("StartQuestionsButton");
 
 
-    fetch("https://codecyprus.org/th/api/start?player=" + name + "&app=" + teamName + "&treasure-hunt-id=" + uuid )
+    fetch( "https://codecyprus.org/th/api/start?player=asrasdderger&app=teamAndrii&treasure-hunt-id=ag9nfmNvZGVjeXBydXNvcmdyGQsSDFRyZWFzdXJlSHVudBiAgICAvKGCCgw" )
         .then(response => response.json()) //Parse JSON text to JavaScript object
         .then(jsonObject => {
 
 
+            let session = jsonObject.session;
+            let numofQuestions = jsonObject.numOfQuestions;
 
-            console.log(jsonObject);
+            Questions(session);
 
+            console.log(session,numofQuestions);
 
-
+            FormElement.removeChild(ButtonErase);
 
 
 
         });
 
 
-    console.log(name);
-    console.log(teamName);
-    console.log(uuid);
-}
-
-function dfg() {
 
 }
 
-dfg();
+function Questions(session) {
+
+    let FormElement = document.getElementById("FormQuestions");
+
+    let Question = document.getElementById("Question");
+
+    fetch( "https://codecyprus.org/th/api/question?session="+ session )
+        .then(response => response.json()) //Parse JSON text to JavaScript object
+        .then(jsonObject => {
+
+            let QuestionNames = jsonObject.questionText;
+
+            let  CheckQuestion = jsonObject.questionType;
+
+            let CheckIfCanBeSkipped = jsonObject.canBeSkipped;
+
+            Question.innerHTML = QuestionNames;
+
+            if (CheckQuestion == "INTEGER")
+            {
+
+                console.log("asdfdsf");
+            }
+
+            if (CheckQuestion == "BOOLEAN")
+            {
+
+                console.log("asdasd");
+            }
+
+            if (CheckIfCanBeSkipped == true){
+
+                document.getElementById("Notes").innerHTML =  "<input class='button' value='Skip' id='SkipButton'  />";
+
+            }else {
+
+                document.getElementById("Notes").innerHTML = "Sorry this question can't be skipped !!! ";
+            }
+
+
+
+
+
+
+
+
+
+
+
+            console.log(jsonObject);
+
+        });
+
+
+        }
+
+
+
