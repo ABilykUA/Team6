@@ -73,7 +73,7 @@ function onStartClick() {
     let ButtonErase = document.getElementById("StartQuestionsButton");
 
 
-    fetch( "https://codecyprus.org/th/api/start?player=anna&app=teamAndrii&treasure-hunt-id=ag9nfmNvZGVjeXBydXNvcmdyGQsSDFRyZWFzdXJlSHVudBiAgICAvKGCCgw" )
+    fetch( "https://codecyprus.org/th/api/start?player=annsda&app=teamAndrii&treasure-hunt-id=ag9nfmNvZGVjeXBydXNvcmdyGQsSDFRyZWFzdXJlSHVudBiAgICAvKGCCgw" )
         .then(response => response.json()) //Parse JSON text to JavaScript object
         .then(jsonObject => {
 
