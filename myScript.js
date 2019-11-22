@@ -35,7 +35,7 @@ function NameAndTeamInput() {
 
                     let HuntOptions = document.createElement("li");
 
-                    HuntOptions.innerHTML = "<a href='Question.html' onclick='onStartClick(Name.value, TeamName.value, UUID )' >" + NameOfHunts + "</a>";
+                    HuntOptions.innerHTML = "<a href='Question.html' onclick='onStartClick()' >" + NameOfHunts + "</a>";
 
                     TreasureHuntslist.appendChild(HuntOptions);
 
@@ -113,19 +113,19 @@ function Questions(session) {
 
             Question.innerHTML = QuestionNames;
 
-            if (CheckQuestion == "INTEGER")
+            if (CheckQuestion === "INTEGER")
             {
 
                 console.log("asdfdsf");
             }
 
-            if (CheckQuestion == "BOOLEAN")
+            if (CheckQuestion === "BOOLEAN")
             {
 
                 console.log("asdasd");
             }
 
-            if (CheckIfCanBeSkipped == true){
+            if (CheckIfCanBeSkipped === true){
 
                 document.getElementById("Notes").innerHTML =  "<input class='button' value='Skip' id='SkipButton'  />";
 
