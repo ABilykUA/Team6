@@ -49,6 +49,7 @@ ul{
     border: 1px solid black;
     background-image: linear-gradient(salmon, white);
     text-align: center;
+    font-size: 3vmax;
 }
 
 

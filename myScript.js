@@ -29,13 +29,15 @@ function NameAndTeamInput() {
 
                 for (let i = 0; i < TreasureHuntsOBJECT.length; i++) {
 
+
+
                     UUID = TreasureHuntsOBJECT[i].uuid;
 
                     NameOfHunts = TreasureHuntsOBJECT[i].name;
 
                     let HuntOptions = document.createElement("li");
 
-                    HuntOptions.innerHTML = "<a href='Question.html' onclick='onStartClick()' >" + NameOfHunts + "</a>";
+                    HuntOptions.innerHTML = "<a href='#' onclick='SessionGet(UUID,Name.value,TeamName.value)' >" + NameOfHunts + "</a>";
 
                     TreasureHuntslist.appendChild(HuntOptions);
 
@@ -43,6 +45,7 @@ function NameAndTeamInput() {
 
 
                     // i have to make it, save the name , uuid , teamname, to qustions page!  !!
+                    // href='Question.html'
 
 
                 }
@@ -62,17 +65,57 @@ function NameAndTeamInput() {
 
 }
 
+
+
+function SessionGet (UUID,Name,TeamName){
+
+    console.log(Name);
+    console.log(UUID);
+    console.log(TeamName);
+
+
+    const Api_Session = "https://codecyprus.org/th/api/start?player="+   Name   +"&app=" +    TeamName    + "&treasure-hunt-id=ag9nfmNvZGVjeXBydXNvcmdyGQsSDFRyZWFzdXJlSHVudBiAgICAvKGCCgw";
+
+    fetch( Api_Session )
+        .then(response => response.json()) //Parse JSON text to JavaScript object
+        .then(jsonObject => {
+
+
+            console.log( jsonObject);
+
+
+            let session = jsonObject.session;
+            let numofQuestions = jsonObject.numOfQuestions;
+
+            console.log(session,numofQuestions);
+
+
+
+
+
+
+
+        });
+
+
+
+
+}
+
+
+
 function onStartClick() {
 
     // name, teamName, uuid
     //input should look like this = https://codecyprus.org/th/api/start?player=" + name + "&app=" + teamName + "&treasure-hunt-id=" + uuid
 
 
+
     let FormElement = document.getElementById("FormQuestions");
     let ButtonErase = document.getElementById("StartQuestionsButton");
 
 
-    fetch( "https://codecyprus.org/th/api/start?player=newplayer&app=teamAndrii&treasure-hunt-id=ag9nfmNvZGVjeXBydXNvcmdyGQsSDFRyZWFzdXJlSHVudBiAgICAvKGCCgw" )
+    fetch( "https://codecyprus.org/th/api/start?player=newplretysdasdsdfayer&app=teamAnsdfdsfdrii&treasure-hunt-id=ag9nfmNvZGVjeXBydXNvcmdyGQsSDFRyZWFzdXJlSHVudBiAgICAvKGCCgw" )
         .then(response => response.json()) //Parse JSON text to JavaScript object
         .then(jsonObject => {
 
@@ -110,30 +153,66 @@ function Questions(session) {
 
             let CheckIfCanBeSkipped = jsonObject.canBeSkipped;
 
+            let CheckLocation = jsonObject.requiresLocation;
+
             Question.innerHTML = QuestionNames;
 
             if (CheckQuestion === "INTEGER")
             {
 
-                console.log("asdfdsf");
+
             }
 
             if (CheckQuestion === "BOOLEAN")
             {
 
-                console.log("asdasd");
+
             }
+            if (CheckQuestion === "NUMERIC")
+            {
+
+
+            }
+
+            if (CheckQuestion === "MCQ")
+            {
+
+
+            }
+
+            if (CheckQuestion === "TEXT")
+            {
+
+
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
             if (CheckIfCanBeSkipped === true){
 
-                document.getElementById("Notes").innerHTML =  "<input class='button' value='Skip' id='SkipButton'  />";
+                document.getElementById("Notes").innerHTML =  "<input type='button' class='button' value='Skip' id='SkipButton'  />";
 
             }else {
 
                 document.getElementById("Notes").innerHTML = "Sorry this question can't be skipped !!! ";
             }
 
+            if (CheckLocation === true ){
 
+                document.getElementById("Notes").innerHTML =  "<input type='button' class='button' value='UpDateLocation' id='UpDateLocButton'  />";
+
+            }
 
 
 
