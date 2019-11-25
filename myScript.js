@@ -67,13 +67,12 @@ function onStartClick() {
     // name, teamName, uuid
     //input should look like this = https://codecyprus.org/th/api/start?player=" + name + "&app=" + teamName + "&treasure-hunt-id=" + uuid
 
-    const Settion_API = "https://codecyprus.org/th/api/start?player=Andrii&app=teamAndrii&treasure-hunt-id=ag9nfmNvZGVjeXBydXNvcmdyGQsSDFRyZWFzdXJlSHVudBiAgICAvKGCCgw";
 
     let FormElement = document.getElementById("FormQuestions");
     let ButtonErase = document.getElementById("StartQuestionsButton");
 
 
-    fetch( "https://codecyprus.org/th/api/start?player=anna&app=teamAndrii&treasure-hunt-id=ag9nfmNvZGVjeXBydXNvcmdyGQsSDFRyZWFzdXJlSHVudBiAgICAvKGCCgw" )
+    fetch( "https://codecyprus.org/th/api/start?player=ansdfgna&app=teamrteAndrii&treasure-hunt-id=ag9nfmNvZGVjeXBydXNvcmdyGQsSDFRyZWFzdXJlSHVudBiAgICAvKGCCgw" )
         .then(response => response.json()) //Parse JSON text to JavaScript object
         .then(jsonObject => {
 
