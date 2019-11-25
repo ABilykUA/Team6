@@ -35,7 +35,7 @@ function NameAndTeamInput() {
 
                     let HuntOptions = document.createElement("li");
 
-                    HuntOptions.innerHTML = "<a href='Question.html' onclick='onStartClick(Name.value, TeamName.value, UUID )' >" + NameOfHunts + "</a>";
+                    HuntOptions.innerHTML = "<a onclick='onStartClick(Name.value, TeamName.value, UUID )' >" + NameOfHunts + "</a>";
 
                     TreasureHuntslist.appendChild(HuntOptions);
 
@@ -62,17 +62,18 @@ function NameAndTeamInput() {
 
 }
 
-function onStartClick() {
+function onStartClick(Name, TeamName, UUID ) {
 
     // name, teamName, uuid
     //input should look like this = https://codecyprus.org/th/api/start?player=" + name + "&app=" + teamName + "&treasure-hunt-id=" + uuid
-
+    // https://codecyprus.org/th/api/start?player=vashfgily&app=vasilsdfykgames&treasure-hunt-id=ag9nfmNvZGVjeXBydXNvcmdyGQsSDFRyZWFzdXJlSHVudBiAgICAvKGCCgw
 
     let FormElement = document.getElementById("FormQuestions");
     let ButtonErase = document.getElementById("StartQuestionsButton");
 
 
-    fetch( "https://codecyprus.org/th/api/start?player=ansdfgna&app=teamrteAndrii&treasure-hunt-id=ag9nfmNvZGVjeXBydXNvcmdyGQsSDFRyZWFzdXJlSHVudBiAgICAvKGCCgw" )
+
+    fetch("https://codecyprus.org/th/api/start?player=lo0xrr&app=vasia&treasure-hunt-id=ag9nfmNvZGVjeXBydXNvcmdyGQsSDFRyZWFzdXJlSHVudBiAgICAvKGCCgw" )
         .then(response => response.json()) //Parse JSON text to JavaScript object
         .then(jsonObject => {
 
@@ -96,7 +97,7 @@ function onStartClick() {
 
 function Questions(session) {
 
-    let FormElement = document.getElementById("FormQuestions");
+
 
     let Question = document.getElementById("Question");
 
@@ -110,30 +111,75 @@ function Questions(session) {
 
             let CheckIfCanBeSkipped = jsonObject.canBeSkipped;
 
+            let CheckLocqation = jsonObject.requiresLocation;
+
             Question.innerHTML = QuestionNames;
 
-            if (CheckQuestion == "INTEGER")
+            if (CheckQuestion === "INTEGER")
             {
+
+                document.getElementById("Textfield").innerHTML =  "<input type='text' id='textfiled'  />";
+
+                document.getElementById("SubmitBitton").innerHTML =  "<input type='button' class='button' value='Sybmit' id='SubmitButton'  />";
 
                 console.log("asdfdsf");
             }
 
-            if (CheckQuestion == "BOOLEAN")
+            if (CheckQuestion === "BOOLEAN")
             {
+
+                document.getElementById("TrueAnswer").innerHTML =  "<input type='button' class='button' value='True' id='TrueButton'  />";
+
+                document.getElementById("FalseAnswer").innerHTML =  "<input type='button' class='button' value='False' id='FalseButton'  />";
+
 
                 console.log("asdasd");
             }
+            if (CheckQuestion === "MCQ")
+            {
 
-            if (CheckIfCanBeSkipped == true){
 
-                document.getElementById("Notes").innerHTML =  "<input class='button' value='Skip' id='SkipButton'  />";
+                console.log("dfgdfgdfjhasdasd");
+            }
 
-            }else {
+            if (CheckQuestion === "TEXT")
+            {
 
-                document.getElementById("Notes").innerHTML = "Sorry this question can't be skipped !!! ";
+
+
+
+                console.log("asdafghfgjdsd");
+            }
+
+            if (CheckQuestion === "NUMERIC")
+            {
+
+
+
+
+                console.log("asdafghfgjdsd");
             }
 
 
+
+
+
+            if (CheckIfCanBeSkipped === true){
+
+                document.getElementById("Skip").innerHTML =  "<input type='button' class='button' value='Skip' id='SkipButton'  />";
+
+            }else {
+
+                document.getElementById("Skip").innerHTML = "Sorry this question can't be skipped !!! ";
+            }
+
+
+            if (CheckLocqation === true){
+
+                document.getElementById("Location").innerHTML =  "<input type='button' class='button' value='UpDate Location' id='UpDateLocationButton'  />";
+
+
+            }
 
 
 
