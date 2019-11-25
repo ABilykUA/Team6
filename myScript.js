@@ -67,7 +67,6 @@ function onStartClick() {
     // name, teamName, uuid
     //input should look like this = https://codecyprus.org/th/api/start?player=" + name + "&app=" + teamName + "&treasure-hunt-id=" + uuid
 
-    const Settion_API = "https://codecyprus.org/th/api/start?player=Andrii&app=teamAndrii&treasure-hunt-id=ag9nfmNvZGVjeXBydXNvcmdyGQsSDFRyZWFzdXJlSHVudBiAgICAvKGCCgw";
 
     let FormElement = document.getElementById("FormQuestions");
     let ButtonErase = document.getElementById("StartQuestionsButton");
