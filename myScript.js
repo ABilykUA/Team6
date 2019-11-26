@@ -1,5 +1,16 @@
 // JS is done here ↓
-
+// JS is done here ↓
+// function Cookies()
+// {
+// let date = new Date();
+// date.setTime(date.getTime() + (60 * 1000));
+// let expires = "expires=" + date.toUTCString();
+// document.cookie="";path=/";
+// document.cookie="";path=/";
+// document.cookie="";path=/";
+// document.cookie="";path=/";
+// console.log(document.cookie);
+// }
 
 
 function NameAndTeamInput() {
@@ -153,64 +164,71 @@ function Questions(session) {
 
             let CheckIfCanBeSkipped = jsonObject.canBeSkipped;
 
-            let CheckLocation = jsonObject.requiresLocation;
+            let CheckLocqation = jsonObject.requiresLocation;
 
             Question.innerHTML = QuestionNames;
 
             if (CheckQuestion === "INTEGER")
             {
 
+                document.getElementById("Textfield").innerHTML =  "<input type='text' id='textfiled'  />";
 
+                document.getElementById("SubmitBitton").innerHTML =  "<input type='button' class='button' value='Sybmit' id='SubmitButton'  />";
+
+                console.log("asdfdsf");
             }
 
             if (CheckQuestion === "BOOLEAN")
             {
 
+                document.getElementById("TrueAnswer").innerHTML =  "<input type='button' class='button' value='True' id='TrueButton'  />";
 
+                document.getElementById("FalseAnswer").innerHTML =  "<input type='button' class='button' value='False' id='FalseButton'  />";
+
+
+                console.log("asdasd");
             }
-            if (CheckQuestion === "NUMERIC")
-            {
-
-
-            }
-
             if (CheckQuestion === "MCQ")
             {
 
 
+                console.log("dfgdfgdfjhasdasd");
             }
 
             if (CheckQuestion === "TEXT")
             {
 
 
+
+
+                console.log("asdafghfgjdsd");
             }
 
+            if (CheckQuestion === "NUMERIC")
+            {
 
 
 
 
-
-
-
-
-
-
+                console.log("asdafghfgjdsd");
+            }
 
 
 
             if (CheckIfCanBeSkipped === true){
 
-                document.getElementById("Notes").innerHTML =  "<input type='button' class='button' value='Skip' id='SkipButton'  />";
+                document.getElementById("Skip").innerHTML =  "<input type='button' class='button' value='Skip' id='SkipButton'  />";
 
             }else {
 
                 document.getElementById("Notes").innerHTML = "Sorry this question can't be skipped !!! ";
             }
 
-            if (CheckLocation === true ){
 
-                document.getElementById("Notes").innerHTML =  "<input type='button' class='button' value='UpDateLocation' id='UpDateLocButton'  />";
+            if (CheckLocqation === true){
+
+                document.getElementById("Location").innerHTML =  "<input type='button' class='button' value='UpDate Location' id='UpDateLocationButton'  />";
+
 
             }
 
