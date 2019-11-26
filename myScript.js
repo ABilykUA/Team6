@@ -1,14 +1,14 @@
 // JS is done here ↓
- function Cookies(UUID,NameOfHunts) {
+ //function Cookies(UUID,NameOfHunts) {
 
-for(let i = 0;i<UUID.length;i++){
+//for(let i = 0;i<UUID.length;i++){
 
- document.cookie="UUID"+ i + "=" + UUID[i] + ";";
- document.cookie="NameOfHunts"+ i + "=" + NameOfHunts[i] + ";";
+ //document.cookie="UUID"+ i + "=" + UUID[i] + ";";
+ //document.cookie="NameOfHunts"+ i + "=" + NameOfHunts[i] + ";";
 
-}
- console.log(document.cookie);
- }
+//}
+// console.log(document.cookie);
+// }
 
 
 function NameAndTeamInput() {
