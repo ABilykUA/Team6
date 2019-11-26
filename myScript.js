@@ -48,7 +48,7 @@ function NameAndTeamInput() {
 
                     let HuntOptions = document.createElement("li");
 
-                    HuntOptions.innerHTML = "<a href='#' onclick='SessionGet(UUID,Name.value,TeamName.value)' >" + NameOfHunts + "</a>";
+                    HuntOptions.innerHTML = "<a href='#' onclick='SessionGet(UUID,Name.value,TeamName.value); this.onclick=null' >" + NameOfHunts + "</a>";
 
                     TreasureHuntslist.appendChild(HuntOptions);
 
