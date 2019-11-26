@@ -1,14 +1,14 @@
 // JS is done here ↓
 // JS is done here ↓
-// function Cookies(UUID0,UUID1,NameOfHunts0,NameOfHunt1)
+// function Cookies()
 // {
 // let date = new Date();
 // date.setTime(date.getTime() + (60 * 1000));
 // let expires = "expires=" + date.toUTCString();
-// document.cookie="UUID0"+ "=" + UUID0 + ";" + expires + ";path=/";
-// document.cookie="UUID1"+ "=" + UUID1 + ";" + expires + ";path=/";
-// document.cookie="NameOfHunts0" + "=" + NameOfHunts0 + ";" + expires + ";path=/";
-// document.cookie="NameOfHunts1" + "=" + NameOfHunt1 + ";" + expires + ";path=/";
+// document.cookie="";path=/";
+// document.cookie="";path=/";
+// document.cookie="";path=/";
+// document.cookie="";path=/";
 // console.log(document.cookie);
 // }
 
@@ -54,25 +54,8 @@ function NameAndTeamInput() {
 
 
                     // i have to make it, save the name , uuid , teamname, to qustions page!  !!
-
-//TextOutPut.innerText = "Lists";
-//
-//                     UUID0 = TreasureHuntsOBJECT[0].uuid;
-//                     NameOfHunts0 = TreasureHuntsOBJECT[0].name;
-//
-//                     UUID1 = TreasureHuntsOBJECT[1].uuid;
-//                     NameOfHunt1 = TreasureHuntsOBJECT[1].name;
-//
-//
-//
-//                     // document.location.href = "Question.html?";
-//
-//
-//                     // i have to make it, save the name , uuid , teamname, to qustions page!  !!
-//
-//                     Cookies(UUID0,UUID1,NameOfHunts0,NameOfHunt1);
-
-                }
+              
+        
 
 
             });
