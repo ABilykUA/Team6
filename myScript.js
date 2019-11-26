@@ -1,16 +1,14 @@
 // JS is done here ↓
-// JS is done here ↓
-// function Cookies()
-// {
-// let date = new Date();
-// date.setTime(date.getTime() + (60 * 1000));
-// let expires = "expires=" + date.toUTCString();
-// document.cookie="";path=/";
-// document.cookie="";path=/";
-// document.cookie="";path=/";
-// document.cookie="";path=/";
-// console.log(document.cookie);
-// }
+ function Cookies(UUID,NameOfHunts) {
+
+for(let i = 0;i<UUID.length;i++){
+
+ document.cookie="UUID"+ i + "=" + UUID[i] + ";";
+ document.cookie="NameOfHunts"+ i + "=" + NameOfHunts[i] + ";";
+
+}
+ console.log(document.cookie);
+ }
 
 
 function NameAndTeamInput() {
@@ -53,14 +51,34 @@ function NameAndTeamInput() {
                     TreasureHuntslist.appendChild(HuntOptions);
 
                     // document.location.href = "Question.html?";
+// let UUID=[];
+               // let NameOfHunts=[];
 
+
+
+              //  for (let i = 0; i < TreasureHuntsOBJECT.length; i++) {
+
+                 //   UUID.push(TreasureHuntsOBJECT[i].uuid);
+
+                 //   NameOfHunts.push(TreasureHuntsOBJECT[i].name);
+
+                  //  let HuntOptions = document.createElement("li");
+
+                 //  HuntOptions.innerHTML = "<a href='Question.html' onclick='onStartClick(Name.value, TeamName.value, UUID[i].value )' >" + NameOfHunts[i] + "</a>";
+
+                 //   TreasureHuntslist.appendChild(HuntOptions);
 
                     // i have to make it, save the name , uuid , teamname, to qustions page!  !!
                     // href='Question.html'
 
 
                 }
-
+//for(let i = 0;i < TreasureHuntsOBJECT.length;i++)
+//{
+ //   console.log(UUID[i]);
+ //   console.log(NameOfHunts[i]);
+//}
+//Cookies(UUID,NameOfHunts)
 
             });
 
