@@ -66,7 +66,7 @@ function NameAndTeamInput() {
 
     }else {
 
-            TextOutPut.innerText = "Error! Refresh the page fill in the fields!";
+            TextOutPut.innerText = "ErEroWr! Refresh the page fill in the fields!";
             elem.parentNode.removeChild(elem);
 
 
