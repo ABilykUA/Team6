@@ -45,41 +45,14 @@ function NameAndTeamInput() {
 
                     let HuntOptions = document.createElement("li");
 
-                    HuntOptions.innerHTML = "<a href='#' onclick='SessionGet(UUID,Name.value); this.onclick=null' >" + NameOfHunts + "</a>";
+                    HuntOptions.innerHTML = "<a href='Question.html?uuid=" + UUID + "&name=" + Name + " '  >" + NameOfHunts + "</a>";
 
                     TreasureHuntslist.appendChild(HuntOptions);
 
-                    // document.location.href = "Question.html?";
-                    // let UUID=[];
-                    // let NameOfHunts=[];
-
-
-
-                     //  for (let i = 0; i < TreasureHuntsOBJECT.length; i++) {
-
-                     //   UUID.push(TreasureHuntsOBJECT[i].uuid);
-
-                      //   NameOfHunts.push(TreasureHuntsOBJECT[i].name);
-
-                      //  let HuntOptions = document.createElement("li");
-
-                     //  HuntOptions.innerHTML = "<a href='Question.html' onclick='onStartClick(Name.value, TeamName.value, UUID[i].value )' >" + NameOfHunts[i] + "</a>";
-
-                      //   TreasureHuntslist.appendChild(HuntOptions);
-
-                     // i have to make it, save the name , uuid , teamname, to qustions page!  !!
-                     // href='Question.html'
 
 
                 }
-                    //for(let i = 0;i < TreasureHuntsOBJECT.length;i++)
-                    //{
-                     //   console.log(UUID[i]);
-                     //   console.log(NameOfHunts[i]);
-                    //}
-                    //Cookies(UUID,NameOfHunts)
-                    //
-                    // test 2
+
 
             });
 
@@ -97,74 +70,7 @@ function NameAndTeamInput() {
 
 
 
-function SessionGet (UUID,Name){
-
-    console.log(Name);
-    console.log(UUID);
-
-
-
-    const Api_Session = "https://codecyprus.org/th/api/start?player="+   Name   +"&app=Team6&treasure-hunt-id=ag9nfmNvZGVjeXBydXNvcmdyGQsSDFRyZWFzdXJlSHVudBiAgICAvKGCCgw";
-
-    fetch( Api_Session )
-        .then(response => response.json()) //Parse JSON text to JavaScript object
-        .then(jsonObject => {
-
-
-            console.log( jsonObject);
-
-
-            let session = jsonObject.session;
-            let numofQuestions = jsonObject.numOfQuestions;
-
-            console.log(session,numofQuestions);
-
-
-
-
-
-
-
-        });
-
-
-
-
-}
-
-
-
-function onStartClick() {
-
-    // name, teamName, uuid
-    //input should look like this = https://codecyprus.org/th/api/start?player=" + name + "&app=" + teamName + "&treasure-hunt-id=" + uuid
-
-
-
-    let FormElement = document.getElementById("FormQuestions");
-    let ButtonErase = document.getElementById("StartQuestionsButton");
-
-
-    fetch( "https://codecyprus.org/th/api/start?player=newasdfnsdfdrii&app=teamAnsdfdsfdrii&treasure-hunt-id=ag9nfmNvZGVjeXBydXNvcmdyGQsSDFRyZWFzdXJlSHVudBiAgICAvKGCCgw" )
-        .then(response => response.json()) //Parse JSON text to JavaScript object
-        .then(jsonObject => {
-
-
-            let session = jsonObject.session;
-
-
-
-            Questions(session);
-
-
-
-            console.log(session);
-
-            FormElement.removeChild(ButtonErase);
-
-
-
-        });
+function SessionGet () {
 
 
 
@@ -244,7 +150,7 @@ function Questions(session) {
 
 
 
-                document.getElementById("Skip").innerHTML =  "<a href='#'> <input type='button' class='button' value='Skip' onclick='SkipQuestion(session)'  /> </a>";
+                document.getElementById("Skip").innerHTML =  "<a href='#'> <input type='button' class='button' value='Skip' onclick='SkipQuestion( session)'  /> </a>";
 
 
             }else {
@@ -280,11 +186,11 @@ function Questions(session) {
 
 
 
-        function SkipQuestion(sessionskip) {
+        function SkipQuestion( session) {
 
 
 
-            fetch( "https://codecyprus.org/th/api/skip?session=" + sessionskip )
+            fetch( "https://codecyprus.org/th/api/skip?session=" +  session )
                 .then(response => response.json()) //Parse JSON text to JavaScript object
                 .then(jsonObject => {
 
