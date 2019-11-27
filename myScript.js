@@ -79,7 +79,8 @@ function NameAndTeamInput() {
  //   console.log(NameOfHunts[i]);
 //}
 //Cookies(UUID,NameOfHunts)
-                //test
+//
+// test 2
 
             });
 
