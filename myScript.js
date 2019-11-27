@@ -1,5 +1,7 @@
 // JS is done here ↓
 
+var sessionID = null;
+
 
 function NameAndTeamInput() {
     const LIST_API = "https://codecyprus.org/th/api/list";
@@ -62,7 +64,6 @@ function NameAndTeamInput() {
 
 function SessionGet () {
 
-    let StartQuestionsButtonDeletion = document.getElementById("StartQuestionsButton");
 
     const params = new URLSearchParams(location.search);
 
@@ -75,13 +76,14 @@ function SessionGet () {
         .then(jsonObject => {
 
                 let Session = jsonObject.session;
+                sessionID = Session;
 
 
                 console.log(Session);
 
                 Questions(Session);
 
-                SkipQuestion(Session);
+                // SkipQuestion(Session);
 
             StartQuestionsButtonDeletion.parentNode.removeChild(StartQuestionsButtonDeletion);
 
@@ -92,6 +94,7 @@ function SessionGet () {
 
         }
 
+        SessionGet();
 
 
 
@@ -101,14 +104,15 @@ function SessionGet () {
 
 
 
+function Questions() {
 
-function Questions(session) {
+    console.log("Questions()session -> " + sessionID);
 
     let FormElement = document.getElementById("FormQuestions");
 
     let Question = document.getElementById("Question");
 
-    const  Questions_Api = "https://codecyprus.org/th/api/question?session="+ session ;
+    const  Questions_Api = "https://codecyprus.org/th/api/question?session="+ sessionID ;
 
     fetch( Questions_Api )
         .then(response => response.json()) //Parse JSON text to JavaScript object
@@ -178,7 +182,7 @@ function Questions(session) {
 
 
 
-                document.getElementById("Skip").innerHTML =  "<a href='#'> <input type='button' class='button' value='Skip' onclick='SkipQuestion(session)'  /> </a>";
+                document.getElementById("Skip").innerHTML =  "<a href='#'> <input type='button' class='button' value='Skip' onclick='SkipQuestion(sessionID)'  /> </a>";
 
 
             }else {
@@ -214,11 +218,11 @@ function Questions(session) {
 
 
 
-        function SkipQuestion(session) {
+        function SkipQuestion() {
 
 
 
-            fetch( "https://codecyprus.org/th/api/skip?session=" +  session )
+            fetch( "https://codecyprus.org/th/api/skip?session=" +  sessionID )
                 .then(response => response.json()) //Parse JSON text to JavaScript object
                 .then(jsonObject => {
 
