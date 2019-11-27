@@ -74,6 +74,17 @@ function SessionGet () {
 
 
 
+    const params = new URLSearchParams(location.search);
+
+    params.get("name");
+    params.get("uuid");
+
+    console.log( params.get("name"), params.get("uuid"));
+
+
+
+
+
 }
 
 function Questions(session) {
