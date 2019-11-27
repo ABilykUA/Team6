@@ -76,16 +76,13 @@ function SessionGet () {
         .then(jsonObject => {
 
                 let Session = jsonObject.session;
+
                 sessionID = Session;
 
 
                 console.log(Session);
 
                 Questions(Session);
-
-                // SkipQuestion(Session);
-
-            StartQuestionsButtonDeletion.parentNode.removeChild(StartQuestionsButtonDeletion);
 
 
 
@@ -187,7 +184,12 @@ function Questions() {
 
             }else {
 
+
+
+
                 document.getElementById("Notes").innerHTML = "Sorry this question can't be skipped !!! ";
+
+                Skip.parentNode.removeChild(Skip);
             }
 
 
