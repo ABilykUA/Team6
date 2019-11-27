@@ -1,14 +1,4 @@
 // JS is done here ↓
- //function Cookies(UUID,NameOfHunts) {
-
-//for(let i = 0;i<UUID.length;i++){
-
- //document.cookie="UUID"+ i + "=" + UUID[i] + ";";
- //document.cookie="NameOfHunts"+ i + "=" + NameOfHunts[i] + ";";
-
-//}
-// console.log(document.cookie);
-// }
 
 
 function NameAndTeamInput() {
@@ -72,20 +62,45 @@ function NameAndTeamInput() {
 
 function SessionGet () {
 
-
+    let StartQuestionsButtonDeletion = document.getElementById("StartQuestionsButton");
 
     const params = new URLSearchParams(location.search);
 
-    params.get("name");
-    params.get("uuid");
 
-    console.log( params.get("name"), params.get("uuid"));
+    const Session_Api = "https://codecyprus.org/th/api/start?player="+   params.get("name")   +"&app=simpsons-app&treasure-hunt-id=" +   params.get("uuid");
 
 
+    fetch(Session_Api)
+        .then(response => response.json()) //Parse JSON text to JavaScript object
+        .then(jsonObject => {
+
+                let Session = jsonObject.session;
+
+
+                console.log(Session);
+
+                Questions(Session);
+
+                SkipQuestion(Session);
+
+            StartQuestionsButtonDeletion.parentNode.removeChild(StartQuestionsButtonDeletion);
 
 
 
-}
+
+        });
+
+        }
+
+
+
+
+
+
+
+
+
+
 
 function Questions(session) {
 
@@ -93,7 +108,9 @@ function Questions(session) {
 
     let Question = document.getElementById("Question");
 
-    fetch( "https://codecyprus.org/th/api/question?session="+ session )
+    const  Questions_Api = "https://codecyprus.org/th/api/question?session="+ session ;
+
+    fetch( Questions_Api )
         .then(response => response.json()) //Parse JSON text to JavaScript object
         .then(jsonObject => {
 
@@ -161,7 +178,7 @@ function Questions(session) {
 
 
 
-                document.getElementById("Skip").innerHTML =  "<a href='#'> <input type='button' class='button' value='Skip' onclick='SkipQuestion( session)'  /> </a>";
+                document.getElementById("Skip").innerHTML =  "<a href='#'> <input type='button' class='button' value='Skip' onclick='SkipQuestion(session)'  /> </a>";
 
 
             }else {
@@ -197,7 +214,7 @@ function Questions(session) {
 
 
 
-        function SkipQuestion( session) {
+        function SkipQuestion(session) {
 
 
 
@@ -206,6 +223,10 @@ function Questions(session) {
                 .then(jsonObject => {
 
                     console.log(jsonObject);
+
+                    Questions();
+
+
 
                 });
 
