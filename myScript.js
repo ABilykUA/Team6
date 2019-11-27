@@ -123,16 +123,16 @@ function Questions() {
 
             let CheckLocation = jsonObject.requiresLocation;
 
-            Question.innerHTML = QuestionNames;
+            document.getElementById("Question").innerHTML = QuestionNames;
 
             if (CheckQuestion === "INTEGER")
             {
 
                 document.getElementById("TextField").innerHTML =  "<input type='text' id='textfiled'  />";
 
-                document.getElementById("SubmitButton").innerHTML =  "<input type='button' class='button' value='Sybmit' id='SubmitButton'  />";
+                document.getElementById("SubmitButton").innerHTML =  "<input type='button' class='button' value='Submit' id='SubmitButton'  />";
 
-                console.log("asdfdsf");
+
             }
 
             if (CheckQuestion === "BOOLEAN")
@@ -229,6 +229,10 @@ function Questions() {
                 .then(jsonObject => {
 
                     console.log(jsonObject);
+
+
+
+
 
                     Questions();
 
