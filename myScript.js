@@ -2,7 +2,9 @@
 
 var sessionID = null;
 var CheckForSkip= null;
-var GameScore = null;
+var GameScore = 0;
+var CheckLocation = null;
+
 
 
 
@@ -40,7 +42,7 @@ function NameAndTeamInput() {
 
                     let HuntOptions = document.createElement("li");
 
-                    HuntOptions.innerHTML = "<a href='Question.html?uuid=" + UUID + "&name=" + Name + " '  >" + NameOfHunts + "</a>";
+                    HuntOptions.innerHTML = "<a href='Question.html?uuid=" + UUID + "&name=" + Name + " '   >" + NameOfHunts + "</a>";
 
                     TreasureHuntslist.appendChild(HuntOptions);
 
@@ -82,8 +84,6 @@ function SessionGet () {
 
                 sessionID = Session;
 
-                document.getElementById("Question").innerHTML = "Loading . . . ";
-
                 console.log(Session);
 
                 Questions(Session);
@@ -94,8 +94,9 @@ function SessionGet () {
         });
 
         }
-
         SessionGet();
+
+
 
 
 
@@ -109,10 +110,6 @@ function Questions() {
 
     console.log("Questions()session -> " + sessionID);
 
-    let FormElement = document.getElementById("FormQuestions");
-
-    let Question = document.getElementById("Question");
-
     const  Questions_Api = "https://codecyprus.org/th/api/question?session="+ sessionID ;
 
     fetch( Questions_Api )
@@ -124,6 +121,8 @@ function Questions() {
             let QuestionNames = jsonObject.questionText;
 
             let  CheckQuestion = jsonObject.questionType;
+
+            CheckLocation = jsonObject.requiresLocation;
 
             CheckForSkip = jsonObject.canBeSkipped;
 
@@ -137,7 +136,7 @@ function Questions() {
             {
 
 
-                integer(CheckForSkip);
+                integer(CheckForSkip,CheckLocation);
 
 
             }
@@ -146,21 +145,21 @@ function Questions() {
             {
 
 
-                boolean (CheckForSkip);
+                boolean (CheckForSkip,CheckLocation);
 
 
 
             }
             if (CheckQuestion === "MCQ")
             {
-                mcq(CheckForSkip);
+                mcq(CheckForSkip,CheckLocation);
 
             }
 
             if (CheckQuestion === "TEXT")
             {
 
-                text(CheckForSkip);
+                text(CheckForSkip,CheckLocation);
 
 
 
@@ -170,7 +169,7 @@ function Questions() {
             {
 
 
-                numeric(CheckForSkip);
+                numeric(CheckForSkip,CheckLocation);
 
 
             }
@@ -218,6 +217,16 @@ function Questions() {
             }else {
                 document.getElementById("Extra").innerHTML = "Sorry this question can't be skipped !!! ";
             }
+            if (CheckLocation === true){
+
+
+                document.getElementById("location").innerHTML =  "<input type='button' class='button' value='Location UpDFate'  />";
+            }else {
+
+                document.getElementById("location").innerHTML =  " ";
+
+            }
+
 
 
             }
@@ -237,9 +246,18 @@ function Questions() {
             }else {
             document.getElementById("Extra").innerHTML = "Sorry this question can't be skipped !!! ";
             }
+                if (CheckLocation === true){
 
 
-}
+                    document.getElementById("location").innerHTML =  "<input type='button' class='button' value='Location UpDFate'  />";
+                }else {
+
+                    document.getElementById("location").innerHTML =  " ";
+
+                }
+
+
+            }
 
             function numeric(){
 
@@ -256,8 +274,19 @@ function Questions() {
                   document.getElementById("Extra").innerHTML = "Sorry this question can't be skipped !!! ";
                      }
 
+                if (CheckLocation === true){
 
-}
+
+                    document.getElementById("location").innerHTML =  "<input type='button' class='button' value='Location UpDFate'  />";
+                }else {
+
+                    document.getElementById("location").innerHTML =  " ";
+
+                }
+
+
+
+            }
 
 
 
@@ -274,11 +303,13 @@ function Questions() {
 
 
 
-            document.getElementById("PlaceForButtons").innerHTML =  "<input type='button' class='button' value='False' id='FalseButton'  />"
+            document.getElementById("PlaceForButtons").innerHTML =
+
+                "<input type='button' class='button' value='False' id='FalseButton' onclick=' SubBool()'  />"
                 + " " +
                 "<br/>" +
                 "<br/>" +
-                "<input type='button' class='button' value='True' id='TrueButton' onclick='answer' /> ";
+                "<input type='button' class='button' value='True' id='TrueButton' onclick=' SubBool()' /> ";
 
             if (CheckForSkip === true){
 
@@ -286,6 +317,33 @@ function Questions() {
             }else {
                 document.getElementById("Extra").innerHTML = "Sorry this question can't be skipped !!! ";
             }
+            if (CheckLocation === true){
+
+
+                document.getElementById("location").innerHTML =  "<input type='button' class='button' value='Location UpDFate'  />";
+            }else {
+
+                document.getElementById("location").innerHTML =  " ";
+
+            }
+
+
+            }
+
+                function SubBoolTrue(){
+
+
+
+
+
+                }
+                function SubBoolFalse(){
+
+
+
+
+
+                }
 
 
 
@@ -294,12 +352,7 @@ function Questions() {
 
 
 
-
-
-
-
-        }
-        function mcq(){
+function mcq(){
 
             document.getElementById("PlaceForButtons").innerHTML =  "WIP";
 
@@ -309,27 +362,19 @@ function Questions() {
             }else {
                 document.getElementById("Extra").innerHTML = "Sorry this question can't be skipped !!! ";
             }
+            if (CheckLocation === true){
 
+
+                document.getElementById("location").innerHTML =  "<input type='button' class='button' value='Location UpDFate'  />";
+            }else {
+
+                document.getElementById("location").innerHTML =  " ";
 
             }
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        }
 
 
 
