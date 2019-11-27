@@ -1,6 +1,9 @@
 // JS is done here ↓
 
 var sessionID = null;
+var CheckForSkip= null;
+var GameScore = null;
+
 
 
 function NameAndTeamInput() {
@@ -79,6 +82,7 @@ function SessionGet () {
 
                 sessionID = Session;
 
+                document.getElementById("Question").innerHTML = "Loading . . . ";
 
                 console.log(Session);
 
@@ -115,22 +119,25 @@ function Questions() {
         .then(response => response.json()) //Parse JSON text to JavaScript object
         .then(jsonObject => {
 
+            let  CheckIfFinished = jsonObject.completed;
+
             let QuestionNames = jsonObject.questionText;
 
             let  CheckQuestion = jsonObject.questionType;
 
-            let CheckIfCanBeSkipped = jsonObject.canBeSkipped;
+            CheckForSkip = jsonObject.canBeSkipped;
 
-            let CheckLocation = jsonObject.requiresLocation;
+            document.getElementById("Score").innerHTML = "Your Score: " + GameScore;
+
+
 
             document.getElementById("Question").innerHTML = QuestionNames;
 
             if (CheckQuestion === "INTEGER")
             {
 
-                document.getElementById("TextField").innerHTML =  "<input type='text' id='textfiled'  />";
 
-                document.getElementById("SubmitButton").innerHTML =  "<input type='button' class='button' value='Submit' id='SubmitButton'  />";
+                integer(CheckForSkip);
 
 
             }
@@ -138,67 +145,49 @@ function Questions() {
             if (CheckQuestion === "BOOLEAN")
             {
 
-                document.getElementById("TrueAnswer").innerHTML =  "<input type='button' class='button' value='True' id='TrueButton'  />";
 
-                document.getElementById("FalseAnswer").innerHTML =  "<input type='button' class='button' value='False' id='FalseButton'  />";
+                boolean (CheckForSkip);
 
 
-                console.log("asdasd");
+
             }
             if (CheckQuestion === "MCQ")
             {
+                mcq(CheckForSkip);
 
-
-                console.log("dfgdfgdfjhasdasd");
             }
 
             if (CheckQuestion === "TEXT")
             {
 
+                text(CheckForSkip);
 
 
 
-                console.log("asdafghfgjdsd");
             }
 
             if (CheckQuestion === "NUMERIC")
             {
 
 
+                numeric(CheckForSkip);
 
 
-                console.log("asdafghfgjdsd");
+            }
+            if (CheckIfFinished === true ){
+
+                    document.getElementById("Question").innerHTML = "Finished";
+
+                    document.getElementById("PlaceForButtons").innerHTML ="Welldone ";
+
+                    document.getElementById("Extra").innerHTML ="I hope u did good ! ";
+
             }
 
 
 
-            if (CheckIfCanBeSkipped === true){
 
 
-
-
-
-
-                document.getElementById("Skip").innerHTML =  "<a href='#'> <input type='button' class='button' value='Skip' onclick='SkipQuestion(sessionID)'  /> </a>";
-
-
-            }else {
-
-
-
-
-                document.getElementById("Notes").innerHTML = "Sorry this question can't be skipped !!! ";
-
-                Skip.parentNode.removeChild(Skip);
-            }
-
-
-            if (CheckLocation === true){
-
-                document.getElementById("Location").innerHTML =  "<input type='button' class='button' value='UpDate Location' id='UpDateLocationButton'  />";
-
-
-            }
 
 
 
@@ -214,6 +203,131 @@ function Questions() {
 
 
         }
+
+        function integer(){
+
+
+            document.getElementById("PlaceForButtons").innerHTML =  "<input type='text' id='textfiled'  />"
+                + " " +
+                "<br/>" +
+                "<br/>" +
+                "<input type='button' class='button' value='Submit' id='SubmitButton' onclick='AnswerQuestion(sessionID)'  />";
+            if (CheckForSkip === true){
+
+                document.getElementById("Extra").innerHTML =  "<input type='button' class='button' value='Skip' onclick='SkipQuestion(sessionID)'  />";
+            }else {
+                document.getElementById("Extra").innerHTML = "Sorry this question can't be skipped !!! ";
+            }
+
+
+            }
+
+
+            function text(){
+
+
+            document.getElementById("PlaceForButtons").innerHTML =  "<input type='text' id='textfiled'  />"
+            + " " +
+            "<br/>" +
+            "<br/>" +
+            "<input type='button' class='button' value='Submit' id='SubmitButton' onclick='AnswerQuestion(sessionID)'  />";
+            if (CheckForSkip === true){
+
+            document.getElementById("Extra").innerHTML =  "<input type='button' class='button' value='Skip' onclick='SkipQuestion(sessionID)'  />";
+            }else {
+            document.getElementById("Extra").innerHTML = "Sorry this question can't be skipped !!! ";
+            }
+
+
+}
+
+            function numeric(){
+
+
+                document.getElementById("PlaceForButtons").innerHTML =  "<input type='text' id='textfiled'  />"
+                    + " " +
+                    "<br/>" +
+                    "<br/>" +
+                  "<input type='button' class='button' value='Submit' id='SubmitButton' onclick='AnswerQuestion(sessionID)'  />";
+                  if (CheckForSkip === true){
+
+                  document.getElementById("Extra").innerHTML =  "<input type='button' class='button' value='Skip' onclick='SkipQuestion(sessionID)'  />";
+                    }else {
+                  document.getElementById("Extra").innerHTML = "Sorry this question can't be skipped !!! ";
+                     }
+
+
+}
+
+
+
+
+
+
+
+
+
+
+        function boolean () {
+
+
+
+
+
+            document.getElementById("PlaceForButtons").innerHTML =  "<input type='button' class='button' value='False' id='FalseButton'  />"
+                + " " +
+                "<br/>" +
+                "<br/>" +
+                "<input type='button' class='button' value='True' id='TrueButton' onclick='answer' /> ";
+
+            if (CheckForSkip === true){
+
+                document.getElementById("Extra").innerHTML =  "<input type='button' class='button' value='Skip' onclick='SkipQuestion(sessionID)'  />";
+            }else {
+                document.getElementById("Extra").innerHTML = "Sorry this question can't be skipped !!! ";
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+        }
+        function mcq(){
+
+            document.getElementById("PlaceForButtons").innerHTML =  "WIP";
+
+            if (CheckForSkip === true){
+
+                document.getElementById("Extra").innerHTML =  "<input type='button' class='button' value='Skip' onclick='SkipQuestion(sessionID)'  />";
+            }else {
+                document.getElementById("Extra").innerHTML = "Sorry this question can't be skipped !!! ";
+            }
+
+
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -235,7 +349,7 @@ function Questions() {
 
 
                     Questions();
-
+                    Score(GameScore,sessionID);
 
 
                 });
@@ -247,6 +361,57 @@ function Questions() {
 
 
         }
+
+        function AnswerQuestion() {
+
+
+
+
+       let answer =  document.getElementById("textfiled").value;
+
+
+         fetch("https://codecyprus.org/th/api/answer?session=" + sessionID  +  "&answer=" + answer )
+                .then(response => response.json()) //Parse JSON text to JavaScript object
+                .then(jsonObject => {
+
+                    console.log(jsonObject);
+
+                    document.getElementById("PlaceForButtons").innerHTML = "Loading...";
+
+                    Questions();
+                    Score(GameScore,sessionID);
+
+
+
+            });
+
+
+
+
+
+
+
+            }
+
+function Score() {
+
+    fetch("https://codecyprus.org/th/api/score?session="+sessionID)
+        .then(response => response.json()) //Parse JSON text to JavaScript object
+        .then(jsonObject => {
+
+            console.log(jsonObject);
+
+            GameScore = jsonObject.score;
+
+
+
+        });
+
+
+}
+
+
+
 
 
 

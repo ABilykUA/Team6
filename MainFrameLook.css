@@ -51,10 +51,7 @@ ul{
     padding: 3px;
 }
 .button{
-
-    text-decoration: none;
-    text-transform: uppercase;
-    padding: 16px 36px 22px;
+    padding: 10px 10px;
     background-color: #c4faff;
     color:black;
     border: 2px solid black;
