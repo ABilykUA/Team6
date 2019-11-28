@@ -220,7 +220,7 @@ function Questions() {
             if (CheckLocation === true){
 
 
-                document.getElementById("location").innerHTML =  "<input type='button' class='button' value='Location UpDFate'  />";
+                document.getElementById("location").innerHTML =  "<input type='button' class='button' value='Loc UpDate'  />";
             }else {
 
                 document.getElementById("location").innerHTML =  " ";
@@ -249,7 +249,7 @@ function Questions() {
                 if (CheckLocation === true){
 
 
-                    document.getElementById("location").innerHTML =  "<input type='button' class='button' value='Location UpDFate'  />";
+                    document.getElementById("location").innerHTML =  "<input type='button' class='button' value='Loc UpDate'  />";
                 }else {
 
                     document.getElementById("location").innerHTML =  " ";
@@ -277,7 +277,7 @@ function Questions() {
                 if (CheckLocation === true){
 
 
-                    document.getElementById("location").innerHTML =  "<input type='button' class='button' value='Location UpDFate'  />";
+                    document.getElementById("location").innerHTML =  "<input type='button' class='button' value='Loc UpDate'  />";
                 }else {
 
                     document.getElementById("location").innerHTML =  " ";
@@ -299,17 +299,15 @@ function Questions() {
 
         function boolean () {
 
-
-
-
-
             document.getElementById("PlaceForButtons").innerHTML =
 
                 "<input type='button' class='button' value='False' id='FalseButton' onclick=' SubBool()'  />"
                 + " " +
-                "<br/>" +
-                "<br/>" +
                 "<input type='button' class='button' value='True' id='TrueButton' onclick=' SubBool()' /> ";
+
+
+
+
 
             if (CheckForSkip === true){
 
@@ -320,7 +318,7 @@ function Questions() {
             if (CheckLocation === true){
 
 
-                document.getElementById("location").innerHTML =  "<input type='button' class='button' value='Location UpDFate'  />";
+                document.getElementById("location").innerHTML =  "<input type='button' class='button' value='Loc UpDate'  />";
             }else {
 
                 document.getElementById("location").innerHTML =  " ";
@@ -365,7 +363,7 @@ function mcq(){
             if (CheckLocation === true){
 
 
-                document.getElementById("location").innerHTML =  "<input type='button' class='button' value='Location UpDFate'  />";
+                document.getElementById("location").innerHTML =  "<input type='button' class='button' value='Loc UpDate'  />";
             }else {
 
                 document.getElementById("location").innerHTML =  " ";

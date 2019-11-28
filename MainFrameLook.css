@@ -51,13 +51,15 @@ ul{
     padding: 3px;
 }
 .button{
-    padding: 10px 10px;
+
+    width: 40%;
+    padding: 5px 10px;
     background-color: #c4faff;
     color:black;
     border: 2px solid black;
     border-radius: 6px;
-    margin-bottom: 16px;
-    font-size: 5vmax;
+    margin-bottom: 6px;
+    font-size: 2.5vmax;
 }
 
 
