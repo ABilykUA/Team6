@@ -2,7 +2,7 @@
 
 var sessionID = null;
 var CheckForSkip= null;
-var GameScore = 0;
+var GameScore = null;
 var CheckLocation = null;
 
 
@@ -189,37 +189,6 @@ function Questions() {
             console.log(jsonObject);
 
         });
-}
-
-
-
-
-
-
-function LeaderBoard()
-{
-
-    fetch("https://codecyprus.org/th/api/leaderboard?session=" + sessionID  +  "&sorted&limit=10" )
-        .then(response => response.json()) //Parse JSON text to JavaScript object
-        .then(jsonObject => {
-
-            console.log(jsonObject);
-
-            //document.getElementById("Leaders").innerHTML = "Loading...";
-
-            //let LeadersList = document.getElementById("Leaders");
-            //let Leaders = document.createElement("li");
-            //Leaders.innerHTML = "<a href='Leader.html?uuid=" + UUID + "&name=" + Name + " '   >" + NameOfHunts + "</a>";
-            //TreasureHuntslist.appendChild(Leaders);
-
-
-
-        });
-    //test
-
-
-
-
 
 
 }
@@ -311,22 +280,15 @@ function numeric(){
 }
 
 
-
-//comicu
-
-
-
-
-
-
 function boolean () {
 
     document.getElementById("PlaceForButtons").innerHTML =
 
-        "<input type='button' class='button' value='False' id='FalseButton' onclick=' SubBoolFalse(sessionID)'  />"
-        + " " +
-        "<input type='button' class='button' value='True' id='TrueButton' onclick=' SubBoolTrue(sessionID)' /> ";
 
+
+        "<input type='button' class='button' value='True' id='TrueButton' onclick=' SubBoolTrue(sessionID)' /> "
+        + " " +
+       "<input type='button' class='button' value='False' id='FalseButton' onclick=' SubBoolFalse(sessionID)'  />";
 
 
 
@@ -413,13 +375,13 @@ function mcq(){
 
     document.getElementById("PlaceForButtons").innerHTML =   document.getElementById("PlaceForButtons").innerHTML =
 
-        "<input type='button' class='button' value='A' id='AButton' onclick='AnswerA(sessionID)'/>"
+    "<input type='button' class='button' value='WIP' id='AButton' onclick='AnswerA(sessionID)'/>"
     + " " +
-    "<input type='button' class='button' value='B' id='BButton' onclick=' AnswerB(sessionID)'/>"
+    "<input type='button' class='button' value='WIP' id='BButton' onclick=' AnswerB(sessionID)'/>"
         +  " " +
-    "<input type='button' class='button' value='C' id='CButton' onclick=' AnswerC(sessionID)'/>"
+    "<input type='button' class='button' value='WIP' id='CButton' onclick=' AnswerC(sessionID)'/>"
     + " " +
-    "<input type='button' class='button' value='D' id='DButton' onclick=' AnswerD(sessionID)'/>";
+    "<input type='button' class='button' value='WIP' id='DButton' onclick=' AnswerD(sessionID)'/>";
 
 
     if (CheckForSkip === true){
@@ -437,82 +399,7 @@ function mcq(){
         document.getElementById("location").innerHTML =  " ";
 
     }
-
-
-
 }
-function AnswerA(){
-    let answer =  "A";
-
-
-    fetch("https://codecyprus.org/th/api/answer?session=" + sessionID  +  "&answer=" + answer )
-        .then(response => response.json()) //Parse JSON text to JavaScript object
-        .then(jsonObject => {
-
-            console.log(jsonObject);
-
-            document.getElementById("PlaceForButtons").innerHTML = "Loading...";
-
-            Questions();
-            Score(GameScore,sessionID);
-
-
-
-        });
-}
-function AnswerB(){ let answer =  "B";
-
-
-    fetch("https://codecyprus.org/th/api/answer?session=" + sessionID  +  "&answer=" + answer )
-        .then(response => response.json()) //Parse JSON text to JavaScript object
-        .then(jsonObject => {
-
-            console.log(jsonObject);
-
-            document.getElementById("PlaceForButtons").innerHTML = "Loading...";
-
-            Questions();
-            Score(GameScore,sessionID);
-
-
-
-        });}
-function AnswerC(){ let answer =  "C";
-
-
-    fetch("https://codecyprus.org/th/api/answer?session=" + sessionID  +  "&answer=" + answer )
-        .then(response => response.json()) //Parse JSON text to JavaScript object
-        .then(jsonObject => {
-
-            console.log(jsonObject);
-
-            document.getElementById("PlaceForButtons").innerHTML = "Loading...";
-
-            Questions();
-            Score(GameScore,sessionID);
-
-
-
-        });}
-function AnswerD(){
-    let answer =  "D";
-
-
-    fetch("https://codecyprus.org/th/api/answer?session=" + sessionID  +  "&answer=" + answer )
-        .then(response => response.json()) //Parse JSON text to JavaScript object
-        .then(jsonObject => {
-
-            console.log(jsonObject);
-
-            document.getElementById("PlaceForButtons").innerHTML = "Loading...";
-
-            Questions();
-            Score(GameScore,sessionID);
-
-
-
-        });}
-
 
 
 
@@ -526,31 +413,17 @@ function SkipQuestion() {
 
             console.log(jsonObject);
 
-
-
-
-
             Questions();
             Score(GameScore,sessionID);
 
 
         });
 
-
-
-
-
-
-
 }
 
 function AnswerQuestion() {
 
-
-
-
     let answer =  document.getElementById("textfiled").value;
-
 
     fetch("https://codecyprus.org/th/api/answer?session=" + sessionID  +  "&answer=" + answer )
         .then(response => response.json()) //Parse JSON text to JavaScript object
@@ -593,6 +466,24 @@ function Score() {
 }
 
 
+function LeaderBoard() {
+
+    fetch("https://codecyprus.org/th/api/leaderboard?session=" + sessionID + "&sorted&limit=10")
+        .then(response => response.json()) //Parse JSON text to JavaScript object
+        .then(jsonObject => {
+
+            console.log(jsonObject);
+
+            //document.getElementById("Leaders").innerHTML = "Loading...";
+
+            //let LeadersList = document.getElementById("Leaders");
+            //let Leaders = document.createElement("li");
+            //Leaders.innerHTML = "<a href='Leader.html?uuid=" + UUID + "&name=" + Name + " '   >" + NameOfHunts + "</a>";
+            //TreasureHuntslist.appendChild(Leaders);
+
+
+        });
+}
 
 
 
