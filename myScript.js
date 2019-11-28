@@ -175,9 +175,9 @@ function Questions() {
             }
             if (CheckIfFinished === true ){
 
-                document.getElementById("Question").innerHTML = "Finished";
+                document.getElementById("Question").innerHTML = "Finished! Welldone";
 
-                document.getElementById("PlaceForButtons").innerHTML ="Welldone ";
+                document.getElementById("PlaceForButtons").innerHTML ="<input type='button' class='button' value='LeaderBoard' onclick='LeaderBoard(sessionID)'  />";
 
                 document.getElementById("Extra").innerHTML ="I hope u did good ! ";
 
@@ -186,22 +186,43 @@ function Questions() {
 
 
 
+            console.log(jsonObject);
+
+        });
+}
 
 
 
 
 
 
+function LeaderBoard()
+{
 
-
-
+    fetch("https://codecyprus.org/th/api/leaderboard?session=" + sessionID  +  "&sorted&limit=10" )
+        .then(response => response.json()) //Parse JSON text to JavaScript object
+        .then(jsonObject => {
 
             console.log(jsonObject);
+
+            //document.getElementById("Leaders").innerHTML = "Loading...";
+
+            //let LeadersList = document.getElementById("Leaders");
+            //let Leaders = document.createElement("li");
+            //Leaders.innerHTML = "<a href='Leader.html?uuid=" + UUID + "&name=" + Name + " '   >" + NameOfHunts + "</a>";
+            //TreasureHuntslist.appendChild(Leaders);
+
+
 
         });
 
 
+
+
+
+
 }
+
 
 function integer(){
 
@@ -301,9 +322,9 @@ function boolean () {
 
     document.getElementById("PlaceForButtons").innerHTML =
 
-        "<input type='button' class='button' value='False' id='FalseButton' onclick=' SubBool()'  />"
+        "<input type='button' class='button' value='False' id='FalseButton' onclick=' SubBoolFalse(sessionID)'  />"
         + " " +
-        "<input type='button' class='button' value='True' id='TrueButton' onclick=' SubBool()' /> ";
+        "<input type='button' class='button' value='True' id='TrueButton' onclick=' SubBoolTrue(sessionID)' /> ";
 
 
 
@@ -331,13 +352,50 @@ function boolean () {
 function SubBoolTrue(){
 
 
+    let answer =  true;
+
+
+    fetch("https://codecyprus.org/th/api/answer?session=" + sessionID  +  "&answer=" + answer )
+        .then(response => response.json()) //Parse JSON text to JavaScript object
+        .then(jsonObject => {
+
+            console.log(jsonObject);
+
+            document.getElementById("PlaceForButtons").innerHTML = "Loading...";
+
+            Questions();
+            Score(GameScore,sessionID);
+
+
+
+        });
+
+
+
+
 
 
 
 }
 function SubBoolFalse(){
 
+    let answer =  false;
 
+
+    fetch("https://codecyprus.org/th/api/answer?session=" + sessionID  +  "&answer=" + answer )
+        .then(response => response.json()) //Parse JSON text to JavaScript object
+        .then(jsonObject => {
+
+            console.log(jsonObject);
+
+            document.getElementById("PlaceForButtons").innerHTML = "Loading...";
+
+            Questions();
+            Score(GameScore,sessionID);
+
+
+
+        });
 
 
 
@@ -352,7 +410,16 @@ function SubBoolFalse(){
 
 function mcq(){
 
-    document.getElementById("PlaceForButtons").innerHTML =  "WIP";
+    document.getElementById("PlaceForButtons").innerHTML =   document.getElementById("PlaceForButtons").innerHTML =
+
+        "<input type='button' class='button' value='A' id='AButton' onclick='AnswerA(sessionID)'/>"
+    + " " +
+    "<input type='button' class='button' value='B' id='BButton' onclick=' AnswerB(sessionID)'/>"
+        +  " " +
+    "<input type='button' class='button' value='C' id='CButton' onclick=' AnswerC(sessionID)'/>"
+    + " " +
+    "<input type='button' class='button' value='D' id='DButton' onclick=' AnswerD(sessionID)'/>";
+
 
     if (CheckForSkip === true){
 
@@ -373,6 +440,77 @@ function mcq(){
 
 
 }
+function AnswerA(){
+    let answer =  "A";
+
+
+    fetch("https://codecyprus.org/th/api/answer?session=" + sessionID  +  "&answer=" + answer )
+        .then(response => response.json()) //Parse JSON text to JavaScript object
+        .then(jsonObject => {
+
+            console.log(jsonObject);
+
+            document.getElementById("PlaceForButtons").innerHTML = "Loading...";
+
+            Questions();
+            Score(GameScore,sessionID);
+
+
+
+        });
+}
+function AnswerB(){ let answer =  "B";
+
+
+    fetch("https://codecyprus.org/th/api/answer?session=" + sessionID  +  "&answer=" + answer )
+        .then(response => response.json()) //Parse JSON text to JavaScript object
+        .then(jsonObject => {
+
+            console.log(jsonObject);
+
+            document.getElementById("PlaceForButtons").innerHTML = "Loading...";
+
+            Questions();
+            Score(GameScore,sessionID);
+
+
+
+        });}
+function AnswerC(){ let answer =  "C";
+
+
+    fetch("https://codecyprus.org/th/api/answer?session=" + sessionID  +  "&answer=" + answer )
+        .then(response => response.json()) //Parse JSON text to JavaScript object
+        .then(jsonObject => {
+
+            console.log(jsonObject);
+
+            document.getElementById("PlaceForButtons").innerHTML = "Loading...";
+
+            Questions();
+            Score(GameScore,sessionID);
+
+
+
+        });}
+function AnswerD(){
+    let answer =  "D";
+
+
+    fetch("https://codecyprus.org/th/api/answer?session=" + sessionID  +  "&answer=" + answer )
+        .then(response => response.json()) //Parse JSON text to JavaScript object
+        .then(jsonObject => {
+
+            console.log(jsonObject);
+
+            document.getElementById("PlaceForButtons").innerHTML = "Loading...";
+
+            Questions();
+            Score(GameScore,sessionID);
+
+
+
+        });}
 
 
 
