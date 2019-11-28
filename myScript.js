@@ -1,15 +1,11 @@
 // JS is done here ↓
-// function Cookies(UUID0,UUID1,NameOfHunts0,NameOfHunt1)
-// {
-// let date = new Date();
-// date.setTime(date.getTime() + (60 * 1000));
-// let expires = "expires=" + date.toUTCString();
-// document.cookie="UUID0"+ "=" + UUID0 + ";" + expires + ";path=/";
-// document.cookie="UUID1"+ "=" + UUID1 + ";" + expires + ";path=/";
-// document.cookie="NameOfHunts0" + "=" + NameOfHunts0 + ";" + expires + ";path=/";
-// document.cookie="NameOfHunts1" + "=" + NameOfHunt1 + ";" + expires + ";path=/";
-// console.log(document.cookie);
-// }
+
+var sessionID = null;
+var CheckForSkip= null;
+var GameScore = 0;
+var CheckLocation = null;
+
+
 
 
 function NameAndTeamInput() {
@@ -22,7 +18,7 @@ function NameAndTeamInput() {
 
 
 
-    if (Name && TeamName !== '') {
+    if (Name !== '') {
 
 
         fetch(LIST_API)
@@ -45,7 +41,7 @@ function NameAndTeamInput() {
 
                     let HuntOptions = document.createElement("li");
 
-                    HuntOptions.innerHTML = "<a href='Question.html' onclick='onStartClick(Name.value, TeamName.value, UUID )' >" + NameOfHunts + "</a>";
+                    HuntOptions.innerHTML = "<a href='Question.html?uuid=" + UUID + "&name=" + Name + " '   >" + NameOfHunts + "</a>";
 
                     TreasureHuntslist.appendChild(HuntOptions);
 
@@ -54,23 +50,6 @@ function NameAndTeamInput() {
 
                     // i have to make it, save the name , uuid , teamname, to qustions page!  !!
 
-
-//TextOutPut.innerText = "Lists";
-//
-//                     UUID0 = TreasureHuntsOBJECT[0].uuid;
-//                     NameOfHunts0 = TreasureHuntsOBJECT[0].name;
-//
-//                     UUID1 = TreasureHuntsOBJECT[1].uuid;
-//                     NameOfHunt1 = TreasureHuntsOBJECT[1].name;
-//
-//
-//
-//                     // document.location.href = "Question.html?";
-//
-//
-//                     // i have to make it, save the name , uuid , teamname, to qustions page!  !!
-//
-//                     Cookies(UUID0,UUID1,NameOfHunts0,NameOfHunt1);
 
                 }
 
@@ -89,27 +68,28 @@ function NameAndTeamInput() {
 
 }
 
-function onStartClick() {
-
-    // name, teamName, uuid
-    //input should look like this = https://codecyprus.org/th/api/start?player=" + name + "&app=" + teamName + "&treasure-hunt-id=" + uuid
 
 
-    let FormElement = document.getElementById("FormQuestions");
-    let ButtonErase = document.getElementById("StartQuestionsButton");
+function SessionGet () {
 
 
-    fetch( "https://codecyprus.org/th/api/start?player=ansdfgna&app=teamrteAndrii&treasure-hunt-id=ag9nfmNvZGVjeXBydXNvcmdyGQsSDFRyZWFzdXJlSHVudBiAgICAvKGCCgw" )
+    const params = new URLSearchParams(location.search);
+
+
+    const Session_Api = "https://codecyprus.org/th/api/start?player="+   params.get("name")   +"&app=simpsons-app&treasure-hunt-id=" +   params.get("uuid");
+
+
+    fetch(Session_Api)
         .then(response => response.json()) //Parse JSON text to JavaScript object
         .then(jsonObject => {
 
+                let Session = jsonObject.session;
 
-            let session = jsonObject.session;
-            let numofQuestions = jsonObject.numOfQuestions;
+                sessionID = Session;
 
-            Questions(session);
+                console.log(Session);
 
-            console.log(session,numofQuestions);
+                Questions(Session);
 
             FormElement.removeChild(ButtonErase);
 
@@ -117,9 +97,14 @@ function onStartClick() {
 
         });
 
+        }
+        SessionGet();
 
 
-}
+
+
+
+
 
 function Questions(session) {
 
@@ -127,38 +112,86 @@ function Questions(session) {
 
     let Question = document.getElementById("Question");
 
-    fetch( "https://codecyprus.org/th/api/question?session="+ session )
+
+function Questions() {
+
+    console.log("Questions()session -> " + sessionID);
+
+    const  Questions_Api = "https://codecyprus.org/th/api/question?session="+ sessionID ;
+
+    fetch( Questions_Api )
         .then(response => response.json()) //Parse JSON text to JavaScript object
         .then(jsonObject => {
+
+            let  CheckIfFinished = jsonObject.completed;
 
             let QuestionNames = jsonObject.questionText;
 
             let  CheckQuestion = jsonObject.questionType;
 
-            let CheckIfCanBeSkipped = jsonObject.canBeSkipped;
+            CheckLocation = jsonObject.requiresLocation;
 
-            Question.innerHTML = QuestionNames;
+            CheckForSkip = jsonObject.canBeSkipped;
 
-            if (CheckQuestion == "INTEGER")
+            document.getElementById("Score").innerHTML = "Your Score: " + GameScore;
+
+
+
+            document.getElementById("Question").innerHTML = QuestionNames;
+
+            if (CheckQuestion === "INTEGER")
             {
 
-                console.log("asdfdsf");
+
+                integer(CheckForSkip,CheckLocation);
+
+
             }
 
-            if (CheckQuestion == "BOOLEAN")
+            if (CheckQuestion === "BOOLEAN")
             {
 
-                console.log("asdasd");
+
+                boolean (CheckForSkip,CheckLocation);
+
+
+
+            }
+            if (CheckQuestion === "MCQ")
+            {
+                mcq(CheckForSkip,CheckLocation);
+
             }
 
-            if (CheckIfCanBeSkipped == true){
+            if (CheckQuestion === "TEXT")
+            {
 
-                document.getElementById("Notes").innerHTML =  "<input class='button' value='Skip' id='SkipButton'  />";
+                text(CheckForSkip,CheckLocation);
 
-            }else {
 
-                document.getElementById("Notes").innerHTML = "Sorry this question can't be skipped !!! ";
+
             }
+
+            if (CheckQuestion === "NUMERIC")
+            {
+
+
+                numeric(CheckForSkip,CheckLocation);
+
+
+            }
+            if (CheckIfFinished === true ){
+
+                    document.getElementById("Question").innerHTML = "Finished";
+
+                    document.getElementById("PlaceForButtons").innerHTML ="Welldone ";
+
+                    document.getElementById("Extra").innerHTML ="I hope u did good ! ";
+
+            }
+
+
+
 
 
 
@@ -176,6 +209,261 @@ function Questions(session) {
 
 
         }
+
+        function integer(){
+
+
+            document.getElementById("PlaceForButtons").innerHTML =  "<input type='text' id='textfiled'  />"
+                + " " +
+                "<br/>" +
+                "<br/>" +
+                "<input type='button' class='button' value='Submit' id='SubmitButton' onclick='AnswerQuestion(sessionID)'  />";
+            if (CheckForSkip === true){
+
+                document.getElementById("Extra").innerHTML =  "<input type='button' class='button' value='Skip' onclick='SkipQuestion(sessionID)'  />";
+            }else {
+                document.getElementById("Extra").innerHTML = "Sorry this question can't be skipped !!! ";
+            }
+            if (CheckLocation === true){
+
+
+                document.getElementById("location").innerHTML =  "<input type='button' class='button' value='Location UpDFate'  />";
+            }else {
+
+                document.getElementById("location").innerHTML =  " ";
+
+            }
+
+
+
+            }
+
+
+            function text(){
+
+
+            document.getElementById("PlaceForButtons").innerHTML =  "<input type='text' id='textfiled'  />"
+            + " " +
+            "<br/>" +
+            "<br/>" +
+            "<input type='button' class='button' value='Submit' id='SubmitButton' onclick='AnswerQuestion(sessionID)'  />";
+            if (CheckForSkip === true){
+
+            document.getElementById("Extra").innerHTML =  "<input type='button' class='button' value='Skip' onclick='SkipQuestion(sessionID)'  />";
+            }else {
+            document.getElementById("Extra").innerHTML = "Sorry this question can't be skipped !!! ";
+            }
+                if (CheckLocation === true){
+
+
+                    document.getElementById("location").innerHTML =  "<input type='button' class='button' value='Location UpDFate'  />";
+                }else {
+
+                    document.getElementById("location").innerHTML =  " ";
+
+                }
+
+
+            }
+
+            function numeric(){
+
+
+                document.getElementById("PlaceForButtons").innerHTML =  "<input type='text' id='textfiled'  />"
+                    + " " +
+                    "<br/>" +
+                    "<br/>" +
+                  "<input type='button' class='button' value='Submit' id='SubmitButton' onclick='AnswerQuestion(sessionID)'  />";
+                  if (CheckForSkip === true){
+
+                  document.getElementById("Extra").innerHTML =  "<input type='button' class='button' value='Skip' onclick='SkipQuestion(sessionID)'  />";
+                    }else {
+                  document.getElementById("Extra").innerHTML = "Sorry this question can't be skipped !!! ";
+                     }
+
+                if (CheckLocation === true){
+
+
+                    document.getElementById("location").innerHTML =  "<input type='button' class='button' value='Location UpDFate'  />";
+                }else {
+
+                    document.getElementById("location").innerHTML =  " ";
+
+                }
+
+
+
+            }
+
+
+
+
+
+
+
+
+
+
+        function boolean () {
+
+
+
+
+
+            document.getElementById("PlaceForButtons").innerHTML =
+
+                "<input type='button' class='button' value='False' id='FalseButton' onclick=' SubBool()'  />"
+                + " " +
+                "<br/>" +
+                "<br/>" +
+                "<input type='button' class='button' value='True' id='TrueButton' onclick=' SubBool()' /> ";
+
+            if (CheckForSkip === true){
+
+                document.getElementById("Extra").innerHTML =  "<input type='button' class='button' value='Skip' onclick='SkipQuestion(sessionID)'  />";
+            }else {
+                document.getElementById("Extra").innerHTML = "Sorry this question can't be skipped !!! ";
+            }
+            if (CheckLocation === true){
+
+
+                document.getElementById("location").innerHTML =  "<input type='button' class='button' value='Location UpDFate'  />";
+            }else {
+
+                document.getElementById("location").innerHTML =  " ";
+
+            }
+
+
+            }
+
+                function SubBoolTrue(){
+
+
+
+
+
+                }
+                function SubBoolFalse(){
+
+
+
+
+
+                }
+
+
+
+
+
+
+
+
+function mcq(){
+
+            document.getElementById("PlaceForButtons").innerHTML =  "WIP";
+
+            if (CheckForSkip === true){
+
+                document.getElementById("Extra").innerHTML =  "<input type='button' class='button' value='Skip' onclick='SkipQuestion(sessionID)'  />";
+            }else {
+                document.getElementById("Extra").innerHTML = "Sorry this question can't be skipped !!! ";
+            }
+            if (CheckLocation === true){
+
+
+                document.getElementById("location").innerHTML =  "<input type='button' class='button' value='Location UpDFate'  />";
+            }else {
+
+                document.getElementById("location").innerHTML =  " ";
+
+            }
+
+
+
+        }
+
+
+
+
+        function SkipQuestion() {
+
+
+
+            fetch( "https://codecyprus.org/th/api/skip?session=" +  sessionID )
+                .then(response => response.json()) //Parse JSON text to JavaScript object
+                .then(jsonObject => {
+
+                    console.log(jsonObject);
+
+
+
+
+
+                    Questions();
+                    Score(GameScore,sessionID);
+
+
+                });
+
+
+
+
+
+
+
+        }
+
+        function AnswerQuestion() {
+
+
+
+
+       let answer =  document.getElementById("textfiled").value;
+
+
+         fetch("https://codecyprus.org/th/api/answer?session=" + sessionID  +  "&answer=" + answer )
+                .then(response => response.json()) //Parse JSON text to JavaScript object
+                .then(jsonObject => {
+
+                    console.log(jsonObject);
+
+                    document.getElementById("PlaceForButtons").innerHTML = "Loading...";
+
+                    Questions();
+                    Score(GameScore,sessionID);
+
+
+
+            });
+
+
+
+
+
+
+
+            }
+
+function Score() {
+
+    fetch("https://codecyprus.org/th/api/score?session="+sessionID)
+        .then(response => response.json()) //Parse JSON text to JavaScript object
+        .then(jsonObject => {
+
+            console.log(jsonObject);
+
+            GameScore = jsonObject.score;
+
+
+
+        });
+
+
+}
+
+
+
 
 
 

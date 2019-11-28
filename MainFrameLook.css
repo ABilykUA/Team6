@@ -1,3 +1,10 @@
+*{
+
+    font-family:  monospace;
+
+}
+
+
 header{
     overflow: hidden;
     background-color: white;
@@ -6,7 +13,7 @@ header{
     border-bottom: black 1px solid;
     margin-bottom: 30px;
     text-align: center;
-    font-family: "Palatino", monospace;
+
 }
 
 
@@ -44,11 +51,13 @@ ul{
     padding: 3px;
 }
 .button{
-
-    margin-top:1vmax ;
-    border: 1px solid black;
-    background-image: linear-gradient(salmon, white);
-    text-align: center;
+    padding: 10px 10px;
+    background-color: #c4faff;
+    color:black;
+    border: 2px solid black;
+    border-radius: 6px;
+    margin-bottom: 16px;
+    font-size: 5vmax;
 }
 
 
