@@ -177,10 +177,14 @@ function Questions() {
 
                 document.getElementById("Question").innerHTML = "Finished! Welldone";
 
-                document.getElementById("PlaceForButtons").innerHTML ="<input type='button' class='button' value='LeaderBoard' onclick='LeaderBoard(sessionID)'  />";
-
                 document.getElementById("Extra").innerHTML ="I hope u did good ! ";
 
+                document.getElementById("PlaceForButtons").innerHTML ="";
+
+                document.getElementById("location").innerHTML ="";
+
+
+                LeaderBoard();
             }
 
 
@@ -197,7 +201,7 @@ function Questions() {
 function integer(){
 
 
-    document.getElementById("PlaceForButtons").innerHTML =  "<input type='text' id='textfiled'  />"
+    document.getElementById("PlaceForButtons").innerHTML =  "<input type='number' id='textfiled'  />"
         + " " +
         "<br/>" +
         "<br/>" +
@@ -237,6 +241,7 @@ function text(){
     }else {
         document.getElementById("Extra").innerHTML = "Sorry this question can't be skipped !!! ";
     }
+
     if (CheckLocation === true){
 
 
@@ -253,7 +258,7 @@ function text(){
 function numeric(){
 
 
-    document.getElementById("PlaceForButtons").innerHTML =  "<input type='text' id='textfiled'  />"
+    document.getElementById("PlaceForButtons").innerHTML =  "<input type='numeric' id='textfiled'  />"
         + " " +
         "<br/>" +
         "<br/>" +
@@ -373,15 +378,11 @@ function SubBoolFalse(){
 
 function mcq(){
 
-    document.getElementById("PlaceForButtons").innerHTML =   document.getElementById("PlaceForButtons").innerHTML =
-
-    "<input type='button' class='button' value='WIP' id='AButton' onclick='AnswerA(sessionID)'/>"
-    + " " +
-    "<input type='button' class='button' value='WIP' id='BButton' onclick=' AnswerB(sessionID)'/>"
-        +  " " +
-    "<input type='button' class='button' value='WIP' id='CButton' onclick=' AnswerC(sessionID)'/>"
-    + " " +
-    "<input type='button' class='button' value='WIP' id='DButton' onclick=' AnswerD(sessionID)'/>";
+        document.getElementById("PlaceForButtons").innerHTML =  "<input type='text' id='textfiled' maxlength='1' />"
+            + " " +
+            "<br/>" +
+            "<br/>" +
+            "<input type='button' class='button' value='Submit' id='SubmitButton' onclick='AnswerQuestion(sessionID)'  />";
 
 
     if (CheckForSkip === true){
@@ -390,6 +391,7 @@ function mcq(){
     }else {
         document.getElementById("Extra").innerHTML = "Sorry this question can't be skipped !!! ";
     }
+
     if (CheckLocation === true){
 
 
@@ -399,6 +401,8 @@ function mcq(){
         document.getElementById("location").innerHTML =  " ";
 
     }
+
+
 }
 
 
@@ -452,11 +456,11 @@ function Score() {
 
     fetch("https://codecyprus.org/th/api/score?session="+sessionID)
         .then(response => response.json()) //Parse JSON text to JavaScript object
-        .then(jsonObject => {
+        .then(ScoreObject => {
 
-            console.log(jsonObject);
+            console.log(ScoreObject);
 
-            GameScore = jsonObject.score;
+            GameScore = ScoreObject.score;
 
 
 
@@ -472,15 +476,25 @@ function LeaderBoard() {
         .then(response => response.json()) //Parse JSON text to JavaScript object
         .then(jsonObject => {
 
+
+            let div = document.getElementById("PlaceForButtons");
             console.log(jsonObject);
 
-            //document.getElementById("Leaders").innerHTML = "Loading...";
+            let Winners = jsonObject.leaderboard;
 
-            //let LeadersList = document.getElementById("Leaders");
-            //let Leaders = document.createElement("li");
-            //Leaders.innerHTML = "<a href='Leader.html?uuid=" + UUID + "&name=" + Name + " '   >" + NameOfHunts + "</a>";
-            //TreasureHuntslist.appendChild(Leaders);
+            for (let i = 0; i < Winners.length; i++) {
 
+                NameofWiners = Winners[i].player;
+
+                ScoreofWiners = Winners[i].score;
+
+                let WinnerOptions = document.createElement("p");
+
+                WinnerOptions.innerHTML = "";
+
+                div.appendChild(WinnerOptions);
+
+            }
 
         });
 }
