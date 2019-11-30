@@ -493,31 +493,53 @@ function Score() {
 
 function LeaderBoard() {
 
+    let LeadersHeader = document.getElementById("PlaceForButtons");
+let Time;
+let Player;
+let LeadersScore;
+
+
     fetch("https://codecyprus.org/th/api/leaderboard?session=" + sessionID + "&sorted&limit=10")
         .then(response => response.json()) //Parse JSON text to JavaScript object
         .then(jsonObject => {
 
 
-            let div = document.getElementById("PlaceForButtons");
-            console.log(jsonObject);
+            let LeaderBoard = jsonObject.leaderboard;
+            console.log(LeaderBoard);
+            let LeaderBoardlist = document.getElementById("Leaders");
+            console.log(LeaderBoardlist);
 
-            let Winners = jsonObject.leaderboard;
+            LeadersHeader.innerText = "Top10";
 
-            for (let i = 0; i < Winners.length; i++) {
+            for (let i = 0; i < LeaderBoard.length; i++) {
 
-                NameofWiners = Winners[i].player;
 
-                ScoreofWiners = Winners[i].score;
+                Time  = LeaderBoard[i].completionTime;
+                Player=LeaderBoard[i].player;
+                LeadersScore = LeaderBoard[i].score;
 
-                let WinnerOptions = document.createElement("p");
 
-                WinnerOptions.innerHTML = "";
+                let OutPutLeadersTime = document.createElement("li");
+                let OutPutLeadersPlayer = document.createElement("li");
+                let OutPutLeadersScore = document.createElement("li");
+                let Space  = document.createElement("li");
 
-                div.appendChild(WinnerOptions);
+                OutPutLeadersTime.innerHTML = "<a> Time </a>" + Time;
+                OutPutLeadersPlayer.innerHTML = "<a> Player </a>" + Time;
+                OutPutLeadersScore.innerHTML = "<a> Leaders Score </a>" + Time;
+                Space.innerHTML = "</br>" ;
 
-            }
+                LeaderBoardlist.appendChild(OutPutLeadersTime);
+                LeaderBoardlist.appendChild(OutPutLeadersPlayer);
+                LeaderBoardlist.appendChild(OutPutLeadersScore);
+                LeaderBoardlist.appendChild(Space);
 
-        });
+
+
+
+
+        }
+})
 }
 
 
