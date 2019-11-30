@@ -525,8 +525,8 @@ let LeadersScore;
                 let Space  = document.createElement("li");
 
                 OutPutLeadersTime.innerHTML = "<a> Time </a>" + Time;
-                OutPutLeadersPlayer.innerHTML = "<a> Player </a>" + Time;
-                OutPutLeadersScore.innerHTML = "<a> Leaders Score </a>" + Time;
+                OutPutLeadersPlayer.innerHTML = "<a> Player </a>" + Player;
+                OutPutLeadersScore.innerHTML = "<a> Leaders Score </a>" + Score;
                 Space.innerHTML = "</br>" ;
 
                 LeaderBoardlist.appendChild(OutPutLeadersTime);
