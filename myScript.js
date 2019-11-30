@@ -498,7 +498,7 @@ let Time;
 let Player;
 let LeadersScore;
 
-
+//leaders
     fetch("https://codecyprus.org/th/api/leaderboard?session=" + sessionID + "&sorted&limit=10")
         .then(response => response.json()) //Parse JSON text to JavaScript object
         .then(jsonObject => {
