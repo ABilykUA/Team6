@@ -526,7 +526,7 @@ let LeadersScore;
 
                 OutPutLeadersTime.innerHTML = "<a> Time </a>" + Time;
                 OutPutLeadersPlayer.innerHTML = "<a> Player </a>" + Player;
-                OutPutLeadersScore.innerHTML = "<a> Leaders Score </a>" + Score;
+                OutPutLeadersScore.innerHTML = "<a> Leaders Score </a>" + LeadersScore;
                 Space.innerHTML = "</br>" ;
 
                 LeaderBoardlist.appendChild(OutPutLeadersTime);
