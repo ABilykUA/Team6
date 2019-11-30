@@ -378,11 +378,13 @@ function SubBoolFalse(){
 
 function mcq(){
 
-        document.getElementById("PlaceForButtons").innerHTML =  "<input type='text' id='textfiled' maxlength='1' />"
-            + " " +
-            "<br/>" +
-            "<br/>" +
-            "<input type='button' class='button' value='Submit' id='SubmitButton' onclick='AnswerQuestion(sessionID)'  />";
+        document.getElementById("PlaceForButtons").innerHTML = "<input type='button' class='button' value='A' id='A' onclick='AnswerMCQ(sessionID,0)'  />"+" "+
+            "<input type='button' class='button' value='B' id='B' onclick='AnswerMCQ(sessionID,1)' />"+" "+
+            "<input type='button' class='button' value='C' id='C' onclick='AnswerMCQ(sessionID,2)'  />"+" "+
+            "<input type='button' class='button' value='D' id='D' onclick='AnswerMCQ(sessionID,3)'  />";
+
+
+
 
 
     if (CheckForSkip === true){
@@ -405,7 +407,26 @@ function mcq(){
 
 }
 
+function AnswerMCQ(sessionID, i)
+{
 
+        var x = document.getElementsByClassName('button')[i].value;
+
+    fetch("https://codecyprus.org/th/api/answer?session=" + sessionID  +  "&answer=" + x )
+        .then(response => response.json()) //Parse JSON text to JavaScript object
+        .then(jsonObject => {
+
+            console.log(jsonObject);
+
+            document.getElementById("PlaceForButtons").innerHTML = "Loading...";
+
+            Questions();
+            Score(GameScore,sessionID);
+
+
+
+        });
+}
 
 function SkipQuestion() {
 
