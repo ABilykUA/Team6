@@ -186,6 +186,10 @@ function Questions() {
 
                 LeaderBoard();
             }
+            if (CheckLocation === true) {
+
+                locationupdate(sessionID);
+            }
 
 
 
@@ -212,15 +216,7 @@ function integer(){
     }else {
         document.getElementById("Extra").innerHTML = "Sorry this question can't be skipped !!! ";
     }
-    if (CheckLocation === true){
 
-
-        document.getElementById("location").innerHTML =  "<input type='button' class='button' value='Loc UpDate'  />";
-    }else {
-
-        document.getElementById("location").innerHTML =  " ";
-
-    }
 
 
 
@@ -242,15 +238,7 @@ function text(){
         document.getElementById("Extra").innerHTML = "Sorry this question can't be skipped !!! ";
     }
 
-    if (CheckLocation === true){
 
-
-        document.getElementById("location").innerHTML =  "<input type='button' class='button' value='Loc UpDate'  />";
-    }else {
-
-        document.getElementById("location").innerHTML =  " ";
-
-    }
 
 
 }
@@ -270,15 +258,7 @@ function numeric(){
         document.getElementById("Extra").innerHTML = "Sorry this question can't be skipped !!! ";
     }
 
-    if (CheckLocation === true){
 
-
-        document.getElementById("location").innerHTML =  "<input type='button' class='button' value='Loc UpDate'  />";
-    }else {
-
-        document.getElementById("location").innerHTML =  " ";
-
-    }
 
 
 
@@ -291,9 +271,9 @@ function boolean () {
 
 
 
-        "<input type='button' class='button' value='True' id='TrueButton' onclick=' SubBoolTrue(sessionID)' /> "
+        "<input type='button' class='button'  id='TrueButton' value='True' onclick=' BoolAnswer(sessionID,0)' /> "
         + " " +
-       "<input type='button' class='button' value='False' id='FalseButton' onclick=' SubBoolFalse(sessionID)'  />";
+       "<input type='button' class='button' id='FalseButton'  value='False' onclick=' BoolAnswer(sessionID,1)'  />";
 
 
 
@@ -304,86 +284,21 @@ function boolean () {
     }else {
         document.getElementById("Extra").innerHTML = "Sorry this question can't be skipped !!! ";
     }
-    if (CheckLocation === true){
-
-
-        document.getElementById("location").innerHTML =  "<input type='button' class='button' value='Loc UpDate'  />";
-    }else {
-
-        document.getElementById("location").innerHTML =  " ";
-
-    }
-
-
-}
-
-function SubBoolTrue(){
-
-
-    let answer =  true;
-
-
-    fetch("https://codecyprus.org/th/api/answer?session=" + sessionID  +  "&answer=" + answer )
-        .then(response => response.json()) //Parse JSON text to JavaScript object
-        .then(jsonObject => {
-
-            console.log(jsonObject);
-
-            document.getElementById("PlaceForButtons").innerHTML = "Loading...";
-
-            Questions();
-            Score(GameScore,sessionID);
-
-
-
-        });
-
-
-
-
 
 
 
 }
-function SubBoolFalse(){
-
-    let answer =  false;
-
-
-    fetch("https://codecyprus.org/th/api/answer?session=" + sessionID  +  "&answer=" + answer )
-        .then(response => response.json()) //Parse JSON text to JavaScript object
-        .then(jsonObject => {
-
-            console.log(jsonObject);
-
-            document.getElementById("PlaceForButtons").innerHTML = "Loading...";
-
-            Questions();
-            Score(GameScore,sessionID);
-
-
-
-        });
-
-
-
-}
-
-
-
-
 
 
 
 
 function mcq(){
 
-        document.getElementById("PlaceForButtons").innerHTML = "<input type='button' class='button' value='A' id='A' onclick='AnswerMCQ(sessionID,0)'  />"+" "+
+        document.getElementById("PlaceForButtons").innerHTML =
+            "<input type='button' class='button' value='A' id='A' onclick='AnswerMCQ(sessionID,0)'  />"+" "+
             "<input type='button' class='button' value='B' id='B' onclick='AnswerMCQ(sessionID,1)' />"+" "+
             "<input type='button' class='button' value='C' id='C' onclick='AnswerMCQ(sessionID,2)'  />"+" "+
             "<input type='button' class='button' value='D' id='D' onclick='AnswerMCQ(sessionID,3)'  />";
-
-
 
 
 
@@ -394,25 +309,48 @@ function mcq(){
         document.getElementById("Extra").innerHTML = "Sorry this question can't be skipped !!! ";
     }
 
-    if (CheckLocation === true){
-
-
-        document.getElementById("location").innerHTML =  "<input type='button' class='button' value='Loc UpDate'  />";
-    }else {
-
-        document.getElementById("location").innerHTML =  " ";
-
-    }
 
 
 }
 
+
+
+
+function BoolAnswer(sessionID,i){
+
+
+
+    let answer = document.getElementsByClassName('button')[i].value;
+
+
+    fetch("https://codecyprus.org/th/api/answer?session=" + sessionID  +  "&answer=" + answer )
+        .then(response => response.json()) //Parse JSON text to JavaScript object
+        .then(jsonObject => {
+
+            console.log(jsonObject);
+
+            document.getElementById("PlaceForButtons").innerHTML = "Loading...";
+
+            Questions();
+            Score(GameScore,sessionID);
+
+
+
+        });
+
+
+
+
+
+
+
+}
 function AnswerMCQ(sessionID, i)
 {
 
-        var x = document.getElementsByClassName('button')[i].value;
+        let answerMCQ = document.getElementsByClassName('button')[i].value;
 
-    fetch("https://codecyprus.org/th/api/answer?session=" + sessionID  +  "&answer=" + x )
+    fetch("https://codecyprus.org/th/api/answer?session=" + sessionID  +  "&answer=" + answerMCQ )
         .then(response => response.json()) //Parse JSON text to JavaScript object
         .then(jsonObject => {
 
@@ -427,25 +365,6 @@ function AnswerMCQ(sessionID, i)
 
         });
 }
-
-function SkipQuestion() {
-
-
-
-    fetch( "https://codecyprus.org/th/api/skip?session=" +  sessionID )
-        .then(response => response.json()) //Parse JSON text to JavaScript object
-        .then(jsonObject => {
-
-            console.log(jsonObject);
-
-            Questions();
-            Score(GameScore,sessionID);
-
-
-        });
-
-}
-
 function AnswerQuestion() {
 
     let answer =  document.getElementById("textfiled").value;
@@ -473,6 +392,26 @@ function AnswerQuestion() {
 
 }
 
+function SkipQuestion() {
+
+
+
+    fetch( "https://codecyprus.org/th/api/skip?session=" +  sessionID )
+        .then(response => response.json()) //Parse JSON text to JavaScript object
+        .then(jsonObject => {
+
+            console.log(jsonObject);
+
+            Questions();
+            Score(GameScore,sessionID);
+
+
+        });
+
+}
+
+
+
 function Score() {
 
     fetch("https://codecyprus.org/th/api/score?session="+sessionID)
@@ -491,15 +430,18 @@ function Score() {
 }
 
 
-function LeaderBoard() {
-
-    let LeadersHeader = document.getElementById("PlaceForButtons");
-let Time;
-let Player;
-let LeadersScore;
-
 //leaders
-    fetch("https://codecyprus.org/th/api/leaderboard?session=" + sessionID + "&sorted&limit=10")
+function LeaderBoard() {
+    let LeadersHeader = document.getElementById("PlaceForButtons");
+    LeadersHeader.innerText = "Loading . . . ";
+
+
+
+    let Time;
+    let Player;
+    let LeadersScore;
+
+    fetch("https://codecyprus.org/th/api/leaderboard?session=" + sessionID + "&sorted&limit=5")
         .then(response => response.json()) //Parse JSON text to JavaScript object
         .then(jsonObject => {
 
@@ -509,7 +451,7 @@ let LeadersScore;
             let LeaderBoardlist = document.getElementById("Leaders");
             console.log(LeaderBoardlist);
 
-            LeadersHeader.innerText = "Top10";
+            LeadersHeader.innerText = "Top 5";
 
             for (let i = 0; i < LeaderBoard.length; i++) {
 
@@ -541,6 +483,20 @@ let LeadersScore;
         }
 })
 }
+
+//location update
+function locationupdate(){
+
+
+    fetch("https://codecyprus.org/th/api/location?session=" +   sessionID +   "&latitude=35.008364&longitude=33.696996")
+        .then(response => response.json()) //Parse JSON text to JavaScript object
+        .then(jsonObject => {
+
+            console.log(jsonObject);
+
+        })
+
+        }
 
 
 
