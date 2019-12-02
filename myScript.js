@@ -515,8 +515,6 @@ function locationupdate(){
 
         }
 
-function QRCode(){
 
-}
 
 
