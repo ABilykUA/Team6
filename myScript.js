@@ -466,8 +466,9 @@ function LeaderBoard() {
                 let OutPutLeadersScore = document.createElement("li");
                 let Space  = document.createElement("li");
 
-                OutPutLeadersScore.innerHTML = "<a> Leaders Score: </a>"+" " + LeadersScore;
+
                 OutPutLeadersPlayer.innerHTML = "<a> Player: </a>"+" " + Player;
+                OutPutLeadersScore.innerHTML = "<a> Leaders Score: </a>"+" " + LeadersScore;
                 OutPutLeadersTime.innerHTML = "<a> Time: </a>" +" "+ msToTime(Time);
 
                 Space.innerHTML = "</br>" ;
@@ -504,16 +505,28 @@ function msToTime(duration) {
 //location update
 function locationupdate(){
 
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
 
-    fetch("https://codecyprus.org/th/api/location?session=" +   sessionID +   "&latitude=35.008364&longitude=33.696996")
-        .then(response => response.json()) //Parse JSON text to JavaScript object
-        .then(jsonObject => {
+            fetch("https://codecyprus.org/th/api/location?session=" +   sessionID +   "&latitude=35.008364&longitude=33.696996")
+                .then(response => response.json()) //Parse JSON text to JavaScript object
+                .then(jsonObject => {
 
-            console.log(jsonObject);
+                    console.log(jsonObject);
 
-        })
+                });
+
 
         }
+        else {
+            alert("Geolocation is not supported by your browser.");
+        }
+    }
+
+    function showPosition(position) {
+        alert("Latitude: " + position.coords.latitude + ", Longitude: " + position.coords.longitude);
+    }
+
 
 
 
