@@ -7,6 +7,7 @@
 </head>
 <body>
 <video id="preview"></video>
+<a> <input type="button" value="Switch" class="button" id="Switch" /></a>
 <div style="margin: 20px; padding: 20px; background-color: black; color: white; text-align: center;" id="content">qr</div>
 <script>
     var opts = {
@@ -45,9 +46,22 @@
 };
     var scanner = new Instascan.Scanner(opts);
     Instascan.Camera.getCameras().then(function (cameras) {
-        if (cameras.length > 0) {
-            scanner.start(cameras[2]);
-        } else {
+        let i = 0;
+        SwitchCamera(cameras,i);
+
+        if (cameras.length > i && Switch.clicked === true) {
+            i++;
+            SwitchCamera(cameras,i);
+
+
+        }
+        else if(cameras.length === i && Switch.clicked === true)
+            {
+                i=0;
+                SwitchCamera(cameras,i);
+
+            }
+        else {
             console.error('No cameras found.');
             alert("No cameras found.");
         }
@@ -59,7 +73,11 @@
         document.getElementById("content").innerHTML = content;
     });
 
-
+    function SwitchCamera(cameras,i)
+    {
+        scanner.start(cameras[i]);
+        console.log(i);
+    }
 </script>
 
 
