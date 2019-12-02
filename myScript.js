@@ -466,9 +466,10 @@ function LeaderBoard() {
                 let OutPutLeadersScore = document.createElement("li");
                 let Space  = document.createElement("li");
 
-                OutPutLeadersTime.innerHTML = "<a> Time: </a>" +" "+ Time;
-                OutPutLeadersPlayer.innerHTML = "<a> Player: </a>"+" " + Player;
                 OutPutLeadersScore.innerHTML = "<a> Leaders Score: </a>"+" " + LeadersScore;
+                OutPutLeadersPlayer.innerHTML = "<a> Player: </a>"+" " + Player;
+                OutPutLeadersTime.innerHTML = "<a> Time: </a>" +" "+ msToTime(Time);
+
                 Space.innerHTML = "</br>" ;
 
                 LeaderBoardlist.appendChild(OutPutLeadersTime);
@@ -480,9 +481,25 @@ function LeaderBoard() {
 
 
 
+
+
         }
 })
 }
+
+function msToTime(duration) {
+    let milliseconds = parseInt((duration % 1000) / 100),
+        seconds = Math.floor((duration / 1000) % 60),
+        minutes = Math.floor((duration / (1000 * 60)) % 60),
+        hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
+
+    hours = (hours < 10) ? "0" + hours : hours;
+    minutes = (minutes < 10) ? "0" + minutes : minutes;
+    seconds = (seconds < 10) ? "0" + seconds : seconds;
+
+    return hours + ":" + minutes + ":" + seconds + "." + milliseconds;
+}
+
 
 //location update
 function locationupdate(){
