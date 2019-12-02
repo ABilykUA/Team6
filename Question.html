@@ -100,9 +100,14 @@
         console.error(e);
     });
 
+    scanner.addListener('scan', function (content) {
+        console.log(content);
+        document.getElementById("content").innerHTML = content;
+    });
+
 </script>
 
-
+<div style="margin: 20px; padding: 20px; background-color: black; color: white; text-align: center;" id="content"></div>
 
 
 
