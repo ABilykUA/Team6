@@ -7,6 +7,7 @@
 </head>
 <body>
 <video id="preview"></video>
+<ul id="cameraNames"></ul>
 <a> <input type="button" value="Switch" onclick="" class="button" /></a>
 <div style="margin: 20px; padding: 20px; background-color: black; color: white; text-align: center;" id="content">qr</div>
 <script>
@@ -46,10 +47,35 @@
 };
     var scanner = new Instascan.Scanner(opts);
     Instascan.Camera.getCameras().then(function (cameras) {
+
+        for(let i = 0; i <cameras.length;i++)
+        {
+            let CameraNames = document.getElementById("cameraNames");
+
+
+
+
+            for (let i = 0; i < cameras.length; i++) {
+
+
+                CameraName = cameras[i].name
+
+
+                let Caameraa = document.createElement("li");
+
+                Caameraa.innerHTML = "<a  >" + cameras[i].name + "</a>";
+
+                CameraNames.appendChild(Caameraa);
+            }
+        }
+
+
         if (cameras.length > 0) {
 
             scanner.start(cameras[0]);
-            scanner.start(cameras[1]);
+
+
+
 
 
 
