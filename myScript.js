@@ -188,7 +188,13 @@ function Questions() {
             }
             if (CheckLocation === true) {
 
-                locationupdate(sessionID);
+                setInterval(locationupdate(sessionID), 60000);
+
+                document.getElementById("location").innerHTML ="This is a geolocation question your coordinates will be updated every minute. ";
+            }else {
+
+                document.getElementById("location").innerHTML ="";
+
             }
 
 
@@ -365,7 +371,7 @@ function AnswerMCQ(sessionID, i)
 
         });
 }
-function AnswerQuestion() {
+function AnswerQuestion(sessionID) {
 
     let answer =  document.getElementById("textfiled").value;
 
@@ -508,15 +514,6 @@ function locationupdate(){
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(showPosition);
 
-            fetch("https://codecyprus.org/th/api/location?session=" +   sessionID +   "&latitude=35.008364&longitude=33.696996")
-                .then(response => response.json()) //Parse JSON text to JavaScript object
-                .then(jsonObject => {
-
-                    console.log(jsonObject);
-
-                });
-
-
         }
         else {
             alert("Geolocation is not supported by your browser.");
@@ -524,7 +521,17 @@ function locationupdate(){
     }
 
     function showPosition(position) {
-        alert("Latitude: " + position.coords.latitude + ", Longitude: " + position.coords.longitude);
+
+        fetch("https://codecyprus.org/th/api/location?session=" +   sessionID +   "&latitude="+position.coords.latitude+"&longitude="+position.coords.longitude)
+            .then(response => response.json()) //Parse JSON text to JavaScript object
+            .then(jsonObject => {
+
+                console.log(jsonObject);
+
+            });
+
+
+
     }
 
 
