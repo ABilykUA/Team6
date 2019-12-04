@@ -460,7 +460,7 @@ function LeaderBoard() {
     let Player;
     let LeadersScore;
 
-    fetch("https://codecyprus.org/th/api/leaderboard?session=" + sessionID + "&sorted&limit=20")
+    fetch("https://codecyprus.org/th/api/leaderboard?session=" + sessionID + "&sorted&limit=5")
         .then(response => response.json()) //Parse JSON text to JavaScript object
         .then(jsonObject => {
 
