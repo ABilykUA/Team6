@@ -14,8 +14,9 @@
 <body>
 
 <script>
-    list ();//parts of the main code that check errors
+   list ();//parts of the main code that check errors
     start();
+   leaderboard();
 
     function list(){
         fetch("https://codecyprus.org/th/test-api/list?number-of-ths=2")
@@ -23,32 +24,32 @@
             .then(jsonObject => {
 
 
-                let TreasureHuntsOBJECT = jsonObject.treasureHunts;
-
+                let TreasureHuntsOBJECT = jsonObject.treasureHunts;//different names
                 console.log(TreasureHuntsOBJECT);
-
-
 
             });
     }
 
     function start(){
         let Start_Api= "https://codecyprus.org/th/test-api/start?player=";
-        let arr=["inactive","empty","player","app","unknown","missing_parameter",""];
-        for(let i = 0; i<=5;i++){
+        let arr=["inactive","empty","player","app","unknown","missing_parameter", ""];
+
+        for(let i = 0; i<=6;i++){
+
             fetch(Start_Api+arr[i])
                 .then(response => response.json()) //Parse JSON text to JavaScript object
                 .then(jsonObject => {
 
 
                     let Session = jsonObject.status;
-                    if(Session ==="ERROR"){
-                        console.log(Session);}
-
-
-
+                    if(Session ==="ERROR"){                         //mistake check
+                        console.log(jsonObject.errorMessages[0]);}
+                    else{
+                        console.log(jsonObject);   //Ok!
+                    }
                 });
-        }}
+        }
+    }
 
     function question () {}
 
