@@ -20,8 +20,6 @@ header{
 
 h1{
     font-size:5vmax;
-
-
 }
 
 
@@ -33,7 +31,6 @@ body{
     background-color: salmon;
     font-family: monospace;
 
-
 }
 
 main{
@@ -44,7 +41,6 @@ main{
 ul{
     padding: 0;
     list-style-type: none;
-
 }
 
 .bottom{
@@ -61,6 +57,7 @@ ul{
     border-radius: 6px;
     margin-bottom: 6px;
     font-size: 2.5vmax;
+
 }
 
 footer{
@@ -73,18 +70,22 @@ footer{
     font-family: monospace;
     text-align: center ;
 
-
 }
 
 img{
+
 
     width:20%;
     height:20%;
     max-width: 155px;
     max-height: 350px;
+
 }
 
 #Question{
 
+
     padding: 0px 5px;
+
+
 }
