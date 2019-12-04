@@ -188,9 +188,14 @@ function Questions() {
             }
             if (CheckLocation === true) {
 
-                setInterval(locationupdate(sessionID), 60000);
+
+                locationupdate(sessionID);
+
+                setInterval(locationupdate, 60000 ,sessionID); //TODO - Back to 60 seconds
+
 
                 document.getElementById("location").innerHTML ="This is a geolocation question your coordinates will be updated every minute. ";
+
             }else {
 
                 document.getElementById("location").innerHTML ="";
@@ -508,7 +513,7 @@ function msToTime(duration) {
         minutes = Math.floor((duration / (1000 * 60)) % 60),
         hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
 
-    hours = (hours < 10) ? "0" + hours : hours;
+    hours = (hours < 10)     ? "0" + hours : hours;
     minutes = (minutes < 10) ? "0" + minutes : minutes;
     seconds = (seconds < 10) ? "0" + seconds : seconds;
 
@@ -530,12 +535,12 @@ function locationupdate(){
 
     function showPosition(position) {
 
-        document.getElementById("Extra").innerHTML="<p>"+"Your latitude:"+position.coords.latitude  +"<br/>"  +"Your Longitude:"+position.coords.longitude +"</p>";
+        document.getElementById("Extra2").innerHTML="<p>" + "Your latitude: " + position.coords.latitude + "<br/>" + " Your Longitude: " + position.coords.longitude +"</p>";
 
         fetch("https://codecyprus.org/th/api/location?session=" +   sessionID +   "&latitude="+position.coords.latitude+"&longitude="+position.coords.longitude)
             .then(response => response.json()) //Parse JSON text to JavaScript object
             .then(jsonObject => {
-
+                console.log("Updated location to: " + position.coords.latutide + ","+position.coords.longitude);
                 console.log(jsonObject);
 
             });
