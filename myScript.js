@@ -4,7 +4,7 @@ let sessionID = null;
 let CheckForSkip= null;
 let GameScore = null;
 let CheckLocation = null;
-
+let IntClear = null;
 
 
 
@@ -73,7 +73,7 @@ function SessionGet () {
     const params = new URLSearchParams(location.search);
 
 
-    const Session_Api = "https://codecyprus.org/th/api/start?player="+   params.get("name")   +"&app=simpsons-app&treasure-hunt-id=" +   params.get("uuid");
+    const Session_Api = "https://codecyprus.org/th/api/start?player="+   params.get("name")   +"&app=Team6-app&treasure-hunt-id=" +   params.get("uuid");
 
 
     fetch(Session_Api)
@@ -107,7 +107,7 @@ SessionGet();
 
 
 
-function Questions() {
+function Questions(IntClear) {
 
     console.log("Questions()session -> " + sessionID);
 
@@ -192,15 +192,16 @@ function Questions() {
 
                 locationupdate(sessionID);
 
-                setInterval(locationupdate, 60000 ,sessionID); // TODO - Back to 60 seconds
-
+                IntClear =   setInterval(locationupdate, 60000 , sessionID); //
 
                 document.getElementById("location").innerHTML ="This is a geolocation question your coordinates will be updated every minute. ";
 
-            }else {
+            }
+            if (CheckLocation === false) {
 
                 document.getElementById("location").innerHTML ="";
                 document.getElementById("Extra2").innerHTML ="";
+                clearfunction();
 
             }
 
@@ -213,7 +214,12 @@ function Questions() {
 
 
 }
+function clearfunction(){
 
+    clearInterval(IntClear);
+
+
+}
 
 function integer(){
 
@@ -489,9 +495,9 @@ function LeaderBoard() {
                 let Space  = document.createElement("li");
 
 
-                OutPutLeadersPlayer.innerHTML = "<a> Player: </a>"+" " + Player;
+                OutPutLeadersPlayer.innerHTML = "<a> Player: </a>"+" " + Player+ "<br/>" ;
                 OutPutLeadersScore.innerHTML = "<a> Leaders Score: </a>"+" " + LeadersScore;
-                OutPutLeadersTime.innerHTML = "<a> Time: </a>" +" "+ msToTime(Time);
+                OutPutLeadersTime.innerHTML = "<a> Time: </a>" +" "+ Time;
 
                 Space.innerHTML = "</br>" ;
 
@@ -510,18 +516,6 @@ function LeaderBoard() {
 })
 }
 
-function msToTime(duration) {
-    let milliseconds = parseInt((duration % 1000) / 100),
-        seconds = Math.floor((duration / 1000) % 60),
-        minutes = Math.floor((duration / (1000 * 60)) % 60),
-        hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
-
-    hours = (hours < 10)     ? "0" + hours : hours;
-    minutes = (minutes < 10) ? "0" + minutes : minutes;
-    seconds = (seconds < 10) ? "0" + seconds : seconds;
-
-    return hours + ":" + minutes + ":" + seconds + "." + milliseconds;
-}
 
 
 //location update
