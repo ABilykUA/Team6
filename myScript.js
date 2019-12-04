@@ -1,9 +1,9 @@
 // JS is done here ↓
 
-var sessionID = null;
-var CheckForSkip= null;
-var GameScore = null;
-var CheckLocation = null;
+let sessionID = null;
+let CheckForSkip= null;
+let GameScore = null;
+let CheckLocation = null;
 
 
 
@@ -86,7 +86,8 @@ function SessionGet () {
 
             console.log(Session);
 
-            Questions(Session);
+
+            Questions();
 
 
 
@@ -191,7 +192,7 @@ function Questions() {
 
                 locationupdate(sessionID);
 
-                setInterval(locationupdate, 60000 ,sessionID); //TODO - Back to 60 seconds
+                setInterval(locationupdate, 60000 ,sessionID); // TODO - Back to 60 seconds
 
 
                 document.getElementById("location").innerHTML ="This is a geolocation question your coordinates will be updated every minute. ";
@@ -199,6 +200,7 @@ function Questions() {
             }else {
 
                 document.getElementById("location").innerHTML ="";
+                document.getElementById("Extra2").innerHTML ="";
 
             }
 
@@ -452,7 +454,7 @@ function LeaderBoard() {
     let Player;
     let LeadersScore;
 
-    fetch("https://codecyprus.org/th/api/leaderboard?session=" + sessionID + "&sorted&limit=5")
+    fetch("https://codecyprus.org/th/api/leaderboard?session=" + sessionID + "&sorted&limit=20")
         .then(response => response.json()) //Parse JSON text to JavaScript object
         .then(jsonObject => {
 
@@ -463,6 +465,7 @@ function LeaderBoard() {
             console.log(LeaderBoardlist);
 
 
+            LeadersHeader.innerHTML = "Your Score: " + GameScore+  "<br/>"  +   "<br/>" + "Top 5";
 
 
 
@@ -470,7 +473,7 @@ function LeaderBoard() {
 
 
 
-            LeadersHeader.innerText = "Top 5";
+
 
             for (let i = 0; i < LeaderBoard.length; i++) {
 
@@ -535,12 +538,12 @@ function locationupdate(){
 
     function showPosition(position) {
 
-        document.getElementById("Extra2").innerHTML="<p>" + "Your latitude: " + position.coords.latitude + "<br/>" + " Your Longitude: " + position.coords.longitude +"</p>";
+        document.getElementById("Extra2").innerHTML="<p>" + "Your latitude: " + position.coords.latitude +  "<br/>" + " Your Longitude: " + position.coords.longitude +"</p>";
 
         fetch("https://codecyprus.org/th/api/location?session=" +   sessionID +   "&latitude="+position.coords.latitude+"&longitude="+position.coords.longitude)
             .then(response => response.json()) //Parse JSON text to JavaScript object
             .then(jsonObject => {
-                console.log("Updated location to: " + position.coords.latutide + ","+position.coords.longitude);
+
                 console.log(jsonObject);
 
             });
