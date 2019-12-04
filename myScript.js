@@ -440,7 +440,7 @@ function Score() {
 function LeaderBoard() {
     let LeadersHeader = document.getElementById("PlaceForButtons");
     LeadersHeader.innerText = "Loading . . . ";
-
+    document.getElementById("Score").innerText="";
 
 
     let Time;
@@ -456,6 +456,14 @@ function LeaderBoard() {
             console.log(LeaderBoard);
             let LeaderBoardlist = document.getElementById("Leaders");
             console.log(LeaderBoardlist);
+
+
+
+
+
+
+
+
 
             LeadersHeader.innerText = "Top 5";
 
@@ -521,6 +529,8 @@ function locationupdate(){
     }
 
     function showPosition(position) {
+
+        document.getElementById("Extra").innerHTML="<p>"+"&latitude="+position.coords.latitude+"&longitude="+position.coords.longitude +"</p>";
 
         fetch("https://codecyprus.org/th/api/location?session=" +   sessionID +   "&latitude="+position.coords.latitude+"&longitude="+position.coords.longitude)
             .then(response => response.json()) //Parse JSON text to JavaScript object
