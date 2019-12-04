@@ -1,11 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" type="text/css" href="MainFrameLook.css">
     <meta charset="UTF-8">
     <title>Test Page</title>
+
 </head>
 <body>
+
+<script>
+    list ();//parts of the main code that check errors
+    start();
+
+    function list(){
+        fetch("https://codecyprus.org/th/test-api/list?number-of-ths=2")
+            .then(response => response.json()) //Parse JSON text to JavaScript object
+            .then(jsonObject => {
+
+
+                let TreasureHuntsOBJECT = jsonObject.treasureHunts;
+
+                console.log(TreasureHuntsOBJECT);
+
+
+
+            });
+    }
+
+    function start(){
+        let Start_Api= "https://codecyprus.org/th/test-api/start?player=";
+        let arr=["inactive","empty","player","app","unknown","missing_parameter",""];
+        for(let i = 0; i<=5;i++){
+            fetch(Start_Api+arr[i])
+                .then(response => response.json()) //Parse JSON text to JavaScript object
+                .then(jsonObject => {
+
+
+                    let Session = jsonObject.status;
+                    if(Session ==="ERROR"){
+                        console.log(Session);}
+
+
+
+                });
+        }}
+
+    function question () {}
+
+    function answer(){}
+
+    function score(){}
+
+    function leaderboard(){
+        fetch("https://codecyprus.org/th/test-api/leaderboard?sorted&hasPrize&size=42")
+            .then(response => response.json()) //Parse JSON text to JavaScript object
+            .then(jsonObject => {
+
+
+                let LeaderBoard = jsonObject;
+                console.log(LeaderBoard);
+
+
+
+
+
+
+            });
+    }
+
+</script>
 <h1>TestPage</h1>
+<p>/th/test-api/list</p>
+<p>/th/test-api/start</p>
 
 
 
@@ -30,7 +96,7 @@
 
 <h2>Meeting 1</h2>
 <p>Decide how the application should looks like.
-This is the end of the first meeting.</p>
+    This is the end of the first meeting.</p>
 <h2> Meeting 2</h2>
 <p>Decide how each element of the program should work.
     This is the end of the second meeting.</p>
