@@ -46,6 +46,7 @@
     scanPeriod: 1
 };
     var scanner = new Instascan.Scanner(opts);
+
     Instascan.Camera.getCameras().then(function (cameras) {
 
         for(let i = 0; i <cameras.length;i++)
@@ -71,25 +72,91 @@
 
 
         if (cameras.length > 0) {
-
             scanner.start(cameras[0]);
-            scanner.start(cameras[1]);
-
-
-
-alert("stop-it work?");
-
-
-
-
-            console.log(cameras.length)
-        } else {
-            console.error('No cameras found.');
-            alert("No cameras found.");
         }
+
     }).catch(function (e) {
         console.error(e);
     });
+
+
+    Instascan.Camera.getCameras().then(function (cameras) {
+
+        for(let i = 0; i <cameras.length;i++)
+        {
+            let CameraNames = document.getElementById("cameraNames");
+
+
+
+
+            for (let i = 0; i < cameras.length; i++) {
+
+
+                CameraName = cameras[i].name;
+
+
+                let Caameraa = document.createElement("li");
+
+                Caameraa.innerHTML = "<a  >" + cameras[i].name + "</a>";
+
+                CameraNames.appendChild(Caameraa);
+            }
+        }
+
+
+        if (cameras.length > 0) {
+            scanner.start(cameras[1]);
+            alert("work");
+        }
+
+    }).catch(function (e) {
+        console.error(e);
+    });
+
+//     Instascan.Camera.getCameras().then(function (cameras) {
+//
+//         for(let i = 0; i <cameras.length;i++)
+//         {
+//             let CameraNames = document.getElementById("cameraNames");
+//
+//
+//
+//
+//             for (let i = 0; i < cameras.length; i++) {
+//
+//
+//                 CameraName = cameras[i].name;
+//
+//
+//                 let Caameraa = document.createElement("li");
+//
+//                 Caameraa.innerHTML = "<a  >" + cameras[i].name + "</a>";
+//
+//                 CameraNames.appendChild(Caameraa);
+//             }
+//         }
+//
+//
+//         if (cameras.length > 0) {
+//
+//             scanner.start(cameras[0]);
+//             scanner.start(cameras[1]);
+//
+//
+//
+// alert("stop-it work?");
+//
+//
+//
+//
+//             console.log(cameras.length)
+//         } else {
+//             console.error('No cameras found.');
+//             alert("No cameras found.");
+//         }
+//     }).catch(function (e) {
+//         console.error(e);
+//     });
     scanner.addListener('scan', function (content) {
         console.log(content);
         document.getElementById("content").innerHTML = content;
