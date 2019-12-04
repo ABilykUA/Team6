@@ -530,7 +530,7 @@ function locationupdate(){
 
     function showPosition(position) {
 
-        document.getElementById("Extra").innerHTML="<p>"+"&latitude="+position.coords.latitude+"&longitude="+position.coords.longitude +"</p>";
+        document.getElementById("Extra").innerHTML="<p>"+"Your latitude:"+position.coords.latitude  +"<br/>"  +"Your Longitude:"+position.coords.longitude +"</p>";
 
         fetch("https://codecyprus.org/th/api/location?session=" +   sessionID +   "&latitude="+position.coords.latitude+"&longitude="+position.coords.longitude)
             .then(response => response.json()) //Parse JSON text to JavaScript object
