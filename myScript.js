@@ -1,6 +1,6 @@
 // JS is done here ↓
 
-let sessionID = null;
+
 let CheckForSkip= null;
 let GameScore = null;
 let CheckLocation = null;
@@ -82,9 +82,11 @@ function SessionGet () {
 
             let Session = jsonObject.session;
 
-            sessionID = Session;
 
-            console.log(Session);
+            checkCookie(Session);
+
+
+            console.log(Session,"testing");
 
 
             Questions();
@@ -107,11 +109,16 @@ function SessionGet () {
 
 
 
-function Questions(IntClear) {
+function Questions() {
 
-    console.log("Questions()session -> " + sessionID);
+    console.log(getCookie("username"));
 
-    const  Questions_Api = "https://codecyprus.org/th/api/question?session="+ sessionID ;
+
+    let sessionid = getCookie("username");
+
+    console.log("Questions()session -> " +  sessionid);
+
+    const  Questions_Api = "https://codecyprus.org/th/api/question?session="+ sessionid ;
 
     fetch( Questions_Api )
         .then(response => response.json()) //Parse JSON text to JavaScript object
@@ -190,9 +197,9 @@ function Questions(IntClear) {
             if (CheckLocation === true) {
 
 
-                locationupdate(sessionID);
+                locationupdate();
 
-                IntClear =   setInterval(locationupdate, 60000 , sessionID); //
+                IntClear =   setInterval(locationupdate, 60000 ); //
 
                 document.getElementById("location").innerHTML ="This is a geolocation question your coordinates will be updated every minute. ";
 
@@ -201,7 +208,7 @@ function Questions(IntClear) {
 
                 document.getElementById("location").innerHTML ="";
                 document.getElementById("Extra2").innerHTML ="";
-                clearfunction();
+
 
             }
 
@@ -214,12 +221,7 @@ function Questions(IntClear) {
 
 
 }
-function clearfunction(){
 
-    clearInterval(IntClear);
-
-
-}
 
 function integer(){
 
@@ -228,10 +230,10 @@ function integer(){
         + " " +
         "<br/>" +
         "<br/>" +
-        "<input type='button' class='button' value='Submit' id='SubmitButton' onclick='AnswerQuestion(sessionID)'  />";
+        "<input type='button' class='button' value='Submit' id='SubmitButton' onclick='AnswerQuestion()'  />";
     if (CheckForSkip === true){
 
-        document.getElementById("Extra").innerHTML =  "<input type='button' class='button' value='Skip' onclick='SkipQuestion(sessionID)'  />";
+        document.getElementById("Extra").innerHTML =  "<input type='button' class='button' value='Skip' onclick='SkipQuestion()'  />";
     }else {
         document.getElementById("Extra").innerHTML = "Sorry this question can't be skipped !!! ";
     }
@@ -249,10 +251,10 @@ function text(){
         + " " +
         "<br/>" +
         "<br/>" +
-        "<input type='button' class='button' value='Submit' id='SubmitButton' onclick='AnswerQuestion(sessionID)'  />";
+        "<input type='button' class='button' value='Submit' id='SubmitButton' onclick='AnswerQuestion()'  />";
     if (CheckForSkip === true){
 
-        document.getElementById("Extra").innerHTML =  "<input type='button' class='button' value='Skip' onclick='SkipQuestion(sessionID)'  />";
+        document.getElementById("Extra").innerHTML =  "<input type='button' class='button' value='Skip' onclick='SkipQuestion()'  />";
     }else {
         document.getElementById("Extra").innerHTML = "Sorry this question can't be skipped !!! ";
     }
@@ -265,14 +267,14 @@ function text(){
 function numeric(){
 
 
-    document.getElementById("PlaceForButtons").innerHTML =  "<input type='numeric' id='textfiled'  />"
+    document.getElementById("PlaceForButtons").innerHTML =  "<input type='number' id='textfiled'  />"
         + " " +
         "<br/>" +
         "<br/>" +
-        "<input type='button' class='button' value='Submit' id='SubmitButton' onclick='AnswerQuestion(sessionID)'  />";
+        "<input type='button' class='button' value='Submit' id='SubmitButton' onclick='AnswerQuestion()'  />";
     if (CheckForSkip === true){
 
-        document.getElementById("Extra").innerHTML =  "<input type='button' class='button' value='Skip' onclick='SkipQuestion(sessionID)'  />";
+        document.getElementById("Extra").innerHTML =  "<input type='button' class='button' value='Skip' onclick='SkipQuestion()'  />";
     }else {
         document.getElementById("Extra").innerHTML = "Sorry this question can't be skipped !!! ";
     }
@@ -290,16 +292,16 @@ function boolean () {
 
 
 
-        "<input type='button' class='button'  id='TrueButton' value='True' onclick=' BoolAnswer(sessionID,0)' /> "
+        "<input type='button' class='button'  id='TrueButton' value='True' onclick=' BoolAnswer(0)' /> "
         + " " +
-       "<input type='button' class='button' id='FalseButton'  value='False' onclick=' BoolAnswer(sessionID,1)'  />";
+       "<input type='button' class='button' id='FalseButton'  value='False' onclick=' BoolAnswer(1)'  />";
 
 
 
 
     if (CheckForSkip === true){
 
-        document.getElementById("Extra").innerHTML =  "<input type='button' class='button' value='Skip' onclick='SkipQuestion(sessionID)'  />";
+        document.getElementById("Extra").innerHTML =  "<input type='button' class='button' value='Skip' onclick='SkipQuestion()'  />";
     }else {
         document.getElementById("Extra").innerHTML = "Sorry this question can't be skipped !!! ";
     }
@@ -313,17 +315,18 @@ function boolean () {
 
 function mcq(){
 
+
         document.getElementById("PlaceForButtons").innerHTML =
-            "<input type='button' class='button' value='A' id='A' onclick='AnswerMCQ(sessionID,0)'  />"+" "+
-            "<input type='button' class='button' value='B' id='B' onclick='AnswerMCQ(sessionID,1)' />"+" "+
-            "<input type='button' class='button' value='C' id='C' onclick='AnswerMCQ(sessionID,2)'  />"+" "+
-            "<input type='button' class='button' value='D' id='D' onclick='AnswerMCQ(sessionID,3)'  />";
+            "<input type='button' class='button' value='A' id='A' onclick='AnswerMCQ(0)'  />"+" "+
+            "<input type='button' class='button' value='B' id='B' onclick='AnswerMCQ(1)' />"+" "+
+            "<input type='button' class='button' value='C' id='C' onclick='AnswerMCQ(2)'  />"+" "+
+            "<input type='button' class='button' value='D' id='D' onclick='AnswerMCQ(3)'  />";
 
 
 
     if (CheckForSkip === true){
 
-        document.getElementById("Extra").innerHTML =  "<input type='button' class='button' value='Skip' onclick='SkipQuestion(sessionID)'  />";
+        document.getElementById("Extra").innerHTML =  "<input type='button' class='button' value='Skip' onclick='SkipQuestion()'  />";
     }else {
         document.getElementById("Extra").innerHTML = "Sorry this question can't be skipped !!! ";
     }
@@ -335,14 +338,15 @@ function mcq(){
 
 
 
-function BoolAnswer(sessionID,i){
+function BoolAnswer(i){
 
+    let sessionid=getCookie("username");
 
 
     let answer = document.getElementsByClassName('button')[i].value;
 
 
-    fetch("https://codecyprus.org/th/api/answer?session=" + sessionID  +  "&answer=" + answer )
+    fetch("https://codecyprus.org/th/api/answer?session=" + sessionid  +  "&answer=" + answer )
         .then(response => response.json()) //Parse JSON text to JavaScript object
         .then(jsonObject => {
 
@@ -351,7 +355,7 @@ function BoolAnswer(sessionID,i){
             document.getElementById("PlaceForButtons").innerHTML = "Loading...";
 
             Questions();
-            Score(GameScore,sessionID);
+            Score(GameScore);
 
 
 
@@ -364,12 +368,13 @@ function BoolAnswer(sessionID,i){
 
 
 }
-function AnswerMCQ(sessionID, i)
+function AnswerMCQ(i)
 {
+    let sessionid=getCookie("username");
 
         let answerMCQ = document.getElementsByClassName('button')[i].value;
 
-    fetch("https://codecyprus.org/th/api/answer?session=" + sessionID  +  "&answer=" + answerMCQ )
+    fetch("https://codecyprus.org/th/api/answer?session=" + sessionid  +  "&answer=" + answerMCQ )
         .then(response => response.json()) //Parse JSON text to JavaScript object
         .then(jsonObject => {
 
@@ -378,17 +383,19 @@ function AnswerMCQ(sessionID, i)
             document.getElementById("PlaceForButtons").innerHTML = "Loading...";
 
             Questions();
-            Score(GameScore,sessionID);
+            Score(GameScore);
 
 
 
         });
 }
-function AnswerQuestion(sessionID) {
+function AnswerQuestion() {
+
+    let sessionid=getCookie("username");
 
     let answer =  document.getElementById("textfiled").value;
 
-    fetch("https://codecyprus.org/th/api/answer?session=" + sessionID  +  "&answer=" + answer )
+    fetch("https://codecyprus.org/th/api/answer?session=" + sessionid  +  "&answer=" + answer )
         .then(response => response.json()) //Parse JSON text to JavaScript object
         .then(jsonObject => {
 
@@ -397,7 +404,7 @@ function AnswerQuestion(sessionID) {
             document.getElementById("PlaceForButtons").innerHTML = "Loading...";
 
             Questions();
-            Score(GameScore,sessionID);
+            Score(GameScore);
 
 
 
@@ -413,16 +420,16 @@ function AnswerQuestion(sessionID) {
 
 function SkipQuestion() {
 
+    let sessionid=getCookie("username");
 
-
-    fetch( "https://codecyprus.org/th/api/skip?session=" +  sessionID )
+    fetch( "https://codecyprus.org/th/api/skip?session=" +  sessionid )
         .then(response => response.json()) //Parse JSON text to JavaScript object
         .then(jsonObject => {
 
             console.log(jsonObject);
 
             Questions();
-            Score(GameScore,sessionID);
+            Score(GameScore);
 
 
         });
@@ -433,7 +440,9 @@ function SkipQuestion() {
 
 function Score() {
 
-    fetch("https://codecyprus.org/th/api/score?session="+sessionID)
+    let sessionid=getCookie("username");
+
+    fetch("https://codecyprus.org/th/api/score?session="+sessionid)
         .then(response => response.json()) //Parse JSON text to JavaScript object
         .then(ScoreObject => {
 
@@ -451,6 +460,7 @@ function Score() {
 
 //leaders
 function LeaderBoard() {
+    let sessionid=getCookie("username");
     let LeadersHeader = document.getElementById("PlaceForButtons");
     LeadersHeader.innerText = "Loading . . . ";
     document.getElementById("Score").innerText="";
@@ -460,7 +470,7 @@ function LeaderBoard() {
     let Player;
     let LeadersScore;
 
-    fetch("https://codecyprus.org/th/api/leaderboard?session=" + sessionID + "&sorted&limit=5")
+    fetch("https://codecyprus.org/th/api/leaderboard?session=" + sessionid + "&sorted&limit=5")
         .then(response => response.json()) //Parse JSON text to JavaScript object
         .then(jsonObject => {
 
@@ -530,7 +540,9 @@ function locationupdate(){
 
         document.getElementById("Extra2").innerHTML="<p>" + "Your latitude: " + position.coords.latitude +  "<br/>" + " Your Longitude: " + position.coords.longitude +"</p>";
 
-        fetch("https://codecyprus.org/th/api/location?session=" +   sessionID +   "&latitude="+position.coords.latitude+"&longitude="+position.coords.longitude)
+        let sessionid=getCookie("username");
+
+        fetch("https://codecyprus.org/th/api/location?session=" +   sessionid +   "&latitude="+position.coords.latitude+"&longitude="+position.coords.longitude)
             .then(response => response.json()) //Parse JSON text to JavaScript object
             .then(jsonObject => {
 
@@ -556,3 +568,57 @@ function handleConnectionChange(event){
 }
 window.addEventListener('online', handleConnectionChange);
 window.addEventListener('offline', handleConnectionChange);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function setCookie(cname,cvalue,exdays) {
+    let d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    let expires = "expires=" + d.toGMTString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+function getCookie(cname) {
+    let name = cname + "=";
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let ca = decodedCookie.split(';');
+    for(let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
+
+function checkCookie(k) { //todo --- change back to session //
+
+   let sessioncookie = k ;
+
+    setCookie("username", sessioncookie, 30);
+
+
+}
