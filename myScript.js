@@ -95,7 +95,7 @@ function SessionGet () {
         });
 
 }
-SessionGet();
+
 
 
 
@@ -460,7 +460,7 @@ function LeaderBoard() {
     let Player;
     let LeadersScore;
 
-    fetch("https://codecyprus.org/th/api/leaderboard?session=" + sessionID + "&sorted&limit=20")
+    fetch("https://codecyprus.org/th/api/leaderboard?session=" + sessionID + "&sorted&limit=5")
         .then(response => response.json()) //Parse JSON text to JavaScript object
         .then(jsonObject => {
 
@@ -472,12 +472,6 @@ function LeaderBoard() {
 
 
             LeadersHeader.innerHTML = "Your Score: " + GameScore+  "<br/>"  +   "<br/>" + "Top 5";
-
-
-
-
-
-
 
 
 
@@ -514,6 +508,8 @@ function LeaderBoard() {
 
         }
 })
+
+
 }
 
 
@@ -547,6 +543,16 @@ function locationupdate(){
     }
 
 
+function handleConnectionChange(event){
+    if(event.type === "offline"){
+        document.getElementById("Internetcheck").innerHTML="Please check your internet connection,this message will disappear after you reconnect no need to refresh the page! ";
+
+    }
+    if(event.type === "online"){
+        document.getElementById("Internetcheck").innerHTML=" ";
+    }
 
 
-
+}
+window.addEventListener('online', handleConnectionChange);
+window.addEventListener('offline', handleConnectionChange);
