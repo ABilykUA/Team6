@@ -14,9 +14,7 @@
 <body>
 
 <script>
-   list ();//parts of the main code that check errors
-    start();
-   leaderboard();
+
 
     function list(){
         fetch("https://codecyprus.org/th/test-api/list?number-of-ths=2")
@@ -29,6 +27,11 @@
 
             });
     }
+
+
+
+
+
 
     function start(){
         let Start_Api= "https://codecyprus.org/th/test-api/start?player=";
@@ -51,11 +54,189 @@
         }
     }
 
-    function question () {}
 
-    function answer(){}
 
-    function score(){}
+
+
+
+
+
+
+
+    function question () {
+        const  Questions_Api = "https://codecyprus.org/th/test-api/question?";
+        let All=["question-type=BOOLEAN", "question-type=MCQ", "question-type=INTEGER", "question-type=NUMERIC","question-type=TEXT",
+            "question-type=BOOLEAN&can-be-skipped", "question-type=MCQ&can-be-skipped", "question-type=INTEGER&can-be-skipped", "question-type=NUMERIC&can-be-skipped","question-type=TEXT&can-be-skipped",
+            "question-type=BOOLEAN&requires-location", "question-type=MCQ&requires-location", "question-type=INTEGER&requires-location", "question-type=NUMERIC&requires-location","question-type=TEXT&requires-location",
+            "question-type=BOOLEAN&can-be-skipped&requires-location", "question-type=MCQ&can-be-skipped&requires-location", "question-type=INTEGER&can-be-skipped&requires-location", "question-type=NUMERIC&can-be-skipped&requires-location","question-type=TEXT&can-be-skipped&requires-location",
+            "completed&question-type=BOOLEAN", "completed&question-type=MCQ", "completed&question-type=INTEGER", "completed&question-type=NUMERIC","completed&question-type=TEXT",
+            "completed&question-type=BOOLEAN&can-be-skipped", "completed&question-type=MCQ&can-be-skipped", "completed&question-type=INTEGER&can-be-skipped", "completed&question-type=NUMERIC&can-be-skipped","completed&question-type=TEXT&can-be-skipped",
+            "completed&question-type=BOOLEAN&requires-location", "completed&question-type=MCQ&requires-location", "completed&question-type=INTEGER&requires-location", "completed&question-type=NUMERIC&requires-location","completed&question-type=TEXT&requires-location",
+            "completed&question-type=BOOLEAN&can-be-skipped&requires-location", "completed&question-type=MCQ&can-be-skipped&requires-location", "completed&question-type=INTEGER&can-be-skipped&requires-location", "completed&question-type=NUMERIC&can-be-skipped&requires-location","completed&question-type=TEXT&can-be-skipped&requires-location"];
+
+        for (let i = 0;i < All.length;i++){
+        fetch( Questions_Api+All[i] )
+            .then(response => response.json()) //Parse JSON text to JavaScript object
+            .then(jsonObject => {
+
+                console.log(jsonObject);
+                let  CheckIfFinished = jsonObject.completed;
+
+                let QuestionNames = jsonObject.questionText;
+
+                let  CheckQuestion = jsonObject.questionType;
+
+                CheckLocation = jsonObject.requiresLocation;
+
+                CheckForSkip = jsonObject.canBeSkipped;
+
+
+
+
+                if (CheckQuestion === "INTEGER")
+                {
+
+
+                    console.log("INTEGER");
+
+
+                }
+
+                if (CheckQuestion === "BOOLEAN")
+                {
+
+
+                    console.log("BOOLEAN");
+
+
+
+                }
+                if (CheckQuestion === "MCQ")
+                {
+                    console.log("MCQ");
+
+                }
+
+                if (CheckQuestion === "TEXT")
+                {
+
+                    console.log("TEXT");
+
+
+
+                }
+
+                if (CheckQuestion === "NUMERIC")
+                {
+
+
+                    console.log("NUMERIC");
+
+
+                }
+                if (CheckIfFinished === true ){
+
+                   console.log("Move to LeaderBoard(Finish)")
+
+
+
+                }
+                if (CheckLocation === true) {
+
+
+                    console.log('NeedLOcation');
+
+                }
+                if (CheckLocation === false) {
+
+                    console.log('NO NeedLOcation');
+
+                }
+
+                if (CheckForSkip === true){
+
+                    console.log("CanbeSkiped");
+                }else {
+                    console.log("CanNotbeSkiped");
+                }
+
+
+                console.log("Loop");
+
+            });
+
+
+    }}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    function answer(){
+        const  Answers_Api = "https://codecyprus.org/th/test-api/answer?";
+        let Array=["correct&completed=false","correct&completed=true","completed=false", "completed=true"];
+
+        for(let i =0;i<Array.length;i++){
+        fetch( Answers_Api+Array[i] )
+        .then(response => response.json()) //Parse JSON text to JavaScript object
+        .then(jsonObject => {
+
+            console.log(jsonObject);
+        })
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+    function score(){
+        let Array=["score=42","finished&score=42","completed&score=42","completed&finished&score=42", "error" ];
+        for(let i =0;i<Array.length;i++){
+        fetch("https://codecyprus.org/th/test-api/score?"+ Array[i])
+            .then(response => response.json()) //Parse JSON text to JavaScript object
+            .then(jsonObject => {
+
+if (jsonObject.status==="OK") {
+
+
+    console.log(jsonObject);
+}
+else{
+    console.log(jsonObject.errorMessages);
+
+}
+
+            })
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
 
     function leaderboard(){
         fetch("https://codecyprus.org/th/test-api/leaderboard?sorted&hasPrize&size=42")
@@ -63,8 +244,9 @@
             .then(jsonObject => {
 
 
-                let LeaderBoard = jsonObject;
-                console.log(LeaderBoard);
+
+
+                console.log( jsonObject);
 
 
 
@@ -73,6 +255,12 @@
 
             });
     }
+
+
+
+
+
+
 
 </script>
 
