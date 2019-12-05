@@ -95,7 +95,7 @@ function SessionGet () {
         });
 
 }
-SessionGet();
+
 
 
 
@@ -475,12 +475,6 @@ function LeaderBoard() {
 
 
 
-
-
-
-
-
-
             for (let i = 0; i < LeaderBoard.length; i++) {
 
 
@@ -514,6 +508,8 @@ function LeaderBoard() {
 
         }
 })
+
+
 }
 
 
@@ -547,6 +543,16 @@ function locationupdate(){
     }
 
 
+function handleConnectionChange(event){
+    if(event.type === "offline"){
+        document.getElementById("Internetcheck").innerHTML="Please check your internet connection,this message will disappear after you reconnect no need to refresh the page! ";
+
+    }
+    if(event.type === "online"){
+        document.getElementById("Internetcheck").innerHTML=" ";
+    }
 
 
-
+}
+window.addEventListener('online', handleConnectionChange);
+window.addEventListener('offline', handleConnectionChange);
