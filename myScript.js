@@ -3,7 +3,7 @@
 
 let CheckForSkip= null;
 let GameScore = 0;
-let IntClear = null;
+let IntClear;
 
 
 
@@ -192,26 +192,7 @@ function Questions() {
 
                 LeaderBoard();
             }
-            if (CheckLocation === true) {
 
-
-                locationupdate();
-
-
-
-
-                IntClear =   setInterval(locationupdate, 60000 ); //
-
-                document.getElementById("location").innerHTML ="This is a geolocation question your coordinates will be updated every minute. ";
-
-            }
-            if (CheckLocation === false) {
-
-                document.getElementById("location").innerHTML ="";
-                document.getElementById("Extra2").innerHTML ="";
-
-
-            }
 
 
 
@@ -238,6 +219,20 @@ function integer(){
     }else {
         document.getElementById("Extra").innerHTML = "Sorry this question can't be skipped !!! ";
     }
+    if (CheckLocation === true) {
+
+        IntClear =   setInterval(locationupdate, 60000 ); //
+
+        document.getElementById("location").innerHTML ="This is a geolocation question your coordinates will be updated every minute. ";
+
+    }
+    if (CheckLocation === false) {
+
+        document.getElementById("location").innerHTML ="";
+        document.getElementById("Extra2").innerHTML ="";
+
+        clearInterval(IntClear);
+    }
 
 
 
@@ -259,6 +254,20 @@ function text(){
     }else {
         document.getElementById("Extra").innerHTML = "Sorry this question can't be skipped !!! ";
     }
+    if (CheckLocation === true) {
+
+        IntClear =   setInterval(locationupdate, 60000 ); //
+
+        document.getElementById("location").innerHTML ="This is a geolocation question your coordinates will be updated every minute. ";
+
+    }
+    if (CheckLocation === false) {
+
+        document.getElementById("location").innerHTML ="";
+        document.getElementById("Extra2").innerHTML ="";
+
+        clearInterval(IntClear);
+    }
 
 
 
@@ -278,6 +287,20 @@ function numeric(){
         document.getElementById("Extra").innerHTML =  "<input type='button' class='button' value='Skip' onclick='SkipQuestion()'  />";
     }else {
         document.getElementById("Extra").innerHTML = "Sorry this question can't be skipped !!! ";
+    }
+    if (CheckLocation === true) {
+
+        IntClear =   setInterval(locationupdate, 60000 ); //
+
+        document.getElementById("location").innerHTML ="This is a geolocation question your coordinates will be updated every minute. ";
+
+    }
+    if (CheckLocation === false) {
+
+        document.getElementById("location").innerHTML ="";
+        document.getElementById("Extra2").innerHTML ="";
+
+        clearInterval(IntClear);
     }
 
 
@@ -306,6 +329,20 @@ function boolean () {
     }else {
         document.getElementById("Extra").innerHTML = "Sorry this question can't be skipped !!! ";
     }
+    if (CheckLocation === true) {
+
+        IntClear =   setInterval(locationupdate, 60000 ); //
+
+        document.getElementById("location").innerHTML ="This is a geolocation question your coordinates will be updated every minute. ";
+
+    }
+    if (CheckLocation === false) {
+
+        document.getElementById("location").innerHTML ="";
+        document.getElementById("Extra2").innerHTML ="";
+
+        clearInterval(IntClear);
+    }
 
 
 
@@ -330,6 +367,21 @@ function mcq(){
         document.getElementById("Extra").innerHTML =  "<input type='button' class='button' value='Skip' onclick='SkipQuestion()'  />";
     }else {
         document.getElementById("Extra").innerHTML = "Sorry this question can't be skipped !!! ";
+    }
+    if (CheckLocation === true) {
+
+        IntClear =   setInterval(locationupdate, 60000 ); //
+
+        document.getElementById("location").innerHTML ="This is a geolocation question your coordinates will be updated every minute. ";
+
+    }
+    if (CheckLocation === false) {
+
+        document.getElementById("location").innerHTML ="";
+        document.getElementById("Extra2").innerHTML ="";
+        clearInterval(IntClear);
+
+
     }
 
 
