@@ -15,18 +15,57 @@
 </head>
 <body>
 
+<header>
+    <h1>TestPage</h1>
+</header>
+
+<a>Here is you can test the features of our site! This page use the parts of the real code to test.</a>
+<a>That test launch list call, and out put information about treasure, it read .name and out put this part.</a>
+<ol id="OutputList"></ol>
+<a><input type="button" value="Switch" onclick="CallListFromButton()" class="button" /></a>
+
+<a>That test launch start call. This test proves that program can process(dynamically) all available out puts from the server.</a>
+<ul id="OutputStart"></ul>
+<a><input type="button" value="Switch" onclick="start()" class="button" /></a>
+
+<a>That test launch question call. This test proves that program can process(dynamically) all available out puts from the server.</a>
+<table id="OutputQuestion">
+    <tr>
+        <th> Type? </th>
+        <th> Finished? </th>
+        <th> Location? </th>
+        <th> Skip? </th>
+
+    </tr>
+</table>
+<a><input type="button" value="Switch" onclick="question()" class="button" /></a>
+
 <script>
+function CallListFromButton(){
+    list();
+}
 
 
     function list(){
-        fetch("https://codecyprus.org/th/test-api/list?number-of-ths=2")
+        let TreasureHuntslist = document.getElementById("OutputList");
+        fetch("https://codecyprus.org/th/test-api/list?number-of-ths=5")
+
             .then(response => response.json()) //Parse JSON text to JavaScript object
             .then(jsonObject => {
 
+                let TreasureHuntsOBJECT = jsonObject.treasureHunts;
+                for (let i = 0; i < TreasureHuntsOBJECT.length; i++) {
 
-                let TreasureHuntsOBJECT = jsonObject.treasureHunts;//different names
-                console.log(TreasureHuntsOBJECT);
+                    UUID = TreasureHuntsOBJECT[i].uuid;
 
+                    NameOfHunts = TreasureHuntsOBJECT[i].name;
+
+                    let HuntOptions = document.createElement("li");
+
+                    HuntOptions.innerHTML = "<a>" + NameOfHunts + "</a>";
+
+                    TreasureHuntslist.appendChild(HuntOptions);
+                }
             });
     }
 
@@ -38,6 +77,7 @@
     function start(){
         let Start_Api= "https://codecyprus.org/th/test-api/start?player=";
         let arr=["inactive","empty","player","app","unknown","missing_parameter", ""];
+        let TreasureHuntslist = document.getElementById("OutputStart");
 
         for(let i = 0; i<=6;i++){
 
@@ -47,10 +87,13 @@
 
 
                     let Session = jsonObject.status;
-                    if(Session ==="ERROR"){                         //mistake check
+                    if(Session ==="ERROR"){//mistake check
+                        let HuntOptions = document.createElement("li");
+                        HuntOptions.innerHTML = "<a>" + jsonObject.errorMessages[0] + "</a>";
+                        TreasureHuntslist.appendChild(HuntOptions);
                         console.log(jsonObject.errorMessages[0]);}
                     else{
-                        console.log(jsonObject);   //Ok!
+                        console.log(jsonObject.session);   //Ok!
                     }
                 });
         }
@@ -76,6 +119,8 @@
             "completed&question-type=BOOLEAN&requires-location", "completed&question-type=MCQ&requires-location", "completed&question-type=INTEGER&requires-location", "completed&question-type=NUMERIC&requires-location","completed&question-type=TEXT&requires-location",
             "completed&question-type=BOOLEAN&can-be-skipped&requires-location", "completed&question-type=MCQ&can-be-skipped&requires-location", "completed&question-type=INTEGER&can-be-skipped&requires-location", "completed&question-type=NUMERIC&can-be-skipped&requires-location","completed&question-type=TEXT&can-be-skipped&requires-location"];
 
+        let TreasureHuntslist = document.getElementById("OutputQuestion");
+
         for (let i = 0;i < All.length;i++){
         fetch( Questions_Api+All[i] )
             .then(response => response.json()) //Parse JSON text to JavaScript object
@@ -95,11 +140,31 @@
 
 
 
+                let Tr = document.createElement("tr");
+                console.log( Tr);
+                console.log(TreasureHuntslist);
+
+                TreasureHuntslist.appendChild(Tr);
+
+                let Td = document.createElement("td");
+                let Td1 = document.createElement("td");
+                let Td2 = document.createElement("td");
+                let Td3 = document.createElement("td");
+
+
+
+
+
+
+
+
+
                 if (CheckQuestion === "INTEGER")
                 {
 
+                    Td.innerHTML = "<a>INTEGER</a>";
+                    Tr.appendChild(Td);
 
-                    console.log("INTEGER");
 
 
                 }
@@ -107,22 +172,27 @@
                 if (CheckQuestion === "BOOLEAN")
                 {
 
+                    Td.innerHTML = "<a>BOOLEAN</a>";
+                    Tr.appendChild(Td);
 
-                    console.log("BOOLEAN");
 
 
 
                 }
                 if (CheckQuestion === "MCQ")
                 {
-                    console.log("MCQ");
+                    Td.innerHTML = "<a>MCQ</a>";
+                    Tr.appendChild(Td);
+
 
                 }
 
                 if (CheckQuestion === "TEXT")
                 {
 
-                    console.log("TEXT");
+                    Td.innerHTML = "<a>TEXT</a>";
+                    Tr.appendChild(Td);
+
 
 
 
@@ -131,39 +201,55 @@
                 if (CheckQuestion === "NUMERIC")
                 {
 
+                    Td.innerHTML = "<a>NUMERIC</a>";
+                    Tr.appendChild(Td);
 
-                    console.log("NUMERIC");
 
 
                 }
                 if (CheckIfFinished === true ){
 
-                   console.log("Move to LeaderBoard(Finish)")
-
-
+                    Td1.innerHTML = "<a>Move to LeaderBoard(Finished)</a>";
+                    Tr.appendChild(Td1);
 
                 }
+
+                if(CheckIfFinished === false){
+
+                        Td1.innerHTML = "<a>Don't move to LeaderBoard(Not Finished)</a>";
+                    Tr.appendChild(Td1);
+                    }
+
+
                 if (CheckLocation === true) {
 
+                    Td2.innerHTML = "<a>Need Location</a>";
+                    Tr.appendChild(Td2);
 
-                    console.log('NeedLOcation');
 
                 }
                 if (CheckLocation === false) {
 
-                    console.log('NO NeedLOcation');
+                    Td2.innerHTML = "<a>Don't need Location</a>";
+                    Tr.appendChild(Td2);
+
 
                 }
 
                 if (CheckForSkip === true){
 
-                    console.log("CanbeSkiped");
+
+                    Td3.innerHTML = "<a>Can be Skiped</a>";
+                    Tr.appendChild(Td3);
                 }else {
-                    console.log("CanNotbeSkiped");
+
+                    Td3.innerHTML = "<a>Can Not be Skiped</a>";
+                    Tr.appendChild(Td3);
                 }
 
 
-                console.log("Loop");
+
+
 
             });
 
@@ -266,9 +352,7 @@ else{
 
 </script>
 
-<header>
-<h1>TestPage</h1>
-</header>
+
 
 
 <main>
