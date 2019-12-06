@@ -2,8 +2,7 @@
 
 
 let CheckForSkip= null;
-let GameScore = null;
-let CheckLocation = null;
+let GameScore = 0;
 let IntClear = null;
 
 
@@ -82,7 +81,6 @@ function SessionGet () {
 
             let Session = jsonObject.session;
 
-
             checkCookie(Session);
 
 
@@ -110,9 +108,6 @@ function SessionGet () {
 
 
 function Questions() {
-
-    console.log(getCookie("username"));
-
 
     let sessionid = getCookie("username");
 
@@ -144,7 +139,7 @@ function Questions() {
             {
 
 
-                integer(CheckForSkip,CheckLocation);
+                integer(CheckForSkip);
 
 
             }
@@ -153,21 +148,21 @@ function Questions() {
             {
 
 
-                boolean (CheckForSkip,CheckLocation);
+                boolean (CheckForSkip);
 
 
 
             }
             if (CheckQuestion === "MCQ")
             {
-                mcq(CheckForSkip,CheckLocation);
+                mcq(CheckForSkip);
 
             }
 
             if (CheckQuestion === "TEXT")
             {
 
-                text(CheckForSkip,CheckLocation);
+                text(CheckForSkip);
 
 
 
@@ -177,7 +172,7 @@ function Questions() {
             {
 
 
-                numeric(CheckForSkip,CheckLocation);
+                numeric(CheckForSkip);
 
 
             }
@@ -187,9 +182,12 @@ function Questions() {
 
                 document.getElementById("Extra").innerHTML ="I hope u did good ! ";
 
-                document.getElementById("PlaceForButtons").innerHTML ="";
+                document.getElementById("PlaceForButtons").innerHTML =  "";
 
                 document.getElementById("location").innerHTML ="";
+
+                document.getElementById("BackHome").innerHTML="<br/>"+"<a href='index.html'>" +"<input type='button' class='button' value='Back to the landing page'>" + "</a>";
+
 
 
                 LeaderBoard();
@@ -198,6 +196,9 @@ function Questions() {
 
 
                 locationupdate();
+
+
+
 
                 IntClear =   setInterval(locationupdate, 60000 ); //
 
@@ -349,7 +350,16 @@ function BoolAnswer(i){
     fetch("https://codecyprus.org/th/api/answer?session=" + sessionid  +  "&answer=" + answer )
         .then(response => response.json()) //Parse JSON text to JavaScript object
         .then(jsonObject => {
+            let CheckForError = jsonObject.correct;
 
+
+            if (CheckForError === false){
+
+                document.getElementById("Incorrectquestion").innerText="Wrong answer, try again!";
+            }else {
+                document.getElementById("Incorrectquestion").innerText=" ";
+
+            }
             console.log(jsonObject);
 
             document.getElementById("PlaceForButtons").innerHTML = "Loading...";
@@ -378,6 +388,19 @@ function AnswerMCQ(i)
         .then(response => response.json()) //Parse JSON text to JavaScript object
         .then(jsonObject => {
 
+
+
+            let CheckForError = jsonObject.correct;
+
+
+            if (CheckForError === false){
+
+                document.getElementById("Incorrectquestion").innerText="Wrong answer, try again!";
+            }else {
+                document.getElementById("Incorrectquestion").innerText=" ";
+
+            }
+
             console.log(jsonObject);
 
             document.getElementById("PlaceForButtons").innerHTML = "Loading...";
@@ -399,6 +422,18 @@ function AnswerQuestion() {
         .then(response => response.json()) //Parse JSON text to JavaScript object
         .then(jsonObject => {
 
+
+            let CheckForError = jsonObject.correct;
+
+
+            if (CheckForError === false){
+
+                document.getElementById("Incorrectquestion").innerText="Wrong answer, try again!";
+            }else {
+                document.getElementById("Incorrectquestion").innerText=" ";
+
+            }
+
             console.log(jsonObject);
 
             document.getElementById("PlaceForButtons").innerHTML = "Loading...";
@@ -408,15 +443,15 @@ function AnswerQuestion() {
 
 
 
+
+
         });
 
 
 
-
-
-
-
 }
+
+
 
 function SkipQuestion() {
 
@@ -431,7 +466,7 @@ function SkipQuestion() {
             Questions();
             Score(GameScore);
 
-
+            document.getElementById("Incorrectquestion").innerText=" ";
         });
 
 }
@@ -521,6 +556,23 @@ function LeaderBoard() {
 
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -622,3 +674,4 @@ function checkCookie(k) { //todo --- change back to session //
 
 
 }
+
