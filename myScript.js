@@ -1,12 +1,14 @@
 // JS is done here ↓
-let   CheckLocation = null;
+let CheckLocation = null;
 let CheckForSkip= null;
 let GameScore = 0;
 let IntClear;
+var SessionID ;
+var User;
 
 
 
-function NameAndTeamInput() {
+function NameInput() {
     const LIST_API = "https://codecyprus.org/th/api/list";
 
     let Name = document.getElementById("Name").value;
@@ -80,7 +82,11 @@ function SessionGet () {
 
             let Session = jsonObject.session;
 
-            checkCookie(Session);
+            SessionID = Session;
+            User = params.get("name");
+
+            setCookie("SessionID", Session, 1);
+            setCookie("User", params.get("name"), 1);
 
 
             console.log(Session,"testing");
@@ -108,11 +114,11 @@ function SessionGet () {
 
 function Questions() {
 
-    let sessionid = getCookie("username");
 
-    console.log("Questions()session -> " +  sessionid);
 
-    const  Questions_Api = "https://codecyprus.org/th/api/question?session="+ sessionid ;
+    console.log("Questions()session -> " +  SessionID );
+
+    const  Questions_Api = "https://codecyprus.org/th/api/question?session="+ SessionID ;
 
     fetch( Questions_Api )
         .then(response => response.json()) //Parse JSON text to JavaScript object
@@ -127,6 +133,9 @@ function Questions() {
             CheckLocation = jsonObject.requiresLocation;
 
             CheckForSkip = jsonObject.canBeSkipped;
+
+
+            document.getElementById("Player").innerHTML = User;
 
             document.getElementById("Score").innerHTML = "Your Score: " + GameScore;
 
@@ -177,6 +186,8 @@ function Questions() {
             }
             if (CheckIfFinished === true ){
 
+                deleteCookie();
+
                 document.getElementById("Question").innerHTML = "Finished! Welldone";
 
                 document.getElementById("Extra").innerHTML ="I hope u did good ! ";
@@ -203,6 +214,13 @@ function Questions() {
 
 }
 
+function deleteCookie()
+{
+    document.cookie = "SessionID=;  path=/;";
+
+    document.cookie = "User=;  path=/;";
+
+}
 
 function integer(){
 
@@ -222,7 +240,7 @@ function integer(){
 
         IntClear =   setInterval(locationupdate, 60000 ); //
 
-        document.getElementById("location").innerHTML ="This is a geolocation question your coordinates will be updated every minute. ";
+        document.getElementById("location").innerHTML ="This is a geolocation question your coordinates will be updated every minute,wait until wait until the coordinates are shown before you answer !!!. ";
 
     }
     if (CheckLocation === false) {
@@ -392,13 +410,11 @@ function mcq(){
 
 function BoolAnswer(i){
 
-    let sessionid=getCookie("username");
-
 
     let answer = document.getElementsByClassName('button')[i].value;
 
 
-    fetch("https://codecyprus.org/th/api/answer?session=" + sessionid  +  "&answer=" + answer )
+    fetch("https://codecyprus.org/th/api/answer?session=" + SessionID  +  "&answer=" + answer )
         .then(response => response.json()) //Parse JSON text to JavaScript object
         .then(jsonObject => {
             let CheckForError = jsonObject.correct;
@@ -406,14 +422,14 @@ function BoolAnswer(i){
 
             if (CheckForError === false){
 
-                document.getElementById("Incorrectquestion").innerText="Wrong answer, try again!";
+                document.getElementById("Incorrectquestion").innerHTML="Wrong answer, try again!"+"<br/>";
             }else {
                 document.getElementById("Incorrectquestion").innerText=" ";
 
             }
             console.log(jsonObject);
 
-            document.getElementById("PlaceForButtons").innerHTML = "Loading...";
+            document.getElementById("PlaceForButtons").innerHTML = "<div class='loader'>"+"</div>";
 
             Questions();
             Score(GameScore);
@@ -431,11 +447,10 @@ function BoolAnswer(i){
 }
 function AnswerMCQ(i)
 {
-    let sessionid=getCookie("username");
 
         let answerMCQ = document.getElementsByClassName('button')[i].value;
 
-    fetch("https://codecyprus.org/th/api/answer?session=" + sessionid  +  "&answer=" + answerMCQ )
+    fetch("https://codecyprus.org/th/api/answer?session=" + SessionID  +  "&answer=" + answerMCQ )
         .then(response => response.json()) //Parse JSON text to JavaScript object
         .then(jsonObject => {
 
@@ -446,7 +461,7 @@ function AnswerMCQ(i)
 
             if (CheckForError === false){
 
-                document.getElementById("Incorrectquestion").innerText="Wrong answer, try again!";
+                document.getElementById("Incorrectquestion").innerHTML="Wrong answer, try again!"+"<br/>";
             }else {
                 document.getElementById("Incorrectquestion").innerText=" ";
 
@@ -454,7 +469,7 @@ function AnswerMCQ(i)
 
             console.log(jsonObject);
 
-            document.getElementById("PlaceForButtons").innerHTML = "Loading...";
+            document.getElementById("PlaceForButtons").innerHTML = "<p class='loading'>"+"Loading"+"</p>";
 
             Questions();
             Score(GameScore);
@@ -465,11 +480,11 @@ function AnswerMCQ(i)
 }
 function AnswerQuestion() {
 
-    let sessionid=getCookie("username");
+
 
     let answer =  document.getElementById("textfiled").value;
 
-    fetch("https://codecyprus.org/th/api/answer?session=" + sessionid  +  "&answer=" + answer )
+    fetch("https://codecyprus.org/th/api/answer?session=" + SessionID  +  "&answer=" + answer )
         .then(response => response.json()) //Parse JSON text to JavaScript object
         .then(jsonObject => {
 
@@ -479,7 +494,7 @@ function AnswerQuestion() {
 
             if (CheckForError === false){
 
-                document.getElementById("Incorrectquestion").innerText="Wrong answer, try again!";
+                document.getElementById("Incorrectquestion").innerHTML="Wrong answer, try again!"+"<br/>";
             }else {
                 document.getElementById("Incorrectquestion").innerText=" ";
 
@@ -487,7 +502,8 @@ function AnswerQuestion() {
 
             console.log(jsonObject);
 
-            document.getElementById("PlaceForButtons").innerHTML = "Loading...";
+            document.getElementById("PlaceForButtons").innerHTML = "<div class='loader'>"+"</div>";
+
 
             Questions();
             Score(GameScore);
@@ -506,9 +522,9 @@ function AnswerQuestion() {
 
 function SkipQuestion() {
 
-    let sessionid=getCookie("username");
 
-    fetch( "https://codecyprus.org/th/api/skip?session=" +  sessionid )
+
+    fetch( "https://codecyprus.org/th/api/skip?session=" +  SessionID )
         .then(response => response.json()) //Parse JSON text to JavaScript object
         .then(jsonObject => {
 
@@ -526,9 +542,9 @@ function SkipQuestion() {
 
 function Score() {
 
-    let sessionid=getCookie("username");
 
-    fetch("https://codecyprus.org/th/api/score?session="+sessionid)
+
+    fetch("https://codecyprus.org/th/api/score?session="+SessionID)
         .then(response => response.json()) //Parse JSON text to JavaScript object
         .then(ScoreObject => {
 
@@ -546,9 +562,9 @@ function Score() {
 
 //leaders
 function LeaderBoard() {
-    let sessionid=getCookie("username");
+
     let LeadersHeader = document.getElementById("PlaceForButtons");
-    LeadersHeader.innerText = "Loading . . . ";
+    LeadersHeader.innerText = "<div class='loader'>"+"</div>";
     document.getElementById("Score").innerText="";
 
 
@@ -556,7 +572,7 @@ function LeaderBoard() {
     let Player;
     let LeadersScore;
 
-    fetch("https://codecyprus.org/th/api/leaderboard?session=" + sessionid + "&sorted&limit=5")
+    fetch("https://codecyprus.org/th/api/leaderboard?session=" + SessionID + "&sorted&limit=5")
         .then(response => response.json()) //Parse JSON text to JavaScript object
         .then(jsonObject => {
 
@@ -644,9 +660,7 @@ function locationupdate(){
 
         document.getElementById("Extra2").innerHTML="<p>" + "Your latitude: " + position.coords.latitude +  "<br/>" + " Your Longitude: " + position.coords.longitude +"</p>";
 
-        let sessionid=getCookie("username");
-
-        fetch("https://codecyprus.org/th/api/location?session=" +   sessionid +   "&latitude="+position.coords.latitude+"&longitude="+position.coords.longitude)
+        fetch("https://codecyprus.org/th/api/location?session=" +   SessionID +   "&latitude="+position.coords.latitude+"&longitude="+position.coords.longitude)
             .then(response => response.json()) //Parse JSON text to JavaScript object
             .then(jsonObject => {
 
@@ -695,33 +709,54 @@ window.addEventListener('offline', handleConnectionChange);
 
 
 //setting cookies and getting them back
-function setCookie(cname,cvalue,exdays) {
-    let d = new Date();
-    d.setTime(d.getTime() + (exdays*24*60*60*1000));
-    let expires = "expires=" + d.toGMTString();
+
+function setCookie(cname,cvalue,exdays)
+{
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*30*60*1000));
+    var expires = "expires=" + d.toLocaleString();
     document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 }
 
-function getCookie(cname) {
-    let name = cname + "=";
-    let decodedCookie = decodeURIComponent(document.cookie);
-    let ca = decodedCookie.split(';');
-    for(let i = 0; i < ca.length; i++) {
-        let c = ca[i];
-        while (c.charAt(0) === ' ') {
+function getCookie(cname)
+{
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for(var i = 0; i < ca.length; i++)
+    {
+        var c = ca[i];
+        while (c.charAt(0) == ' ')
+        {
             c = c.substring(1);
         }
-        if (c.indexOf(name) === 0) {
+        if (c.indexOf(name) == 0)
+        {
             return c.substring(name.length, c.length);
         }
     }
     return "";
 }
 
-function checkCookie(k) { //todo --- change back to session //
 
-    setCookie("username", k, 30);
+function checkCookie()
+{
 
+    var SessionIDCookie = getCookie("SessionID");
+    var UserCookie = getCookie("User");
+
+
+
+    if (SessionIDCookie != "")
+    {
+        SessionID = SessionIDCookie ;
+        User=UserCookie;
+        console.log( SessionID, User,"test");
+        Questions();
+    }
+    else
+    {
+        SessionGet ();
+    }
 
 }
-
