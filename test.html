@@ -133,7 +133,9 @@ function CallListFromButton(){
                 let Td3 = document.createElement("td");
 
 
+                if (i === 0){
 
+                }
 
 
 
@@ -143,7 +145,7 @@ function CallListFromButton(){
                 if (CheckQuestion === "INTEGER")
                 {
 
-                    Td.innerHTML = "<a>INTEGER</a>";
+                    Td.innerHTML = "<p>INTEGER</p>";
                     Tr.appendChild(Td);
 
 
@@ -153,7 +155,7 @@ function CallListFromButton(){
                 if (CheckQuestion === "BOOLEAN")
                 {
 
-                    Td.innerHTML = "<a>BOOLEAN</a>";
+                    Td.innerHTML = "<p>BOOLEAN</p>";
                     Tr.appendChild(Td);
 
 
@@ -162,7 +164,7 @@ function CallListFromButton(){
                 }
                 if (CheckQuestion === "MCQ")
                 {
-                    Td.innerHTML = "<a>MCQ</a>";
+                    Td.innerHTML = "<p>MCQ</p>";
                     Tr.appendChild(Td);
 
 
@@ -171,7 +173,7 @@ function CallListFromButton(){
                 if (CheckQuestion === "TEXT")
                 {
 
-                    Td.innerHTML = "<a>TEXT</a>";
+                    Td.innerHTML = "<p>TEXT</p>";
                     Tr.appendChild(Td);
 
 
@@ -182,7 +184,7 @@ function CallListFromButton(){
                 if (CheckQuestion === "NUMERIC")
                 {
 
-                    Td.innerHTML = "<a>NUMERIC</a>";
+                    Td.innerHTML = "<p>NUMERIC</p>";
                     Tr.appendChild(Td);
 
 
@@ -190,28 +192,28 @@ function CallListFromButton(){
                 }
                 if (CheckIfFinished === true ){
 
-                    Td1.innerHTML = "<a>Move to LeaderBoard(Finished)</a>";
+                    Td1.innerHTML = "<p>Move to LeaderBoard(Finished)</p>";
                     Tr.appendChild(Td1);
 
                 }
 
                 if(CheckIfFinished === false){
 
-                        Td1.innerHTML = "<a>Don't move to LeaderBoard(Not Finished)</a>";
+                        Td1.innerHTML = "<p>Don't move to LeaderBoard(Not Finished)</p>";
                     Tr.appendChild(Td1);
                     }
 
 
                 if (CheckLocation === true) {
 
-                    Td2.innerHTML = "<a>Need Location</a>";
+                    Td2.innerHTML = "<p>Need Location</p>";
                     Tr.appendChild(Td2);
 
 
                 }
                 if (CheckLocation === false) {
 
-                    Td2.innerHTML = "<a>Don't need Location</a>";
+                    Td2.innerHTML = "<p>Don't need Location</p>";
                     Tr.appendChild(Td2);
 
 
@@ -220,11 +222,11 @@ function CallListFromButton(){
                 if (CheckForSkip === true){
 
 
-                    Td3.innerHTML = "<a>Can be Skiped</a>";
+                    Td3.innerHTML = "<p>Can be Skiped</p>";
                     Tr.appendChild(Td3);
                 }else {
 
-                    Td3.innerHTML = "<a>Can Not be Skiped</a>";
+                    Td3.innerHTML = "<p>Can Not be Skiped</p>";
                     Tr.appendChild(Td3);
                 }
 
@@ -380,6 +382,93 @@ else{
 
 
 <main>
+
+    <div class="box">
+        <h2>Notes section</h2>
+    </div>
+
+    <div class="box">
+        <div class="boxtest">
+            <p>We are:</p>
+            <ul>
+                <li>-Andrew Bilyk</li>
+
+                <li>-Vasily Ivanov</li>
+            </ul>
+            <br/>
+        </div>
+
+        <div class="boxtest">
+            <h2>Meeting 1</h2>
+            <p>Decide how the application should looks like.
+                This is the end of the first meeting.</p>
+            <br/>
+        </div>
+
+        <div class="boxtest">
+            <h2> Meeting 2</h2>
+            <p>Decide how each element of the program should work.
+                This is the end of the second meeting.</p>
+
+            <br/>
+        </div>
+
+        <div class="boxtest">
+            <h2>Meeting 3</h2>
+
+
+            <p>Devide the work... Andrew Bilyk created /th/api/list call. Vasily Ivanov create a prototype of  /th/api/leaderboard call.
+                This is the end of the meeting 3.</p>
+
+            <br/>
+        </div>
+        <div class="boxtest">
+            <h2>Meeting 4</h2>
+
+            <p>Work a few hours together to achieve a good work of /th/api/question call. This is the end of the meeting 4.</p>
+
+            <br/>
+        </div>
+        <div class="boxtest">
+            <h2>Meeting 5</h2>
+            <p>Build all functions together. This is the end of the meeting 5.</p>
+
+            <br/>
+        </div>
+        <div class="boxtest">
+            <h2>Meeting 6</h2>
+            <p>Andrew Bilyk add to the app the /th/api/score call and /th/api/skip call. This is the end of the meeting 6.</p>
+
+            <br/>
+        </div>
+        <div class="boxtest">
+            <h2>Meeting 7</h2>
+            <p>Andrew Bilyk add to the app the /th/api/location call.This is the end of the meeting 7.</p>
+
+            <br/>
+
+        </div>
+        <div class="boxtest">
+            <h2>Meeting 8</h2>
+            <p>Vasily Ivanov create a clear Notes page. Vasily Ivanov and Andrew Bilyk build every thing together. This is the end of the meeting 8.</p>
+
+            <br/>
+        </div>
+        <div class="boxtest">
+            <h2>Meeting 9</h2>
+            <p>Vasily Ivanov create a QR code function.This is the end of the meeting 9.</p>
+
+            <br/>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
 <div class="box">
     <h2>Test scetion</h2>
 </div>
@@ -439,8 +528,12 @@ else{
         <p><input type="button" value="Switch" onclick="start()" class="button" /></p>
     </div>
 
-    <div class="boxtest">
-        <h2>That test launch question call. This test proves that program can process(dynamically) all available out puts from the server.</h2>
+
+
+    </div>
+
+    <div id="boxtestspetial">
+        <h2>That test launch question call. This test proves that program can process(dynamically) all available out puts from the server.(to large to fit )</h2>
         <table id="OutputQuestion" width="100%">
             <tr>
                 <th> Type? </th>
@@ -454,8 +547,6 @@ else{
         <br/>
         <p><input type="button" value="Switch" onclick="question()" class="button" /></p>
 
-    </div>
-
 
     <p>/th/test-api/list</p>
     <p>/th/test-api/start</p>
@@ -465,84 +556,6 @@ else{
 
 
 
-<div class="box">
-    <h2>Notes section</h2>
-</div>
-
-<div class="box">
-    <div class="boxtest">
-        <p>We are:</p>
-        <ul>
-            <li>-Andrew Bilyk</li>
-
-            <li>-Vasily Ivanov</li>
-        </ul>
-        <br/>
-    </div>
-
-    <div class="boxtest">
-        <h2>Meeting 1</h2>
-        <p>Decide how the application should looks like.
-            This is the end of the first meeting.</p>
-        <br/>
-    </div>
-
-    <div class="boxtest">
-        <h2> Meeting 2</h2>
-        <p>Decide how each element of the program should work.
-            This is the end of the second meeting.</p>
-
-        <br/>
-    </div>
-
-    <div class="boxtest">
-        <h2>Meeting 3</h2>
-
-
-        <p>Devide the work... Andrew Bilyk created /th/api/list call. Vasily Ivanov create a prototype of  /th/api/leaderboard call.
-            This is the end of the meeting 3.</p>
-
-        <br/>
-    </div>
-    <div class="boxtest">
-        <h2>Meeting 4</h2>
-
-        <p>Work a few hours together to achieve a good work of /th/api/question call. This is the end of the meeting 4.</p>
-
-        <br/>
-    </div>
-    <div class="boxtest">
-        <h2>Meeting 5</h2>
-        <p>Build all functions together. This is the end of the meeting 5.</p>
-
-        <br/>
-    </div>
-    <div class="boxtest">
-        <h2>Meeting 6</h2>
-        <p>Andrew Bilyk add to the app the /th/api/score call and /th/api/skip call. This is the end of the meeting 6.</p>
-
-        <br/>
-    </div>
-    <div class="boxtest">
-        <h2>Meeting 7</h2>
-        <p>Andrew Bilyk add to the app the /th/api/location call.This is the end of the meeting 7.</p>
-
-        <br/>
-
-    </div>
-    <div class="boxtest">
-        <h2>Meeting 8</h2>
-        <p>Vasily Ivanov create a clear Notes page. Vasily Ivanov and Andrew Bilyk build every thing together. This is the end of the meeting 8.</p>
-
-        <br/>
-    </div>
-    <div class="boxtest">
-        <h2>Meeting 9</h2>
-        <p>Vasily Ivanov create a QR code function.This is the end of the meeting 9.</p>
-
-        <br/>
-    </div>
-</div>
 </main>
 </body>
 </html>
