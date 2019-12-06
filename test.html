@@ -40,6 +40,37 @@
 </table>
 <a><input type="button" value="Switch" onclick="question()" class="button" /></a>
 
+<a>That test launch Answer call. This test proves that program can process(dynamically) all available out puts from the server.</a>
+<table id="OutputAnswer">
+    <tr>
+        <th> Corrrect? </th>
+        <th> Completed? </th>
+    </tr>
+</table>
+<a><input type="button" value="Switch" onclick="answer()" class="button" /></a>
+
+<a>That test launch Score call. This test proves that program can process(dynamically) all available out puts from the server.</a>
+<table id="OutputScore">
+    <tr>
+        <th> Finished? </th>
+        <th> Completed? </th>
+        <th> Error? </th>
+        <th> Message? </th>
+    </tr>
+</table>
+<a><input type="button" value="Switch" onclick="score()" class="button" /></a>
+
+<a>That test launch LeaderBoard call. This test proves that program can process(dynamically) all available out puts from the server.</a>
+<table id="OutputLeaderBoard">
+    <tr>
+        <th> Name </th>
+        <th> Score </th>
+        <th> Time </th>
+        <th> Prize </th>
+    </tr>
+</table>
+<a><input type="button" value="Switch" onclick="leaderboard()" class="button" /></a>
+
 <script>
 function CallListFromButton(){
     list();
@@ -270,6 +301,7 @@ function CallListFromButton(){
 
 
     function answer(){
+        let TreasureHuntslist = document.getElementById("OutputAnswer");
         const  Answers_Api = "https://codecyprus.org/th/test-api/answer?";
         let Array=["correct&completed=false","correct&completed=true","completed=false", "completed=true"];
 
@@ -278,7 +310,17 @@ function CallListFromButton(){
         .then(response => response.json()) //Parse JSON text to JavaScript object
         .then(jsonObject => {
 
-            console.log(jsonObject);
+            let Tr = document.createElement("tr");
+            TreasureHuntslist.appendChild(Tr);
+
+            let Td = document.createElement("td");
+            let Td1 = document.createElement("td");
+
+            Tr.appendChild(Td);
+            Td.innerHTML = "<a>"+jsonObject.correct+"</a>";
+            Tr.appendChild(Td1);
+            Td1.innerHTML = "<a>"+jsonObject.completed+"</a>";
+
         })
         }
     }
@@ -295,19 +337,40 @@ function CallListFromButton(){
 
 
     function score(){
+        let TreasureHuntslist = document.getElementById("OutputScore");
         let Array=["score=42","finished&score=42","completed&score=42","completed&finished&score=42", "error" ];
         for(let i =0;i<Array.length;i++){
+
         fetch("https://codecyprus.org/th/test-api/score?"+ Array[i])
             .then(response => response.json()) //Parse JSON text to JavaScript object
             .then(jsonObject => {
+                let Tr = document.createElement("tr");
+                TreasureHuntslist.appendChild(Tr);
+
+                let Td = document.createElement("td");
+                let Td1 = document.createElement("td");
+                let Td2 = document.createElement("td");
+                let Td3 = document.createElement("td");
+                Tr.appendChild(Td);
+                Tr.appendChild(Td1);
+                Tr.appendChild(Td2);
+                Tr.appendChild(Td3);
 
 if (jsonObject.status==="OK") {
 
+    Td.innerHTML = "<a>"+jsonObject.finished+"</a>";
+    Td1.innerHTML = "<a>"+jsonObject.completed+"</a>";
+    Td2.innerHTML = "<a>No</a>";
+    Td3.innerHTML = "<a>-</a>";
 
-    console.log(jsonObject);
 }
 else{
-    console.log(jsonObject.errorMessages);
+    Td.innerHTML = "<a>-</a>";
+    Td1.innerHTML = "<a>-</a>";
+    Td2.innerHTML = "<a>Yes</a>";
+    Td3.innerHTML = "<a>"+jsonObject.errorMessages+"</a>";
+    console.log(jsonObject);
+
 
 }
 
@@ -327,22 +390,33 @@ else{
 
 
     function leaderboard(){
-        fetch("https://codecyprus.org/th/test-api/leaderboard?sorted&hasPrize&size=42")
+        let TreasureHuntslist = document.getElementById("OutputLeaderBoard");
+        let arr =["sorted&size=1","sorted&hasPrize&size=1","hasPrize&size=1"];
+        for(let i =0;i<arr.length;i++){
+        fetch("https://codecyprus.org/th/test-api/leaderboard?"+ arr[i])
             .then(response => response.json()) //Parse JSON text to JavaScript object
             .then(jsonObject => {
 
-
+                let Tr = document.createElement("tr");
+                TreasureHuntslist.appendChild(Tr);
 
 
                 console.log( jsonObject);
-
-
-
-
-
+                let Td = document.createElement("td");
+                let Td1 = document.createElement("td");
+                let Td2 = document.createElement("td");
+                let Td3 = document.createElement("td");
+                Tr.appendChild(Td);
+                Tr.appendChild(Td1);
+                Tr.appendChild(Td2);
+                Tr.appendChild(Td3);
+                Td.innerHTML = "<a>"+jsonObject.leaderboard[0].player+"</a>";
+                Td1.innerHTML = "<a>"+jsonObject.leaderboard[0].score+"</a>";
+                Td2.innerHTML = "<a>"+jsonObject.leaderboard[0].completionTime+"</a>";
+                Td3.innerHTML = "<a>"+jsonObject.hasPrize+"</a>";
 
             });
-    }
+    }}
 
 
 
