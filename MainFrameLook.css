@@ -6,6 +6,18 @@
 
 }
 
+th, td {
+    text-align:center;
+    border:1px solid black;
+    padding: 5px;
+    width:25%;
+}
+
+table{
+    border:1px solid black;
+
+}
+
 .LB{
 
     color: red;
@@ -21,6 +33,17 @@
     margin-right: 8%;
     margin-left: 8%;
     background-color: #74BDCB; /*#74BDCB, #8080ff*/
+    padding: 10px 20px;
+    border-radius:6px;
+    margin-bottom: 2%   ;
+
+}
+.boxtest{
+
+    border: black 1px solid;
+    margin-right: 8%;
+    margin-left: 8%;
+    background-color: #EFE7BC;
     padding: 10px 20px;
     border-radius:6px;
     margin-bottom: 2%   ;

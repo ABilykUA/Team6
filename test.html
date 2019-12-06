@@ -19,26 +19,6 @@
     <h1>TestPage</h1>
 </header>
 
-<a>Here is you can test the features of our site! This page use the parts of the real code to test.</a>
-<a>That test launch list call, and out put information about treasure, it read .name and out put this part.</a>
-<ol id="OutputList"></ol>
-<a><input type="button" value="Switch" onclick="CallListFromButton()" class="button" /></a>
-
-<a>That test launch start call. This test proves that program can process(dynamically) all available out puts from the server.</a>
-<ul id="OutputStart"></ul>
-<a><input type="button" value="Switch" onclick="start()" class="button" /></a>
-
-<a>That test launch question call. This test proves that program can process(dynamically) all available out puts from the server.</a>
-<table id="OutputQuestion">
-    <tr>
-        <th> Type? </th>
-        <th> Finished? </th>
-        <th> Location? </th>
-        <th> Skip? </th>
-
-    </tr>
-</table>
-<a><input type="button" value="Switch" onclick="question()" class="button" /></a>
 
 <script>
 function CallListFromButton(){
@@ -357,6 +337,38 @@ else{
 
 <main>
 
+<div class="box">
+
+    <div class="boxtest">
+    <h2>Here is you can test the features of our site! This page use the parts of the real code to test.
+    That test launch list call, and out put information about treasure, it read .name and out put this part.</h2>
+    <ol id="OutputList"></ol>
+    <p><input type="button" value="Switch" onclick="CallListFromButton()" class="button" /></p>
+    </div>
+
+    <div class="boxtest">
+    <h2>That test launch start call. This test proves that program can process(dynamically) all available out puts from the server.</h2>
+    <ul id="OutputStart"></ul>
+    <p><input type="button" value="Switch" onclick="start()" class="button" /></p>
+    </div>
+
+    <div class="boxtest">
+    <h2>That test launch question call. This test proves that program can process(dynamically) all available out puts from the server.</h2>
+    <table id="OutputQuestion" width="100%">
+        <tr>
+            <th> Type? </th>
+            <th> Finished? </th>
+            <th> Location? </th>
+            <th> Skip? </th>
+
+
+        </tr>
+    </table>
+    <br/>
+    <p><input type="button" value="Switch" onclick="question()" class="button" /></p>
+
+    </div>
+
 
 <p>/th/test-api/list</p>
 <p>/th/test-api/start</p>
@@ -379,13 +391,13 @@ else{
 </ul>
     <br/>
 
-<h2>Meeting 1</h2>
+            <h2>Meeting 1</h2>
 <p>Decide how the application should looks like.
     This is the end of the first meeting.</p>
 
     <br/>
 
-    <h2> Meeting 2</h2>
+        <h2> Meeting 2</h2>
 <p>Decide how each element of the program should work.
     This is the end of the second meeting.</p>
 
@@ -394,7 +406,7 @@ else{
     <h2>Meeting 3</h2>
 
 
-<p>Devide a work... Andrew Bilyk create /th/api/list call. Vasily Ivanov create a prototype of  /th/api/leaderboard call.
+<p>Devide the work... Andrew Bilyk created /th/api/list call. Vasily Ivanov create a prototype of  /th/api/leaderboard call.
     This is the end of the meeting 3.</p>
 
     <br/>
@@ -434,7 +446,7 @@ else{
 
     <br/>
 
-
+</div>
 </main>
 </body>
 </html>
