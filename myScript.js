@@ -1,6 +1,5 @@
 // JS is done here ↓
-
-
+let   CheckLocation = null;
 let CheckForSkip= null;
 let GameScore = 0;
 let IntClear;
@@ -41,7 +40,7 @@ function NameAndTeamInput() {
 
                     let HuntOptions = document.createElement("li");
 
-                    HuntOptions.innerHTML = "<a href='Question.html?uuid=" + UUID + "&name=" + Name + " '   >" + NameOfHunts + "</a>";
+                    HuntOptions.innerHTML = "<a class='LB' href='Question.html?uuid=" + UUID + "&name=" + Name + " '   >" + NameOfHunts + "</a>"+"<br/>"+"<br/>";
 
                     TreasureHuntslist.appendChild(HuntOptions);
 
@@ -139,7 +138,7 @@ function Questions() {
             {
 
 
-                integer(CheckForSkip);
+                integer(CheckForSkip,CheckLocation);
 
 
             }
@@ -148,21 +147,21 @@ function Questions() {
             {
 
 
-                boolean (CheckForSkip);
+                boolean (CheckForSkip,CheckLocation);
 
 
 
             }
             if (CheckQuestion === "MCQ")
             {
-                mcq(CheckForSkip);
+                mcq(CheckForSkip,CheckLocation);
 
             }
 
             if (CheckQuestion === "TEXT")
             {
 
-                text(CheckForSkip);
+                text(CheckForSkip,CheckLocation);
 
 
 
@@ -172,7 +171,7 @@ function Questions() {
             {
 
 
-                numeric(CheckForSkip);
+                numeric(CheckForSkip,CheckLocation);
 
 
             }
@@ -186,7 +185,7 @@ function Questions() {
 
                 document.getElementById("location").innerHTML ="";
 
-                document.getElementById("BackHome").innerHTML="<br/>"+"<a href='index.html'>" +"<input type='button' class='button' value='Back to the landing page'>" + "</a>";
+                document.getElementById("BackHome").innerHTML="<br/>"+"<a href='index.html'>" +"<input type='button' class='button' value='Landing page'>" + "</a>";
 
 
 
@@ -586,6 +585,7 @@ function LeaderBoard() {
                 let Space  = document.createElement("li");
 
 
+
                 OutPutLeadersPlayer.innerHTML = "<a> Player: </a>"+" " + Player+ "<br/>" ;
                 OutPutLeadersScore.innerHTML = "<a> Leaders Score: </a>"+" " + LeadersScore;
                 OutPutLeadersTime.innerHTML = "<a> Time: </a>" +" "+ Time;
@@ -708,10 +708,10 @@ function getCookie(cname) {
     let ca = decodedCookie.split(';');
     for(let i = 0; i < ca.length; i++) {
         let c = ca[i];
-        while (c.charAt(0) == ' ') {
+        while (c.charAt(0) === ' ') {
             c = c.substring(1);
         }
-        if (c.indexOf(name) == 0) {
+        if (c.indexOf(name) === 0) {
             return c.substring(name.length, c.length);
         }
     }
@@ -720,9 +720,7 @@ function getCookie(cname) {
 
 function checkCookie(k) { //todo --- change back to session //
 
-   let sessioncookie = k ;
-
-    setCookie("username", sessioncookie, 30);
+    setCookie("username", k, 30);
 
 
 }

@@ -6,7 +6,26 @@
 
 }
 
+.LB{
 
+    color: red;
+    text-decoration: none;
+    font-size: 1.17em;
+    padding: 3px;
+
+
+}
+.box{
+
+    border: black 1px solid;
+    margin-right: 8%;
+    margin-left: 8%;
+    background-color: #74BDCB; /*#74BDCB, #8080ff*/
+    padding: 10px 20px;
+    border-radius:6px;
+    margin-bottom: 2%   ;
+
+}
 header{
     overflow: hidden;
     background-color: white;
@@ -29,7 +48,7 @@ body{
 
     margin: 0;
     padding: 0;
-    background-color: salmon;
+    background-color: salmon; /*salmon , #ffff80*/
     font-family: monospace;
 
 }
@@ -46,7 +65,7 @@ ul{
 
 .button{
 
-    width: 40%;
+    width: 80%;
     padding: 5px 10px;
     background-color: #fdd3ce;
     color:black;
@@ -82,7 +101,7 @@ img{
 #Question{
 
 
-    padding: 0px 5px;
+    padding: 0 5px;
 
 
 }
