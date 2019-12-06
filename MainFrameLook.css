@@ -9,7 +9,7 @@
 th, td {
     text-align:center;
     border:1px solid black;
-    padding: 5px;
+    padding: 10px;
     width:25%;
 }
 
@@ -41,8 +41,6 @@ table{
 .boxtest{
 
     border: black 1px solid;
-    margin-right: 8%;
-    margin-left: 8%;
     background-color: #EFE7BC;
     padding: 10px 20px;
     border-radius:6px;
