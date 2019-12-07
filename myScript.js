@@ -787,12 +787,16 @@ function checkCookie()
 
 
 
+
     if (SessionIDCookie !== "")
     {
-        SessionID = SessionIDCookie ;
+
+
+       SessionID = SessionIDCookie ;
         User=UserCookie;
         console.log( SessionID, User,"test");
         Questions();
+
     }
     else
     {

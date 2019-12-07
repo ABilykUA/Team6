@@ -3,13 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <script src="instascan.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="Camera.css">
     <title>QR Code Reader</title>
+
 </head>
 <body>
 <video id="preview"></video>
 <ul id="cameraNames"></ul>
-<a> <input type="button" value="Switch" onclick="" class="button" /></a>
-<div style="margin: 20px; padding: 20px; background-color: black; color: white; text-align: center;" id="content">qr</div>
+<div id="content">qr</div>
+<button id="switchCamera" onclick="switchCamera();">Switch camera</button>
 <script>
     var opts = {
     // Whether to scan continuously for QR codes. If false, use scanner.scan() to
@@ -45,55 +47,46 @@
     // Default 1 (i.e. analyze every frame).
     scanPeriod: 1
 };
-    var scanner = new Instascan.Scanner(opts);
-    Instascan.Camera.getCameras().then(function (cameras) {
 
-        for(let i = 0; i <cameras.length;i++)
-        {
-            let CameraNames = document.getElementById("cameraNames");
+    let cameraIndex = 0; //The index of the selected camera.
+    let cameraArray; //An array of all available cameras.
 
+    let scanner = new Instascan.Scanner(opts);
 
-
-
-            for (let i = 0; i < cameras.length; i++) {
-
-
-                CameraName = cameras[i].name;
-
-
-                let Caameraa = document.createElement("li");
-
-                Caameraa.innerHTML = "<a  >" + cameras[i].name + "</a>";
-
-                CameraNames.appendChild(Caameraa);
-            }
-        }
-
-
-        if (cameras.length > 0) {
-
-            scanner.start(cameras[0]);
-            scanner.stop(cameras[0]);
-            scanner.start(cameras[1]);
-
-
-alert("stop-it work?");
-
-
-
-
-            console.log(cameras.length)
-        } else {
-            console.error('No cameras found.');
-            alert("No cameras found.");
-        }
-    }).catch(function (e) {
-        console.error(e);
-    });
+    //The scanner listener - when a code is scanned, do something:
     scanner.addListener('scan', function (content) {
         console.log(content);
         document.getElementById("content").innerHTML = content;
     });
+
+    //Initialize the cameras:
+    Instascan.Camera.getCameras().then(function (cameras) {
+        cameraArray = cameras; //Set the value for cameraArray, so that we can know what cameras we can use later
+        if (cameras.length > 0) {
+            cameraIndex = 0; //Set the first camera as the default
+            scanner.start(cameras[0]); //Start the default camera
+        } else {
+            alert('No cameras found.');
+        }
+    }).catch(function (e) {
+        alert(e);
+    });
+
+    function switchCamera() {
+        //Cycle through the available cameras:
+        if (cameraIndex < cameraArray.length - 1) {
+            cameraIndex++;
+        }
+        else {
+            cameraIndex = 0;
+        }
+
+        //Find the next camera to use:
+        let camera = cameraArray[cameraIndex];
+
+        //Start the new selected camera:
+        scanner.start(camera);
+    }
 
 
 </script>
