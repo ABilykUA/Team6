@@ -569,7 +569,7 @@ function Score() {
         .then(response => response.json()) //Parse JSON text to JavaScript object
         .then(ScoreObject => {
 
-            if (jsonObject.status==="OK") {
+            if (ScoreObject.status==="OK") {
 
                 console.log(ScoreObject);
 
@@ -578,8 +578,8 @@ function Score() {
             }
             else{
 
-                TreasureHuntslist.innerHTML = "<a>"+jsonObject.errorMessages+"</a>";
-                console.log(jsonObject);
+                TreasureHuntslist.innerHTML = "<a>"+ScoreObject.errorMessages+"</a>";
+                console.log(ScoreObject);
 
 
             }
@@ -630,7 +630,7 @@ function LeaderBoard() {
                 let hours = parseInt( seconds / 3600 );
                 seconds = seconds % 3600;
                 let minutes = parseInt( seconds / 60 );
-                seconds = seconds % 60;
+                seconds = Math.floor(seconds % 60);
 
 
 
