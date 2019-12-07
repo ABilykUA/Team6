@@ -69,7 +69,7 @@ function NameInput() {
 
 function SessionGet () {
 
-
+    let TreasureHuntslist = document.getElementById("Error");
     const params = new URLSearchParams(location.search);
 
 
@@ -81,19 +81,26 @@ function SessionGet () {
         .then(jsonObject => {
 
             let Session = jsonObject.session;
+            let ErrorCheck = jsonObject.status;
 
-            SessionID = Session;
-            User = params.get("name");
+            if(ErrorCheck==="ERROR"){
+            let HuntOptions = document.createElement("p");
+            HuntOptions.innerHTML = "<a>" + jsonObject.errorMessages[0] + "</a>";
+            TreasureHuntslist.appendChild(HuntOptions);
+        }else {
 
-            setCookie("SessionID", Session, 1);
-            setCookie("User", params.get("name"), 1);
+                SessionID = Session;
+                User = params.get("name");
+
+                setCookie("SessionID", Session, 1);
+                setCookie("User", params.get("name"), 1);
 
 
-            console.log(Session,"testing");
+                console.log(Session, "testing");
 
 
-            Questions();
-
+                Questions();
+            }
 
 
 
@@ -557,14 +564,25 @@ function SkipQuestion() {
 function Score() {
 
 
-
+    let TreasureHuntslist = document.getElementById("Error");
     fetch("https://codecyprus.org/th/api/score?session="+SessionID)
         .then(response => response.json()) //Parse JSON text to JavaScript object
         .then(ScoreObject => {
 
-            console.log(ScoreObject);
+            if (jsonObject.status==="OK") {
 
-            GameScore = ScoreObject.score;
+                console.log(ScoreObject);
+
+                GameScore = ScoreObject.score;
+
+            }
+            else{
+
+                TreasureHuntslist.innerHTML = "<a>"+jsonObject.errorMessages+"</a>";
+                console.log(jsonObject);
+
+
+            }
 
 
 
@@ -608,6 +626,13 @@ function LeaderBoard() {
                 Player=LeaderBoard[i].player;
                 LeadersScore = LeaderBoard[i].score;
 
+                let seconds = Time / 1000;
+                let hours = parseInt( seconds / 3600 );
+                seconds = seconds % 3600;
+                let minutes = parseInt( seconds / 60 );
+                seconds = seconds % 60;
+
+
 
                 let OutPutLeadersTime = document.createElement("li");
                 let OutPutLeadersPlayer = document.createElement("li");
@@ -616,9 +641,10 @@ function LeaderBoard() {
 
 
 
+
                 OutPutLeadersPlayer.innerHTML = "<a> Player: </a>"+" " + Player+ "<br/>" ;
                 OutPutLeadersScore.innerHTML = "<a> Leaders Score: </a>"+" " + LeadersScore;
-                OutPutLeadersTime.innerHTML = "<a> Time: </a>" +" "+ Time;
+                OutPutLeadersTime.innerHTML = "<a> Time: </a>" +" "+ hours+":"+minutes+":"+seconds;
 
                 Space.innerHTML = "</br>" ;
 
