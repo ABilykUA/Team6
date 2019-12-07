@@ -114,8 +114,6 @@ function SessionGet () {
 
 function Questions() {
 
-
-
     console.log("Questions()session -> " +  SessionID );
 
     const  Questions_Api = "https://codecyprus.org/th/api/question?session="+ SessionID ;
@@ -134,12 +132,9 @@ function Questions() {
 
             CheckForSkip = jsonObject.canBeSkipped;
 
-
             document.getElementById("Player").innerHTML = User;
 
             document.getElementById("Score").innerHTML = "Your Score: " + GameScore;
-
-
 
             document.getElementById("Question").innerHTML = QuestionNames;
 
@@ -229,13 +224,16 @@ function integer(){
         + " " +
         "<br/>" +
         "<br/>" +
+
         "<input type='button' class='button' value='Submit' id='SubmitButton' onclick='AnswerQuestion()'  />";
+
     if (CheckForSkip === true){
 
         document.getElementById("Extra").innerHTML =  "<input type='button' class='button' value='Skip' onclick='SkipQuestion()'  />";
     }else {
         document.getElementById("Extra").innerHTML = "Sorry this question can't be skipped !!! ";
     }
+
     if (CheckLocation === true) {
 
         IntClear =   setInterval(locationupdate, 60000 ); //
@@ -243,6 +241,7 @@ function integer(){
         document.getElementById("location").innerHTML ="This is a geolocation question your coordinates will be updated every minute,wait until wait until the coordinates are shown before you answer !!!. ";
 
     }
+
     if (CheckLocation === false) {
 
         document.getElementById("location").innerHTML ="";
@@ -265,12 +264,16 @@ function text(){
         "<br/>" +
         "<br/>" +
         "<input type='button' class='button' value='Submit' id='SubmitButton' onclick='AnswerQuestion()'  />";
-    if (CheckForSkip === true){
 
+
+
+    if (CheckForSkip === true){
         document.getElementById("Extra").innerHTML =  "<input type='button' class='button' value='Skip' onclick='SkipQuestion()'  />";
     }else {
         document.getElementById("Extra").innerHTML = "Sorry this question can't be skipped !!! ";
     }
+
+
     if (CheckLocation === true) {
 
         IntClear =   setInterval(locationupdate, 60000 ); //
@@ -278,6 +281,8 @@ function text(){
         document.getElementById("location").innerHTML ="This is a geolocation question your coordinates will be updated every minute. ";
 
     }
+
+
     if (CheckLocation === false) {
 
         document.getElementById("location").innerHTML ="";
@@ -299,12 +304,17 @@ function numeric(){
         "<br/>" +
         "<br/>" +
         "<input type='button' class='button' value='Submit' id='SubmitButton' onclick='AnswerQuestion()'  />";
+
+
+
     if (CheckForSkip === true){
 
         document.getElementById("Extra").innerHTML =  "<input type='button' class='button' value='Skip' onclick='SkipQuestion()'  />";
     }else {
         document.getElementById("Extra").innerHTML = "Sorry this question can't be skipped !!! ";
     }
+
+
     if (CheckLocation === true) {
 
         IntClear =   setInterval(locationupdate, 60000 ); //
@@ -312,6 +322,8 @@ function numeric(){
         document.getElementById("location").innerHTML ="This is a geolocation question your coordinates will be updated every minute. ";
 
     }
+
+
     if (CheckLocation === false) {
 
         document.getElementById("location").innerHTML ="";
@@ -350,7 +362,7 @@ function boolean () {
 
         IntClear =   setInterval(locationupdate, 60000 ); //
 
-        document.getElementById("location").innerHTML ="This is a geolocation question your coordinates will be updated every minute. ";
+        document.getElementById("location").innerHTML ="This is a geolocation question your coordinates will be updated every minute, submit after the coordinates are shown!! ";
 
     }
     if (CheckLocation === false) {
@@ -429,7 +441,9 @@ function BoolAnswer(i){
             }
             console.log(jsonObject);
 
-            document.getElementById("PlaceForButtons").innerHTML = "<div class='loader'>"+"</div>";
+            document.getElementById("PlaceForButtons").innerHTML = "<div class='lds-spinner'>"+"<div>"+"</div>"+"<div>"+"</div>"+"<div>"+"</div>"+"<div>"+"</div>"+"<div>"+"</div>"+"<div>"+"</div>"+"<div>"+"</div>"+"<div>"+"</div>"+"<div>"+"</div>"+"<div>"+"</div>"+"<div>"+"</div>"+"<div>"+"</div>"+"</div>";
+
+
 
             Questions();
             Score(GameScore);
@@ -469,7 +483,7 @@ function AnswerMCQ(i)
 
             console.log(jsonObject);
 
-            document.getElementById("PlaceForButtons").innerHTML = "<p class='loading'>"+"Loading"+"</p>";
+            document.getElementById("PlaceForButtons").innerHTML ="<div class='lds-spinner'>"+"<div>"+"</div>"+"<div>"+"</div>"+"<div>"+"</div>"+"<div>"+"</div>"+"<div>"+"</div>"+"<div>"+"</div>"+"<div>"+"</div>"+"<div>"+"</div>"+"<div>"+"</div>"+"<div>"+"</div>"+"<div>"+"</div>"+"<div>"+"</div>"+"</div>";
 
             Questions();
             Score(GameScore);
@@ -502,7 +516,7 @@ function AnswerQuestion() {
 
             console.log(jsonObject);
 
-            document.getElementById("PlaceForButtons").innerHTML = "<div class='loader'>"+"</div>";
+            document.getElementById("PlaceForButtons").innerHTML ="<div class='lds-spinner'>"+"<div>"+"</div>"+"<div>"+"</div>"+"<div>"+"</div>"+"<div>"+"</div>"+"<div>"+"</div>"+"<div>"+"</div>"+"<div>"+"</div>"+"<div>"+"</div>"+"<div>"+"</div>"+"<div>"+"</div>"+"<div>"+"</div>"+"<div>"+"</div>"+"</div>";
 
 
             Questions();
@@ -564,7 +578,7 @@ function Score() {
 function LeaderBoard() {
 
     let LeadersHeader = document.getElementById("PlaceForButtons");
-    LeadersHeader.innerText = "<div class='loader'>"+"</div>";
+    LeadersHeader.innerHTML = "<div class='lds-spinner'>"+"<div>"+"</div>"+"<div>"+"</div>"+"<div>"+"</div>"+"<div>"+"</div>"+"<div>"+"</div>"+"<div>"+"</div>"+"<div>"+"</div>"+"<div>"+"</div>"+"<div>"+"</div>"+"<div>"+"</div>"+"<div>"+"</div>"+"<div>"+"</div>"+"</div>";
     document.getElementById("Score").innerText="";
 
 
@@ -726,11 +740,11 @@ function getCookie(cname)
     for(var i = 0; i < ca.length; i++)
     {
         var c = ca[i];
-        while (c.charAt(0) == ' ')
+        while (c.charAt(0) === ' ')
         {
             c = c.substring(1);
         }
-        if (c.indexOf(name) == 0)
+        if (c.indexOf(name) === 0)
         {
             return c.substring(name.length, c.length);
         }
@@ -747,7 +761,7 @@ function checkCookie()
 
 
 
-    if (SessionIDCookie != "")
+    if (SessionIDCookie !== "")
     {
         SessionID = SessionIDCookie ;
         User=UserCookie;
