@@ -6,6 +6,8 @@
 
 }
 
+
+
 /*animation start*/
 .lds-spinner {
     color:rebeccapurple;
@@ -95,7 +97,6 @@
     }
 }
 
-
 @keyframes lds-spinner {
     0% {
         opacity: 1;
@@ -104,6 +105,8 @@
         opacity: 0;
     }
 }
+
+
 /*animation end*/
 th, td {
     text-align:center;
