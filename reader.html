@@ -1,17 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <meta charset="UTF-8">
-    <script src="instascan.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="Camera.css">
+
+    <script src="JAVASCRIPT/instascan.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="CSS/Camera.css">
+
     <title>QR Code Reader</title>
 
 </head>
 <body>
-<video id="preview"></video>
-<ul id="cameraNames"></ul>
-<div id="content">qr</div>
-<button id="switchCamera" onclick="switchCamera();">Switch camera</button>
+    <div class="box">
+        <video id="preview"></video>
+            <div class="boxtest">
+                <ul id="cameraNames"></ul>
+                <div id="content">This will change </div>
+                <br/>
+                    <button class="button" id="switchCamera" onclick="switchCamera();">Switch camera</button>
+                <br/>
+                <br/>
+            </div>
+    </div>
 <script>
     var opts = {
     // Whether to scan continuously for QR codes. If false, use scanner.scan() to
