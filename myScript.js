@@ -1,7 +1,7 @@
 // JS is done here ↓
 let CheckLocation = null;
 let CheckForSkip= null;
-let GameScore = 0;
+var GameScore = 0;
 let IntClear;
 var SessionID ;
 var User;
@@ -70,6 +70,7 @@ function NameInput() {
 function SessionGet () {
 
     let TreasureHuntslist = document.getElementById("Error");
+
     const params = new URLSearchParams(location.search);
 
 
@@ -77,6 +78,7 @@ function SessionGet () {
 
 
     fetch(Session_Api)
+
         .then(response => response.json()) //Parse JSON text to JavaScript object
         .then(jsonObject => {
 
@@ -87,6 +89,7 @@ function SessionGet () {
             let HuntOptions = document.createElement("p");
             HuntOptions.innerHTML = "<a>" + jsonObject.errorMessages[0] + "</a>";
             TreasureHuntslist.appendChild(HuntOptions);
+
         }else {
 
                 SessionID = Session;
@@ -200,9 +203,20 @@ function Questions() {
 
                 document.getElementById("BackHome").innerHTML="<br/>"+"<a href='index.html'>" +"<input type='button' class='button' value='Landing page'>" + "</a>";
 
+                del = document.getElementById("LBID");
+
+                del.style.display = "block";
+
+
+
+
+
 
 
                 LeaderBoard();
+            }  else {
+                del = document.getElementById("LBID");
+                del.style.display = "none";
             }
 
 
@@ -221,6 +235,9 @@ function deleteCookie()
     document.cookie = "SessionID=;  path=/;";
 
     document.cookie = "User=;  path=/;";
+
+    document.cookie = "SetScoreCookie=;  path=/;";
+
 
 }
 
@@ -565,6 +582,7 @@ function Score() {
 
 
     let TreasureHuntslist = document.getElementById("Error");
+
     fetch("https://codecyprus.org/th/api/score?session="+SessionID)
         .then(response => response.json()) //Parse JSON text to JavaScript object
         .then(ScoreObject => {
@@ -575,6 +593,7 @@ function Score() {
 
                 GameScore = ScoreObject.score;
 
+                setCookie("SetScoreCookie", GameScore ,1);
             }
             else{
 
@@ -598,7 +617,7 @@ function LeaderBoard() {
     let LeadersHeader = document.getElementById("PlaceForButtons");
     LeadersHeader.innerHTML = "<div class='lds-spinner'>"+"<div>"+"</div>"+"<div>"+"</div>"+"<div>"+"</div>"+"<div>"+"</div>"+"<div>"+"</div>"+"<div>"+"</div>"+"<div>"+"</div>"+"<div>"+"</div>"+"<div>"+"</div>"+"<div>"+"</div>"+"<div>"+"</div>"+"<div>"+"</div>"+"</div>";
     document.getElementById("Score").innerText="";
-
+    document.getElementById("Player").innerText="";
 
     let Time;
     let Player;
@@ -615,7 +634,7 @@ function LeaderBoard() {
             console.log(LeaderBoardlist);
 
 
-            LeadersHeader.innerHTML = "Your Score: " + GameScore+  "<br/>"  +   "<br/>" + "Top 5";
+            LeadersHeader.innerHTML = User +  "<br/>"  + "Your Score: " + GameScore +   "<br/>"  +   "<br/>" + "Top 5";
 
 
 
@@ -784,17 +803,17 @@ function checkCookie()
 
     var SessionIDCookie = getCookie("SessionID");
     var UserCookie = getCookie("User");
-
-
-
+    var GameScoreCookie = getCookie("SetScoreCookie");
 
     if (SessionIDCookie !== "")
     {
 
 
-       SessionID = SessionIDCookie ;
+        SessionID = SessionIDCookie ;
         User=UserCookie;
-        console.log( SessionID, User,"test");
+        GameScore=GameScoreCookie;
+
+        console.log( SessionID, User,GameScore ,"test");
         Questions();
 
     }
@@ -802,6 +821,29 @@ function checkCookie()
     {
         SessionGet ();
     }
+
+}
+
+
+function reStart(){
+
+    var SessionIDCookie = getCookie("SessionID");
+    var UserCookie = getCookie("User");
+    var GameScoreCookie = getCookie("SetScoreCookie");
+
+    if (SessionIDCookie !== "")
+    {
+        SessionID = SessionIDCookie ;
+        User=UserCookie;
+        GameScore=GameScoreCookie;
+
+        console.log( SessionID, User,GameScore ,"test");
+
+    }else {
+
+
+    }
+
 
 }
 
