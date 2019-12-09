@@ -557,8 +557,9 @@ function AnswerQuestion() {
 function SkipQuestion() {
 
 
-
-    fetch( "https://codecyprus.org/th/api/skip?session=" +  SessionID )
+let result =confirm("Are you really want to skip this question");
+if (result===true) {
+    fetch("https://codecyprus.org/th/api/skip?session=" + SessionID)
         .then(response => response.json()) //Parse JSON text to JavaScript object
         .then(jsonObject => {
 
@@ -567,9 +568,10 @@ function SkipQuestion() {
             Questions();
             Score(GameScore);
 
-            document.getElementById("Incorrectquestion").innerText=" ";
+            document.getElementById("Incorrectquestion").innerText = " ";
         });
-
+}
+else{}
 }
 
 
