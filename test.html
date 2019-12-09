@@ -10,6 +10,11 @@
 
     <meta charset="UTF-8">
 
+
+
+
+
+
     <title>Test Page</title>
 
 </head>
@@ -17,6 +22,15 @@
 
 <header>
     <h1>TestPage & TeamNotes </h1>
+
+
+    <div id="navbar">
+        <a href="#Notes">Notes</a>
+        <a href="#Usability">Usability</a>
+        <a href="#Testing">Testing</a>
+        <a href="index.html">Home</a>
+    </div>
+    <a name="Notes"></a>
 </header>
 
 
@@ -373,28 +387,76 @@ else{
 
 
 
+window.onscroll = function() {myFunction()};
+
+var navbar = document.getElementById("navbar");
+var sticky = navbar.offsetTop;
+
+function myFunction() {
+    if (window.pageYOffset >= sticky) {
+        navbar.classList.add("sticky")
+    } else {
+        navbar.classList.remove("sticky");
+    }
+}
+
 
 
 
 
 </script>
+<style>
+    #navbar {
+        overflow: hidden;
+        background-color: #333;
+        padding: 10px;
+    }
+
+
+    #navbar a {
+
+        display: inline;
+        color: #f2f2f2;
+        text-align: center;
+        padding: 14px;
+        text-decoration: none;
+    }
+
+
+    .content {
+        padding: 16px;
+    }
+
+
+    .sticky {
+        position: fixed;
+        top: 0;
+        width: 100%;
+    }
+
+
+    .sticky + .content {
+        padding-top: 60px;
+    }
+</style>
 
 
 
 
 <main>
-    <div class="box">
-        <h2>Notes section</h2>
+    <div class="box" h>
+
+        <h2 >Notes section</h2>
     </div>
 
     <div class="box">
         <div class="boxtest">
             <p>We are:</p>
-            <ul>
-                <li>-Andrew Bilyk</li>
 
-                <li>-Vasily Ivanov</li>
-            </ul>
+                <p>-Andrew Bilyk</p>
+
+                <p>-Vasily Ivanov</p>
+
             <br/>
         </div>
 
@@ -454,12 +516,15 @@ else{
 
             <br/>
         </div>
+
         <div class="boxtest">
             <h2>Meeting 9</h2>
             <p>Vasily Ivanov create a QR code function.This is the end of the meeting 9.</p>
-
+            <a name="Usability"></a>
             <br/>
+
         </div>
+
     </div>
 
 
@@ -473,7 +538,8 @@ else{
 
 
     <div class="box">
-        <h2>10 Usability Heuristics for User Interface Design</h2>
+
+        <h2 >10 Usability Heuristics for User Interface Design</h2>
     </div>
 
     <div class="box">
@@ -542,6 +608,7 @@ else{
         </div>
         <div class="boxtest">
             <h2>More information about 10 Usability Heuristics for User Interface Design you can find  <a href="https://www.nngroup.com/articles/ten-usability-heuristics/"><b>HERE</b></a> </h2>
+            <a name="Testing"></a>
             <br/>
         </div>
     </div>
@@ -554,6 +621,7 @@ else{
 
 
 <div class="box">
+
     <h2>Test scetion</h2>
 </div>
     <div class="box">
@@ -639,7 +707,6 @@ else{
 
     <br/>
 
-    <a href='index.html'><input type="button" class="button" value="Landing page"></a>
 
 
 
