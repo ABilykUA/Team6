@@ -69,7 +69,9 @@
     //The scanner listener - when a code is scanned, do something:
     scanner.addListener('scan', function (content) {
         console.log(content);
-        document.getElementById("content").innerHTML = content;
+        let link = document.getElementById("content");
+        link.href = content;
+        link.innerHTML = content;
     });
 
     //Initialize the cameras:
