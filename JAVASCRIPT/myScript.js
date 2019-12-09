@@ -775,28 +775,34 @@ function getCookie(cname)
 }
 
 
-function checkCookie()
-{
+function checkCookie() {
 
     var SessionIDCookie = getCookie("SessionID");
     var UserCookie = getCookie("User");
     var GameScoreCookie = getCookie("SetScoreCookie");
 
-    if (SessionIDCookie !== "")
-    {
+    if (SessionIDCookie !== "") {
+        let result = confirm("Do you want to continue?");
+
+        if (result === true) {
+            document.location.href="Question.html";
+            SessionID = SessionIDCookie;
+            User = UserCookie;
+            GameScore = GameScoreCookie;
+            console.log(SessionID, User, GameScore, "test");
+            Questions();
 
 
-        SessionID = SessionIDCookie ;
-        User=UserCookie;
-        GameScore=GameScoreCookie;
-
-        console.log( SessionID, User,GameScore ,"test");
-        Questions();
-
+        }else{
+            deleteCookie();
+            SessionGet();
+        }
     }
+
     else
     {
         SessionGet ();
+        console.log("Session pusto")
     }
 
 }
@@ -815,9 +821,11 @@ function reStart(){
         GameScore=GameScoreCookie;
 
         console.log( SessionID, User,GameScore ,"test");
+        Questions();
 
     }else {
 
+        SessionGet ();
 
     }
 
