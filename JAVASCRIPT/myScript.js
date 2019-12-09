@@ -638,11 +638,8 @@ function LeaderBoard() {
                 Player=LeaderBoard[i].player;
                 LeadersScore = LeaderBoard[i].score;
 
-                let seconds = Time / 1000;
-                let hours = parseInt( seconds / 3600 );
-                seconds = seconds % 3600;
-                let minutes = parseInt( seconds / 60 );
-                seconds = Math.floor(seconds % 60);
+              let Date= timeConverter(Time);
+
 
 
 
@@ -656,7 +653,7 @@ function LeaderBoard() {
 
                 OutPutLeadersPlayer.innerHTML = "<a> Player: </a>"+" " + Player+ "<br/>" ;
                 OutPutLeadersScore.innerHTML = "<a> Leaders Score: </a>"+" " + LeadersScore;
-                OutPutLeadersTime.innerHTML = "<a> Time: </a>" +" "+ hours+":"+minutes+":"+seconds;
+                OutPutLeadersTime.innerHTML = "<a> Time: </a>" + Date;
 
                 Space.innerHTML = "</br>" ;
 
@@ -676,7 +673,17 @@ function LeaderBoard() {
 
 
 }
-
+function timeConverter(timestamp){
+    var a = new Date(timestamp);
+    var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    var year = a.getFullYear();
+    var month = months[a.getMonth()];
+    var date = a.getDate();
+    var hour = a.getHours();
+    var min = a.getMinutes();
+    var sec = a.getSeconds();
+    return date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
+}
 //location update
 function locationupdate(){
 
