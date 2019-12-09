@@ -42,7 +42,7 @@ function NameInput() {
 
                     let HuntOptions = document.createElement("li");
 
-                    HuntOptions.innerHTML = "<a class='LB' href='Question.html?uuid=" + UUID + "&name=" + Name + " '   >" + NameOfHunts + "</a>"+"<br/>"+"<br/>";
+                    HuntOptions.innerHTML = "<a class='LB' href='Question.html?uuid=" + UUID + "&name=" + Name + " '>" + NameOfHunts + "</a>"+"<br/>"+"<br/>";
 
                     TreasureHuntslist.appendChild(HuntOptions);
 
@@ -74,7 +74,7 @@ function SessionGet () {
     const params = new URLSearchParams(location.search);
 
 
-    const Session_Api = "https://codecyprus.org/th/api/start?player="+   params.get("name")   +"&app=Team6-app&treasure-hunt-id=" +   params.get("uuid");
+    const Session_Api = "https://codecyprus.org/th/api/start?player="+   params.get("name")   +"&app=Team6-app&treasure-hunt-id=" +  params.get("uuid");
 
 
     fetch(Session_Api)
@@ -203,16 +203,11 @@ function Questions() {
 
                 document.getElementById("BackHome").innerHTML="<br/>"+"<a href='index.html'>" +"<input type='button' class='button' value='Landing page'>" + "</a>";
 
-                del = document.getElementById("LBID");
 
-                del.style.display = "block";
 
                 LeaderBoard();
 
 
-            } else {
-                del = document.getElementById("LBID");
-                del.style.display = "none";
             }
 
 
@@ -258,7 +253,7 @@ function integer(){
 
         IntClear =   setInterval(locationupdate, 60000 ); //
 
-        document.getElementById("location").innerHTML ="This is a geolocation question your coordinates will be updated every minute,wait until wait until the coordinates are shown before you answer !!!. ";
+        document.getElementById("location").innerHTML ="This is a geolocation question your coordinates will be updated every 60 seconds, wait until the coordinates are shown before you answer !!!";
 
     }
 
@@ -298,7 +293,7 @@ function text(){
 
         IntClear =   setInterval(locationupdate, 60000 ); //
 
-        document.getElementById("location").innerHTML ="This is a geolocation question your coordinates will be updated every minute,wait until wait until the coordinates are shown before you answer !!!.  ";
+        document.getElementById("location").innerHTML ="This is a geolocation question your coordinates will be updated every 60 seconds, wait until the coordinates are shown before you answer !!!";
 
     }
 
@@ -339,7 +334,7 @@ function numeric(){
 
         IntClear =   setInterval(locationupdate, 60000 ); //
 
-        document.getElementById("location").innerHTML ="This is a geolocation question your coordinates will be updated every minute,wait until wait until the coordinates are shown before you answer !!!.  ";
+        document.getElementById("location").innerHTML ="This is a geolocation question your coordinates will be updated every 60 seconds, wait until the coordinates are shown before you answer !!! ";
 
     }
 
@@ -382,7 +377,7 @@ function boolean () {
 
         IntClear =   setInterval(locationupdate, 60000 ); //
 
-        document.getElementById("location").innerHTML ="This is a geolocation question your coordinates will be updated every minute, submit after the coordinates are shown!! ";
+        document.getElementById("location").innerHTML ="This is a geolocation question your coordinates will be updated every 60 seconds, wait until the coordinates are shown before you answer !!!";
 
     }
     if (CheckLocation === false) {
@@ -421,7 +416,7 @@ function mcq(){
 
         IntClear =   setInterval(locationupdate, 60000 ); //
 
-        document.getElementById("location").innerHTML ="This is a geolocation question your coordinates will be updated every minute,wait until wait until the coordinates are shown before you answer !!!.  ";
+        document.getElementById("location").innerHTML ="This is a geolocation question your coordinates will be updated every 60 seconds, wait until the coordinates are shown before you answer !!!";
 
     }
     if (CheckLocation === false) {
@@ -726,26 +721,6 @@ window.addEventListener('online', handleConnectionChange);
 window.addEventListener('offline', handleConnectionChange);
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //setting cookies and getting them back
 
 function setCookie(cname,cvalue,exdays)
@@ -792,6 +767,8 @@ function checkCookie() {
             User = UserCookie;
             GameScore = GameScoreCookie;
             console.log(SessionID, User, GameScore, "test");
+
+
             Questions();
 
 
