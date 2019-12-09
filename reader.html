@@ -70,9 +70,8 @@
     scanner.addListener('scan', function (content) {
         console.log(content);
         let link = document.getElementById("content");
-
         link.href = content;
-        link.text = content;
+        link.innerHTML = content;
     });
 
     //Initialize the cameras:
