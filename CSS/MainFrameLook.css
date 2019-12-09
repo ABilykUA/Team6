@@ -7,7 +7,6 @@
 }
 
 
-
 /*animation start*/
 .lds-spinner {
     color:rebeccapurple;
@@ -97,14 +96,7 @@
     }
 }
 
-@keyframes lds-spinner {
-    0% {
-        opacity: 1;
-    }
-    100% {
-        opacity: 0;
-    }
-}
+
 
 
 /*animation end*/

@@ -298,7 +298,7 @@ function text(){
 
         IntClear =   setInterval(locationupdate, 60000 ); //
 
-        document.getElementById("location").innerHTML ="This is a geolocation question your coordinates will be updated every minute. ";
+        document.getElementById("location").innerHTML ="This is a geolocation question your coordinates will be updated every minute,wait until wait until the coordinates are shown before you answer !!!.  ";
 
     }
 
@@ -339,7 +339,7 @@ function numeric(){
 
         IntClear =   setInterval(locationupdate, 60000 ); //
 
-        document.getElementById("location").innerHTML ="This is a geolocation question your coordinates will be updated every minute. ";
+        document.getElementById("location").innerHTML ="This is a geolocation question your coordinates will be updated every minute,wait until wait until the coordinates are shown before you answer !!!.  ";
 
     }
 
@@ -421,7 +421,7 @@ function mcq(){
 
         IntClear =   setInterval(locationupdate, 60000 ); //
 
-        document.getElementById("location").innerHTML ="This is a geolocation question your coordinates will be updated every minute. ";
+        document.getElementById("location").innerHTML ="This is a geolocation question your coordinates will be updated every minute,wait until wait until the coordinates are shown before you answer !!!.  ";
 
     }
     if (CheckLocation === false) {
