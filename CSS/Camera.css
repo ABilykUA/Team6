@@ -3,7 +3,7 @@ body{
 
     margin: 0;
     padding: 0;
-    background-color: salmon; /*salmon , #ffff80*/
+    background-color: #74BDCB; /*salmon , #ffff80*/
     font-family: monospace;
 
 }
@@ -42,12 +42,10 @@ button{
 
 .box{
     text-align: center;
-    border: black 1px solid;
     margin-right: 8%;
     margin-left: 8%;
     background-color: #74BDCB; /*#74BDCB, #8080ff*/
     padding: 10px 20px;
-    border-radius:6px;
     margin-bottom: 2%   ;
 
 }
