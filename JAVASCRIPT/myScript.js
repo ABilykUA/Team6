@@ -245,7 +245,7 @@ function integer(){
         "<br/>" +
         "<br/>" +
 
-        "<input type='button' class='button' value='Submit' id='SubmitButton' onclick='AnswerQuestion()'  />";
+        "<input type='button' class='button' value='Submit' id='SubmitButton' onclick='AnswerQuestion(),geoSub()' />";
 
     if (CheckForSkip === true){
 
@@ -841,4 +841,9 @@ function IFrame() {
     } else {
         x.style.display = "none";
     }
+}
+
+function geoSub{
+    locationupdate();
+
 }
