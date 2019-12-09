@@ -72,7 +72,7 @@
         let link = document.getElementById("content");
         let linkTest = /(http|https):\/\/(\w+:{0,1}\w*)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%!\-\/]))?/;
         if (linkTest.test(content)) {
-            link.innerHTML += "<a href='" + content + "'target=\"_blank\">" + content + "</a>";
+            link.innerHTML = "<a href='" + content + "'target=\"_blank\">" + content + "</a>";
             window.open(content);
         } else {
             link.innerHTML = content;
