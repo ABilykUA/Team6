@@ -552,7 +552,7 @@ function AnswerQuestion() {
 function SkipQuestion() {
 
 
-let result =confirm("Are you really want to skip this question");
+let result =confirm("Are you really want to skip this question?");
 if (result===true) {
     fetch("https://codecyprus.org/th/api/skip?session=" + SessionID)
         .then(response => response.json()) //Parse JSON text to JavaScript object
