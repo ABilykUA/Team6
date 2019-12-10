@@ -42,7 +42,7 @@ function NameInput() {
 
                     let HuntOptions = document.createElement("li");
 
-                    HuntOptions.innerHTML = "<a class='LB' href='Question.html?uuid=" + UUID + "&name=" + Name + " '>" + NameOfHunts + "</a>"+"<br/>"+"<br/>";
+                    HuntOptions.innerHTML = "<a href='Question.html?uuid=" + UUID + "&name=" + Name + " '>" + NameOfHunts + "</a>"+"<br/>"+"<br/>";
 
                     TreasureHuntslist.appendChild(HuntOptions);
 
@@ -195,7 +195,7 @@ function Questions() {
 
                 document.getElementById("Question").innerHTML = "Finished! Welldone";
 
-                document.getElementById("Extra").innerHTML ="I hope u did good ! ";
+                document.getElementById("Extra").innerHTML ="";
 
                 document.getElementById("PlaceForButtons").innerHTML =  "";
 
