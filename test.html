@@ -10,6 +10,48 @@
 
     <meta charset="UTF-8">
 
+    <style>
+
+        #navbar {
+            overflow: hidden;
+            background-color: #333;
+        }
+
+        #navbar a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 17px;
+        }
+
+        #navbar a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        #navbar a.active {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .content {
+            padding: 16px;
+        }
+
+        .sticky {
+            position: fixed;
+            top: 0;
+            width: 100%;
+        }
+
+        .sticky + .content {
+            padding-top: 60px;
+        }
+
+    </style>
 
 
 
@@ -33,6 +75,8 @@
         <a href="#Testing">Testing</a>
 
         <a href="index.html">Home</a>
+
+        <a href="#User">User acceptance</a>
 
 
     </div>
@@ -417,40 +461,7 @@ function myFunction() {
 
 
 </script>
-<style>
-    #navbar {
-        overflow: hidden;
-        background-color: #333;
-        padding: 10px;
-    }
 
-
-    #navbar a {
-
-        display: inline;
-        color: #f2f2f2;
-        text-align: center;
-        padding: 14px;
-        text-decoration: none;
-    }
-
-
-    .content {
-        padding: 16px;
-    }
-
-
-    .sticky {
-        position: fixed;
-        top: 0;
-        width: 100%;
-    }
-
-
-    .sticky + .content {
-        padding-top: 60px;
-    }
-</style>
 
 
 
@@ -623,6 +634,7 @@ function myFunction() {
         </div>
         <div class="boxtest">
             <h2>#10: Help and documentation</h2>
+            <a name="User"></a>
             <p>We have Test/Notes Page</p>
 
             <br/>
@@ -636,16 +648,18 @@ function myFunction() {
 
 
 
+    <div class="box">
+        <div class="boxtest">
 
-<p>User acceptance</p>
+<h2>User acceptance</h2>
     <p>We ask 10 people to check our applications. 8/10 tell us that it is easy to pass the test.</p>
     <p>2/10 tell us that is quite simple.</p>
     <p>We ask them which implementation was the best.</p>
     <p>5/10 tell that it is skip confirmation. </p>
     <p>3/10 tell that it is ability to re-enter the game. </p>
-    <p>2/10 tell that all implementations are good. </p>
-    <p>We worried that QR button are not enough. Practice shows that 10 people out of 10 successfully use the QR code<p>
-
+    <p>2/10 tell that all implementations are good. </p><p>We worried that QR button are not enough. Practice shows that 10 people out of 10 successfully use the QR code</p>
+    </div>
+    </div>
 
 
 <div class="box">
@@ -653,10 +667,10 @@ function myFunction() {
     <h2>Test scetion</h2>
 </div>
     <div class="box">
-<div class="boxtest">
+        <div class="boxtest">
 
 
-    <h2>That test launch Answer call. This test proves that program can process(dynamically) all available out puts from the server.</h2>
+        <h2>That test launch Answer call. This test proves that program can process(dynamically) all available out puts from the server.</h2>
     <table id="OutputAnswer" width="100%">
         <tr>
             <th> Corrrect </th>

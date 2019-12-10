@@ -111,8 +111,19 @@ table{
 }
 
 #font{
+
     font-size: 25px;
+
 }
+
+.fonts{
+
+    font-size: 17px;
+    text-align: justify;
+    margin: 10px;
+
+}
+
 #Leaders{
 
 
