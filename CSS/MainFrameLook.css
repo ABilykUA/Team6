@@ -97,8 +97,6 @@
 }
 
 
-
-
 /*animation end*/
 th, td {
     text-align:center;
@@ -112,14 +110,23 @@ table{
 
 }
 
-.LB{
+#font{
+    font-size: 25px;
+}
+#Leaders{
 
+
+    font-size: 25px;
+
+}
+#HuntOptions li {
+    border: black 1px solid;
+    background-color: #EFE7BC;
+    border-radius:6px;
+    margin-bottom: 2%   ;
+    padding: 10px;
+    font-size: 25px;
     color: black;
-    text-decoration: none;
-    font-size: 1.17em;
-    padding: 3px;
-
-
 }
 .box{
     text-align: center;
