@@ -30,7 +30,7 @@ function NameInput() {
                 let TreasureHuntslist = document.getElementById("HuntOptions");
                 console.log(TreasureHuntsOBJECT);
 
-                TextOutPut.innerText = "Lists";
+                TextOutPut.innerText = "Choose one:";
 
                 for (let i = 0; i < TreasureHuntsOBJECT.length; i++) {
 
@@ -766,7 +766,7 @@ function checkCookie() {
     var GameScoreCookie = getCookie("SetScoreCookie");
 
     if (SessionIDCookie !== "") {
-        let result = confirm("Do you want to continue?");
+        let result = confirm("Game not finished! Do you want to continue?");
 
         if (result === true) {
             document.location.href="Question.html";
@@ -788,7 +788,6 @@ function checkCookie() {
     else
     {
         SessionGet ();
-        console.log("Session pusto")
     }
 
 }
@@ -826,4 +825,5 @@ function IFrame() {
         x.style.display = "none";
     }
 }
+
 
